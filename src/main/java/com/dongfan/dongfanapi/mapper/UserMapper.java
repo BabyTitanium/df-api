@@ -20,4 +20,6 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
     List<User> getUserList(Map map);
+
+    User selectUserByNickname(String nickname);
 }

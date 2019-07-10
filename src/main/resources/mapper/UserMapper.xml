@@ -15,11 +15,12 @@
       <arg column="openid" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="session_key" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="create_at" javaType="java.util.Date" jdbcType="TIMESTAMP" />
+      <arg column="invate_code" javaType="java.lang.String" jdbcType="VARCHAR" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
     id, nick_name, gender, language, city, province, country, avatar_url, phone, openid, 
-    session_key, create_at
+    session_key, create_at,invate_code
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -182,5 +183,12 @@
       limit #{pageStart},#{pageSize}
     </if>
     ;
+  </select>
+
+  <select id="selectUserByNickname" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where nick_name = #{nickname,jdbcType=VARCHAR}
   </select>
 </mapper>

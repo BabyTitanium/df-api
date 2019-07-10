@@ -9,12 +9,16 @@ import com.dongfan.dongfanapi.mapper.UserMapper;
 import com.dongfan.dongfanapi.untils.Response;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.models.auth.In;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
+import org.apache.tomcat.util.net.SSLUtilBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.security.auth.Subject;
+
 import java.util.List;
 import java.util.Map;
 
@@ -43,10 +47,12 @@ public class TestController {
         }
     }
 
-    @ApiOperation("用户登录")
-    @PostMapping("login")
-    public ResponseData login(@RequestBody UserLogin userLogin ){
-//        Subject subject=SubjectUti
-        return null;
+    @ApiOperation("用户网页登录")
+    @PostMapping("webLogin")
+    public ResponseData webLogin(@RequestBody UserLogin userLogin ){
+        Subject subject=SecurityUtils.getSubject();
+        UsernamePasswordToken usernamePasswordToken=new UsernamePasswordToken(userLogin.getUsername(),userLogin.getPassword());
+        subject.login(usernamePasswordToken);
+        return Response.success();
     }
 }

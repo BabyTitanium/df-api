@@ -12,6 +12,7 @@ import org.apache.shiro.authc.credential.CredentialsMatcher;
 public class MyCredentialsMatcher implements CredentialsMatcher {
     @Override
     public boolean doCredentialsMatch(AuthenticationToken authenticationToken, AuthenticationInfo authenticationInfo) {
+        System.out.println("密码验证!!!!!!");
         return true;
     }
 }

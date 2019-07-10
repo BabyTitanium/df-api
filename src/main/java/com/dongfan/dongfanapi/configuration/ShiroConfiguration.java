@@ -100,13 +100,14 @@ public class ShiroConfiguration {
     @Bean
     public MyShiroRealm myShiroRealm(){
         MyShiroRealm myShiroRealm=new MyShiroRealm();
-       // myShiroRealm().setCredentialsMatcher(MyCredentialsMatcher());
+//        myShiroRealm().setCredentialsMatcher(MyCredentialsMatcher());
         return myShiroRealm;
     }
     @Bean
     public CredentialsMatcher MyCredentialsMatcher(){
         return new MyCredentialsMatcher();
     }
+
     @Bean
     public SessionManager sessionManager(){
         return  new DefaultHeaderSessionManager();
