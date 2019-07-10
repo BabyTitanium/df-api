@@ -176,4 +176,11 @@
       create_at = #{createAt,jdbcType=TIMESTAMP}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="getUserList" resultType="com.dongfan.dongfanapi.entity.User" parameterType="java.util.Map">
+    select * from user where 1=1
+    <if test="pageStart!=null and pageSize!=null">
+      limit #{pageStart},#{pageSize}
+    </if>
+    ;
+  </select>
 </mapper>

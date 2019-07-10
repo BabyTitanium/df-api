@@ -2,11 +2,15 @@ package com.dongfan.dongfanapi.configuration;
 
 import org.apache.shiro.authc.credential.CredentialsMatcher;
 import org.apache.shiro.session.mgt.SessionManager;
+import org.apache.shiro.spring.LifecycleBeanPostProcessor;
+import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
+import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.DependsOn;
 
 import javax.servlet.Filter;
 import java.util.LinkedHashMap;
@@ -33,12 +37,9 @@ public class ShiroConfiguration {
     public ShiroFilterFactoryBean shiroFilter(org.apache.shiro.mgt.SecurityManager securityManager) {
         ShiroFilterFactoryBean shiroFilterFactoryBean = new ShiroFilterFactoryBean();
 
-        // 必须设置 SecurityManager
         shiroFilterFactoryBean.setSecurityManager( securityManager);
 
-        // 如果不设置默认会自动寻找Web工程根目录下的"/login.jsp"页面
-//        shiroFilterFactoryBean.setLoginUrl("/user/unlogin");
-        // 登录成功后要跳转的链接
+
         shiroFilterFactoryBean.setSuccessUrl("/index");
         // 未授权界面;
         shiroFilterFactoryBean.setUnauthorizedUrl("https://dfapi.houserqu.com/user/unlogin");
@@ -60,25 +61,14 @@ public class ShiroConfiguration {
         filterChainDefinitionMap.put("/webjars/**", "anon");
         filterChainDefinitionMap.put("/v2/**", "anon");
         filterChainDefinitionMap.put("/swagger-resources/**", "anon");
-        filterChainDefinitionMap.put("/course/getVideoListByCourseId","anon");
-       // filterChainDefinitionMap.put("/user/getPreviousUserInfo","authc");
-        filterChainDefinitionMap.put("/class/getClassList","anon");
-        filterChainDefinitionMap.put("/class/getClassDetail","anon");
-        filterChainDefinitionMap.put("/course/getCourseList","anon");
-        filterChainDefinitionMap.put("/course/getCourseCategory","anon");
-        filterChainDefinitionMap.put("/course/getCategoryVideo","anon");
 
-        filterChainDefinitionMap.put("/video/getVideoDetail","anon");
 
-        filterChainDefinitionMap.put("/user/weAppLogin","anon");
-        filterChainDefinitionMap.put("/user/webLogin","anon");
-        filterChainDefinitionMap.put("/user/unlogin","anon");
 
-        filterChainDefinitionMap.put("/**", "authc");
+        filterChainDefinitionMap.put("/**", "anon");
         // <!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
         // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
-        //logout这个拦截器是shiro已经实现好了的。
-        // 从数据库获取
+        //  logout这个拦截器是shiro已经实现好了的。
+        //  从数据库获取
         /*List<SysPermissionInit> list = sysPermissionInitService.selectAll();
 
         for (SysPermissionInit sysPermissionInit : list) {
@@ -104,6 +94,7 @@ public class ShiroConfiguration {
         securityManager.setSessionManager(sessionManager());
         //注入记住我管理器;
       //  securityManager.setRememberMeManager(rememberMeManager());
+
         return securityManager;
     }
     @Bean
@@ -132,5 +123,35 @@ public class ShiroConfiguration {
         simpleCookie.setMaxAge(2592000);
         return simpleCookie;
     }
+
+    /**
+     * Shiro生命周期处理器
+     * @return
+     */
+    @Bean
+    public LifecycleBeanPostProcessor lifecycleBeanPostProcessor() {
+        return new LifecycleBeanPostProcessor();
+    }
+
+    /**
+     * 开启Shiro的注解(如@RequiresRoles,@RequiresPermissions),需借助SpringAOP扫描使用Shiro注解的类,并在必要时进行安全逻辑验证
+     * 配置以下两个bean(DefaultAdvisorAutoProxyCreator(可选)和AuthorizationAttributeSourceAdvisor)即可实现此功能
+     * @return
+     */
+    @Bean
+    @DependsOn({ "lifecycleBeanPostProcessor" })
+    public DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator() {
+        DefaultAdvisorAutoProxyCreator advisorAutoProxyCreator = new DefaultAdvisorAutoProxyCreator();
+        advisorAutoProxyCreator.setProxyTargetClass(true);
+        return advisorAutoProxyCreator;
+    }
+
+    @Bean
+    public AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor() {
+        AuthorizationAttributeSourceAdvisor authorizationAttributeSourceAdvisor = new AuthorizationAttributeSourceAdvisor();
+        authorizationAttributeSourceAdvisor.setSecurityManager(securityManager());
+        return authorizationAttributeSourceAdvisor;
+    }
+
 
 }

@@ -3,6 +3,9 @@ package com.dongfan.dongfanapi.mapper;
 import com.dongfan.dongfanapi.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+import java.util.Map;
+
 @Mapper
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
@@ -16,4 +19,5 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+    List<User> getUserList(Map map);
 }

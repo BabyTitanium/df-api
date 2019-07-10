@@ -27,7 +27,9 @@ public class User {
 
     private Date createAt;
 
-    public User(Integer id, String nickName, Integer gender, String language, String city, String province, String country, String avatarUrl, String phone, String openid, String sessionKey, Date createAt) {
+    private String invateCode;
+
+    public User(Integer id, String nickName, Integer gender, String language, String city, String province, String country, String avatarUrl, String phone, String openid, String sessionKey, Date createAt, String invateCode) {
         this.id = id;
         this.nickName = nickName;
         this.gender = gender;
@@ -40,6 +42,7 @@ public class User {
         this.openid = openid;
         this.sessionKey = sessionKey;
         this.createAt = createAt;
+        this.invateCode = invateCode;
     }
 
     public User() {
@@ -140,5 +143,13 @@ public class User {
 
     public void setCreateAt(Date createAt) {
         this.createAt = createAt;
+    }
+
+    public String getInvateCode() {
+        return invateCode;
+    }
+
+    public void setInvateCode(String invateCode) {
+        this.invateCode = invateCode == null ? null : invateCode.trim();
     }
 }

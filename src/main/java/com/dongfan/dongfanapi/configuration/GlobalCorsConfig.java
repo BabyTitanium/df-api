@@ -23,8 +23,8 @@ public class GlobalCorsConfig implements Filter {
         HttpServletResponse response = (HttpServletResponse) res;
         HttpServletRequest request = (HttpServletRequest) req;
         String method=request.getMethod();
-        response.setHeader("Access-Control-Allow-Origin", "http://spcc-admin.houserqu.com");
-//        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+//        response.setHeader("Access-Control-Allow-Origin", "http://spcc-admin.houserqu.com");
+        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
 
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
         response.setHeader("Access-Control-Max-Age", "3600");
