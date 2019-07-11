@@ -1,10 +1,12 @@
 package com.dongfan.dongfanapi.configuration;
 
 import org.apache.shiro.authc.credential.CredentialsMatcher;
+import org.apache.shiro.cache.MemoryConstrainedCacheManager;
 import org.apache.shiro.session.mgt.SessionManager;
 import org.apache.shiro.spring.LifecycleBeanPostProcessor;
 import org.apache.shiro.spring.security.interceptor.AuthorizationAttributeSourceAdvisor;
 import org.apache.shiro.spring.web.ShiroFilterFactoryBean;
+import org.apache.shiro.web.filter.mgt.DefaultFilter;
 import org.apache.shiro.web.mgt.DefaultWebSecurityManager;
 import org.apache.shiro.web.servlet.SimpleCookie;
 import org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator;
@@ -40,31 +42,31 @@ public class ShiroConfiguration {
         shiroFilterFactoryBean.setSecurityManager( securityManager);
 
 
-        shiroFilterFactoryBean.setSuccessUrl("/index");
+       // shiroFilterFactoryBean.setSuccessUrl("/index");
         // 未授权界面;
-        shiroFilterFactoryBean.setUnauthorizedUrl("https://dfapi.houserqu.com/user/unlogin");
+//        shiroFilterFactoryBean.setUnauthorizedUrl("/user/unAuthorized");
 
         //自定义拦截器
         Map<String, Filter> filtersMap = new LinkedHashMap<String, Filter>();
         //限制同一帐号同时在线的个数。
         //filtersMap.put("kickout", kickoutSessionControlFilter());
 
-        filtersMap.put("authc", new ShiroLoginFilter());
+        filtersMap.put(DefaultFilter.authc.toString(), new ShiroLoginFilter());
+//        filtersMap.put(DefaultFilter.perms.toString(),new PermFailFilter());
         shiroFilterFactoryBean.setFilters(filtersMap);
 
         // 权限控制map.
         Map<String, String> filterChainDefinitionMap = new LinkedHashMap<String, String>();
-        // 配置不会被拦截的链接 顺序判断
-        // 配置退出过滤器,其中的具体的退出代码Shiro已经替我们实现了
-        // 从数据库获取动态的权限
+
         filterChainDefinitionMap.put("/swagger-ui.html", "anon");
         filterChainDefinitionMap.put("/webjars/**", "anon");
         filterChainDefinitionMap.put("/v2/**", "anon");
         filterChainDefinitionMap.put("/swagger-resources/**", "anon");
 
 
+        filterChainDefinitionMap.put("/user/webLogin", "anon");
 
-        filterChainDefinitionMap.put("/**", "anon");
+        filterChainDefinitionMap.put("/**", "authc");
         // <!-- 过滤链定义，从上向下顺序执行，一般将 /**放在最为下边 -->:这是一个坑呢，一不小心代码就不好使了;
         // <!-- authc:所有url都必须认证通过才可以访问; anon:所有url都都可以匿名访问-->
         //  logout这个拦截器是shiro已经实现好了的。
@@ -84,12 +86,11 @@ public class ShiroConfiguration {
     @Bean
     public org.apache.shiro.mgt.SecurityManager securityManager() {
         DefaultWebSecurityManager securityManager = new DefaultWebSecurityManager();
-        // 设置realm.
-        myShiroRealm().setCredentialsMatcher(MyCredentialsMatcher());
+
+//        myShiroRealm().setCredentialsMatcher(MyCredentialsMatcher());
         securityManager.setRealm(myShiroRealm());
 
-        // 自定义缓存实现 使用redis
-        //securityManager.setCacheManager(cacheManager());
+        securityManager.setCacheManager(new MemoryConstrainedCacheManager());
         // 自定义session管理 使用redis
         securityManager.setSessionManager(sessionManager());
         //注入记住我管理器;
@@ -103,10 +104,10 @@ public class ShiroConfiguration {
 //        myShiroRealm().setCredentialsMatcher(MyCredentialsMatcher());
         return myShiroRealm;
     }
-    @Bean
-    public CredentialsMatcher MyCredentialsMatcher(){
-        return new MyCredentialsMatcher();
-    }
+//    @Bean
+//    public CredentialsMatcher MyCredentialsMatcher(){
+//        return new MyCredentialsMatcher();
+//    }
 
     @Bean
     public SessionManager sessionManager(){

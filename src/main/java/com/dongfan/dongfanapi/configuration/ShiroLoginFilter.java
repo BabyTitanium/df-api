@@ -24,13 +24,13 @@ public class ShiroLoginFilter extends FormAuthenticationFilter {
             httpServletResponse.setCharacterEncoding("UTF-8");
             httpServletResponse.setContentType("application/json");
 
-            httpServletResponse.getWriter().write(JSONObject.toJSON(Response.error("未登录", 402)).toString());
+            httpServletResponse.getWriter().write(JSONObject.toJSON(Response.error("not logged in", 402)).toString());
         } else {
             //saveRequestAndRedirectToLogin(request, response);
             /**
              * @Mark 非ajax请求重定向为登录页面
              */
-            httpServletResponse.sendRedirect("/login");
+            httpServletResponse.getWriter().write(JSONObject.toJSON(Response.error("not logged in", 402)).toString());
         }
         return false;
     }

@@ -2,6 +2,7 @@ package com.dongfan.dongfanapi.configuration;
 
 import com.dongfan.dongfanapi.untils.Response;
 import com.dongfan.dongfanapi.untils.ResponseData;
+import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
@@ -16,6 +17,9 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public ResponseData allHandler(HttpServletRequest req, Exception e) throws Exception {
+        if(e instanceof UnauthorizedException){
+
+        }
         return Response.error("未知错误",e.getMessage());
     }
 
@@ -34,4 +38,12 @@ public class GlobalExceptionHandler {
 
         return Response.error("请求错误", e.getMessage());
     }
+
+    @ExceptionHandler(UnauthorizedException.class)
+    @ResponseBody
+    public ResponseData defaultExceptionHandler(HttpServletRequest req,Exception e){
+        return Response.error("not allowed", 402);
+    }
+
+
 }

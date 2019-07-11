@@ -191,4 +191,10 @@
     from user
     where nick_name = #{nickname,jdbcType=VARCHAR}
   </select>
+  <select id="selectUserByOpenId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where openid = #{openId,jdbcType=VARCHAR}
+  </select>
 </mapper>

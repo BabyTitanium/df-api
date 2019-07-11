@@ -1,7 +1,12 @@
 package com.dongfan.dongfanapi.mapper;
 
 import com.dongfan.dongfanapi.entity.AuthPermission;
+import org.apache.ibatis.annotations.Mapper;
 
+
+import java.util.List;
+
+@Mapper
 public interface AuthPermissionMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +19,6 @@ public interface AuthPermissionMapper {
     int updateByPrimaryKeySelective(AuthPermission record);
 
     int updateByPrimaryKey(AuthPermission record);
+
+    List<AuthPermission> selectUserAuthPermissions(int userId);
 }

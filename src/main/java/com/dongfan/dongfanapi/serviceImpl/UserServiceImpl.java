@@ -1,9 +1,14 @@
 package com.dongfan.dongfanapi.serviceImpl;
 
+import com.dongfan.dongfanapi.entity.AuthPermission;
+import com.dongfan.dongfanapi.entity.AuthRole;
 import com.dongfan.dongfanapi.entity.User;
+import com.dongfan.dongfanapi.mapper.AuthPermissionMapper;
+import com.dongfan.dongfanapi.mapper.AuthRoleMapper;
 import com.dongfan.dongfanapi.mapper.UserMapper;
 import com.dongfan.dongfanapi.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -16,17 +21,34 @@ import java.util.Map;
 public class UserServiceImpl implements UserService {
     @Resource
     private UserMapper userMapper;
+    @Resource
+    private AuthRoleMapper authRoleMapper;
+    @Resource
+    private AuthPermissionMapper authPermissionMapper;
 
     @Override
     public List<User> getUserList(Map condition) {
-        Map<String,Object> map=new HashMap<>();
         return userMapper.getUserList(condition);
     }
 
     @Override
     public User getUserByNickname(String nickname) {
-            User user=userMapper.selectUserByNickname(nickname);
-            System.out.println(user.getPhone());
-            return user;
+        User user=userMapper.selectUserByNickname(nickname);
+        return user;
+    }
+
+    @Override
+    public User getUserByOpenId(String openId) {
+        return userMapper.selectUserByOpenId(openId);
+    }
+
+    @Override
+    public List<AuthRole> getUserAuthRoles(int userId) {
+        return authRoleMapper.selectUserAuthRoles(userId);
+    }
+
+    @Override
+    public List<AuthPermission> getUserAuthPermissions(int userId) {
+        return authPermissionMapper.selectUserAuthPermissions(userId);
     }
 }

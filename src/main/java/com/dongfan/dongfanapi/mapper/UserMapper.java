@@ -22,4 +22,5 @@ public interface UserMapper {
     List<User> getUserList(Map map);
 
     User selectUserByNickname(String nickname);
+    User selectUserByOpenId(String openId);
 }

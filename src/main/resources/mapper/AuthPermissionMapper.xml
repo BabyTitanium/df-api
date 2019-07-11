@@ -70,4 +70,9 @@
       name = #{name,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectUserAuthPermissions" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  select ap.* from auth_role_user aru ,auth_role_permission arp,auth_permission ap where aru.user_id=#{userId}
+   and aru.role_id=arp.role_id and arp.permission_id=ap.id
+  </select>
 </mapper>
