@@ -20,5 +20,6 @@ public interface AuthRoleMapper {
     int updateByPrimaryKeySelective(AuthRole record);
 
     int updateByPrimaryKey(AuthRole record);
+
     List<AuthRole> selectUserAuthRoles(int userId);//根据用户ID获取用户角色
 }
