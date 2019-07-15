@@ -1,6 +1,7 @@
 package com.dongfan.dongfanapi.service;
 
 import com.dongfan.dongfanapi.entity.AuthRole;
+import com.dongfan.dongfanapi.entity.AuthRolePermission;
 
 /**
  * @Author: lll
@@ -9,4 +10,8 @@ import com.dongfan.dongfanapi.entity.AuthRole;
  */
 public interface AuthRoleService {
     void addRole(AuthRole authRole);
+    void deleteRole(int roleId);
+    void editRole(AuthRole authRole);
+    void addPermissionToRole(AuthRolePermission authRolePermission);
+    void removePermissionFromRole(int id);
 }

@@ -1,4 +1,4 @@
-package com.dongfan.dongfanapi;
+package com.dongfan.dongfanapi.params;
 
 import lombok.Data;
 
