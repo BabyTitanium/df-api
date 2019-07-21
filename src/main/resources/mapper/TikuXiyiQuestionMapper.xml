@@ -378,4 +378,8 @@
       is_high_test = #{isHighTest,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getXiyiTiKuQuestion" resultType="java.util.Map">
+    SELECT xiyi.id,xiyi.title,xiyi.answer,xiyi.option,xiyi.explain,xiyi.chapter_name  FROM tiku_xiyi_info xiyi limit 0,200
+  </select>
 </mapper>
