@@ -11,6 +11,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 /**
  * @Author: lll
  * @Date: 2019/7/11 20:39
@@ -23,8 +25,8 @@ public class AdminRoleController {
     private AuthRoleService authRoleService;
     @ApiOperation("给系统添加角色")
     @PostMapping("addRole")
-    @RequiresPermissions("ROLE_ADD")
-    public ResponseData addAuthRole(@RequestBody AuthRole authRole){
+    //@RequiresPermissions("ROLE_ADD")
+    public ResponseData addAuthRole(@RequestBody @Valid  AuthRole authRole){
         authRoleService.addRole(authRole);
         return Response.success();
     }

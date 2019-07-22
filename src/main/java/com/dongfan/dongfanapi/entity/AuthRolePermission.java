@@ -1,10 +1,13 @@
 package com.dongfan.dongfanapi.entity;
 
+import javax.validation.constraints.NotNull;
+
 public class AuthRolePermission {
     private Integer id;
 
+    @NotNull
     private Integer roleId;
-
+    @NotNull
     private Integer permissionId;
 
     public AuthRolePermission(Integer id, Integer roleId, Integer permissionId) {

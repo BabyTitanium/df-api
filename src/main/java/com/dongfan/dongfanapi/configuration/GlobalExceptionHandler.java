@@ -5,6 +5,7 @@ import com.dongfan.dongfanapi.untils.ResponseData;
 import org.apache.shiro.authz.UnauthorizedException;
 import org.springframework.beans.TypeMismatchException;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -17,10 +18,12 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public ResponseData allHandler(HttpServletRequest req, Exception e) throws Exception {
-        if(e instanceof UnauthorizedException){
-
-        }
         return Response.error("未知错误",e.getMessage());
+    }
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    @ResponseBody
+    public ResponseData paramValidateHandler(HttpServletRequest req, Exception e) throws Exception {
+            return Response.error("参数异常");
     }
 
     @ExceptionHandler({MissingServletRequestParameterException.class, TypeMismatchException.class})

@@ -3,6 +3,7 @@ package com.dongfan.dongfanapi.mapper;
 import com.dongfan.dongfanapi.entity.TikuXiyiQuestion;
 import com.dongfan.dongfanapi.entity.TikuXiyiQuestionWithBLOBs;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -23,6 +24,8 @@ public interface TikuXiyiQuestionMapper {
 
     int updateByPrimaryKey(TikuXiyiQuestion record);
 
-    List<Map<String,Object>> getXiyiTiKuQuestion();
+    List<Map<String,Object>> getXiyiTiKuQuestion(@Param("start")int start,@Param("limit") int limit);
+
+    int getXiyiTiKuQuestionCount();
 
 }
