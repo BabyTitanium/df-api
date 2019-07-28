@@ -33,7 +33,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User getUserByNickname(String nickname) {
-        User user=userMapper.selectUserByNickname(nickname);
+        User user = userMapper.selectUserByNickname(nickname);
         return user;
     }
 

@@ -1,4 +1,4 @@
-package com.dongfan.dongfanapi.configuration;
+package com.dongfan.dongfanapi.shiroconfig;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.session.ExpiredSessionException;
@@ -28,7 +28,7 @@ import java.io.Serializable;
  */
 public class DefaultHeaderSessionManager extends DefaultSessionManager implements WebSessionManager {
 
-    private static final Logger log  = LoggerFactory.getLogger(DefaultHeaderSessionManager.class);
+    private static final Logger log = LoggerFactory.getLogger(DefaultHeaderSessionManager.class);
 
     private final String X_AUTH_TOKEN = "token";
 
@@ -69,8 +69,7 @@ public class DefaultHeaderSessionManager extends DefaultSessionManager implement
         if (!(request instanceof HttpServletRequest)) {
             log.debug("Current request is not an HttpServletRequest - cannot get session ID cookie.  Returning null.");
             return null;
-        }
-        else {
+        } else {
             HttpServletRequest httpRequest = (HttpServletRequest) request;
 
             // 在request 中 读取 x-auth-token 信息  作为 sessionId

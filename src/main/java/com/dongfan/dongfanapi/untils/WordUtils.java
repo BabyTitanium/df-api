@@ -17,7 +17,8 @@ public class WordUtils {
     private static final String FTL_FP = "/templates/"; //模板路径
 
     private static Configuration configuration = null;
-    static{
+
+    static {
         configuration = new Configuration();
         configuration.setDefaultEncoding("utf-8");//设置默认的编码
         //读配置文件
@@ -25,7 +26,7 @@ public class WordUtils {
 
     }
 
-    public static Boolean writeWordReport(String wordFilePath,String wordFileName,String templateFileName, Map<String, Object> beanParams) {
+    public static Boolean writeWordReport(String wordFilePath, String wordFileName, String templateFileName, Map<String, Object> beanParams) {
         Writer out = null;
         try {
             configuration.setClassForTemplateLoading(WordUtils.class, FTL_FP);

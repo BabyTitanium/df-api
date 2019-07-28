@@ -1,184 +1,184 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dongfan.dongfanapi.mapper.NewsMapper">
-  <resultMap id="BaseResultMap" type="com.dongfan.dongfanapi.entity.News">
-    <constructor>
-      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="thumb" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="poster" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="create_at" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="update_at" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="type_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="sort" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="smeta" javaType="java.lang.String" jdbcType="VARCHAR" />
-    </constructor>
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.dongfan.dongfanapi.entity.News">
-    <constructor>
-      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="thumb" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="poster" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="create_at" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="update_at" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="type_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="sort" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="smeta" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="content" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, title, thumb, poster, create_at, update_at, type_id, sort, smeta
-  </sql>
-  <sql id="Blob_Column_List">
-    content
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from news
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from news
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.dongfan.dongfanapi.entity.News">
-    insert into news (id, title, thumb, 
-      poster, create_at, update_at, 
-      type_id, sort, smeta, 
-      content)
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{thumb,jdbcType=VARCHAR}, 
-      #{poster,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP}, 
-      #{typeId,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{smeta,jdbcType=VARCHAR}, 
-      #{content,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.dongfan.dongfanapi.entity.News">
-    insert into news
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="thumb != null">
-        thumb,
-      </if>
-      <if test="poster != null">
-        poster,
-      </if>
-      <if test="createAt != null">
-        create_at,
-      </if>
-      <if test="updateAt != null">
-        update_at,
-      </if>
-      <if test="typeId != null">
-        type_id,
-      </if>
-      <if test="sort != null">
-        sort,
-      </if>
-      <if test="smeta != null">
-        smeta,
-      </if>
-      <if test="content != null">
-        content,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="thumb != null">
-        #{thumb,jdbcType=VARCHAR},
-      </if>
-      <if test="poster != null">
-        #{poster,jdbcType=VARCHAR},
-      </if>
-      <if test="createAt != null">
-        #{createAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateAt != null">
-        #{updateAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="typeId != null">
-        #{typeId,jdbcType=INTEGER},
-      </if>
-      <if test="sort != null">
-        #{sort,jdbcType=INTEGER},
-      </if>
-      <if test="smeta != null">
-        #{smeta,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null">
-        #{content,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dongfan.dongfanapi.entity.News">
-    update news
-    <set>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="thumb != null">
+    <resultMap id="BaseResultMap" type="com.dongfan.dongfanapi.entity.News">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="thumb" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="poster" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="create_at" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="update_at" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="type_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="sort" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="smeta" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        </constructor>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.dongfan.dongfanapi.entity.News">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="thumb" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="poster" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="create_at" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="update_at" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="type_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="sort" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="smeta" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="content" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, title, thumb, poster, create_at, update_at, type_id, sort, smeta
+    </sql>
+    <sql id="Blob_Column_List">
+        content
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from news
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from news
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.dongfan.dongfanapi.entity.News">
+        insert into news (id, title, thumb,
+        poster, create_at, update_at,
+        type_id, sort, smeta,
+        content)
+        values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{thumb,jdbcType=VARCHAR},
+        #{poster,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP},
+        #{typeId,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, #{smeta,jdbcType=VARCHAR},
+        #{content,jdbcType=LONGVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.dongfan.dongfanapi.entity.News">
+        insert into news
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="thumb != null">
+                thumb,
+            </if>
+            <if test="poster != null">
+                poster,
+            </if>
+            <if test="createAt != null">
+                create_at,
+            </if>
+            <if test="updateAt != null">
+                update_at,
+            </if>
+            <if test="typeId != null">
+                type_id,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="smeta != null">
+                smeta,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="thumb != null">
+                #{thumb,jdbcType=VARCHAR},
+            </if>
+            <if test="poster != null">
+                #{poster,jdbcType=VARCHAR},
+            </if>
+            <if test="createAt != null">
+                #{createAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateAt != null">
+                #{updateAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="typeId != null">
+                #{typeId,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="smeta != null">
+                #{smeta,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.dongfan.dongfanapi.entity.News">
+        update news
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="thumb != null">
+                thumb = #{thumb,jdbcType=VARCHAR},
+            </if>
+            <if test="poster != null">
+                poster = #{poster,jdbcType=VARCHAR},
+            </if>
+            <if test="createAt != null">
+                create_at = #{createAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateAt != null">
+                update_at = #{updateAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="typeId != null">
+                type_id = #{typeId,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="smeta != null">
+                smeta = #{smeta,jdbcType=VARCHAR},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dongfan.dongfanapi.entity.News">
+        update news
+        set title = #{title,jdbcType=VARCHAR},
         thumb = #{thumb,jdbcType=VARCHAR},
-      </if>
-      <if test="poster != null">
         poster = #{poster,jdbcType=VARCHAR},
-      </if>
-      <if test="createAt != null">
         create_at = #{createAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateAt != null">
         update_at = #{updateAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="typeId != null">
         type_id = #{typeId,jdbcType=INTEGER},
-      </if>
-      <if test="sort != null">
         sort = #{sort,jdbcType=INTEGER},
-      </if>
-      <if test="smeta != null">
         smeta = #{smeta,jdbcType=VARCHAR},
-      </if>
-      <if test="content != null">
-        content = #{content,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dongfan.dongfanapi.entity.News">
-    update news
-    set title = #{title,jdbcType=VARCHAR},
-      thumb = #{thumb,jdbcType=VARCHAR},
-      poster = #{poster,jdbcType=VARCHAR},
-      create_at = #{createAt,jdbcType=TIMESTAMP},
-      update_at = #{updateAt,jdbcType=TIMESTAMP},
-      type_id = #{typeId,jdbcType=INTEGER},
-      sort = #{sort,jdbcType=INTEGER},
-      smeta = #{smeta,jdbcType=VARCHAR},
-      content = #{content,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.dongfan.dongfanapi.entity.News">
-    update news
-    set title = #{title,jdbcType=VARCHAR},
-      thumb = #{thumb,jdbcType=VARCHAR},
-      poster = #{poster,jdbcType=VARCHAR},
-      create_at = #{createAt,jdbcType=TIMESTAMP},
-      update_at = #{updateAt,jdbcType=TIMESTAMP},
-      type_id = #{typeId,jdbcType=INTEGER},
-      sort = #{sort,jdbcType=INTEGER},
-      smeta = #{smeta,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        content = #{content,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.dongfan.dongfanapi.entity.News">
+        update news
+        set title = #{title,jdbcType=VARCHAR},
+        thumb = #{thumb,jdbcType=VARCHAR},
+        poster = #{poster,jdbcType=VARCHAR},
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+        update_at = #{updateAt,jdbcType=TIMESTAMP},
+        type_id = #{typeId,jdbcType=INTEGER},
+        sort = #{sort,jdbcType=INTEGER},
+        smeta = #{smeta,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

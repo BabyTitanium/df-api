@@ -1,201 +1,201 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dongfan.dongfanapi.mapper.OrderMapper">
-  <resultMap id="BaseResultMap" type="com.dongfan.dongfanapi.entity.Order">
-    <constructor>
-      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="entity_type" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="entity_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="entity_name" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="pay_tool" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="order_price" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="pay_price" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="create_at" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="order_no" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="pay_no" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="invate_code" javaType="java.lang.String" jdbcType="VARCHAR" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, entity_type, entity_id, entity_name, status, user_id, type, pay_tool, order_price, 
-    pay_price, create_at, order_no, pay_no, invate_code
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from order
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from order
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.dongfan.dongfanapi.entity.Order">
-    insert into order (id, entity_type, entity_id, 
-      entity_name, status, user_id, 
-      type, pay_tool, order_price, 
-      pay_price, create_at, order_no, 
-      pay_no, invate_code)
-    values (#{id,jdbcType=INTEGER}, #{entityType,jdbcType=VARCHAR}, #{entityId,jdbcType=INTEGER}, 
-      #{entityName,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
-      #{type,jdbcType=INTEGER}, #{payTool,jdbcType=VARCHAR}, #{orderPrice,jdbcType=INTEGER}, 
-      #{payPrice,jdbcType=INTEGER}, #{createAt,jdbcType=TIMESTAMP}, #{orderNo,jdbcType=VARCHAR}, 
-      #{payNo,jdbcType=VARCHAR}, #{invateCode,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.dongfan.dongfanapi.entity.Order">
-    insert into order
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="entityType != null">
-        entity_type,
-      </if>
-      <if test="entityId != null">
-        entity_id,
-      </if>
-      <if test="entityName != null">
-        entity_name,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-      <if test="payTool != null">
-        pay_tool,
-      </if>
-      <if test="orderPrice != null">
-        order_price,
-      </if>
-      <if test="payPrice != null">
-        pay_price,
-      </if>
-      <if test="createAt != null">
-        create_at,
-      </if>
-      <if test="orderNo != null">
-        order_no,
-      </if>
-      <if test="payNo != null">
-        pay_no,
-      </if>
-      <if test="invateCode != null">
-        invate_code,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="entityType != null">
-        #{entityType,jdbcType=VARCHAR},
-      </if>
-      <if test="entityId != null">
-        #{entityId,jdbcType=INTEGER},
-      </if>
-      <if test="entityName != null">
-        #{entityName,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=INTEGER},
-      </if>
-      <if test="payTool != null">
-        #{payTool,jdbcType=VARCHAR},
-      </if>
-      <if test="orderPrice != null">
-        #{orderPrice,jdbcType=INTEGER},
-      </if>
-      <if test="payPrice != null">
-        #{payPrice,jdbcType=INTEGER},
-      </if>
-      <if test="createAt != null">
-        #{createAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="orderNo != null">
-        #{orderNo,jdbcType=VARCHAR},
-      </if>
-      <if test="payNo != null">
-        #{payNo,jdbcType=VARCHAR},
-      </if>
-      <if test="invateCode != null">
-        #{invateCode,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dongfan.dongfanapi.entity.Order">
-    update order
-    <set>
-      <if test="entityType != null">
-        entity_type = #{entityType,jdbcType=VARCHAR},
-      </if>
-      <if test="entityId != null">
+    <resultMap id="BaseResultMap" type="com.dongfan.dongfanapi.entity.Order">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="entity_type" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="entity_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="entity_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="pay_tool" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="order_price" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="pay_price" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="create_at" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="order_no" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="pay_no" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="invate_code" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, entity_type, entity_id, entity_name, status, user_id, type, pay_tool, order_price,
+        pay_price, create_at, order_no, pay_no, invate_code
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from order
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from order
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.dongfan.dongfanapi.entity.Order">
+        insert into order (id, entity_type, entity_id,
+        entity_name, status, user_id,
+        type, pay_tool, order_price,
+        pay_price, create_at, order_no,
+        pay_no, invate_code)
+        values (#{id,jdbcType=INTEGER}, #{entityType,jdbcType=VARCHAR}, #{entityId,jdbcType=INTEGER},
+        #{entityName,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+        #{type,jdbcType=INTEGER}, #{payTool,jdbcType=VARCHAR}, #{orderPrice,jdbcType=INTEGER},
+        #{payPrice,jdbcType=INTEGER}, #{createAt,jdbcType=TIMESTAMP}, #{orderNo,jdbcType=VARCHAR},
+        #{payNo,jdbcType=VARCHAR}, #{invateCode,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.dongfan.dongfanapi.entity.Order">
+        insert into order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="entityType != null">
+                entity_type,
+            </if>
+            <if test="entityId != null">
+                entity_id,
+            </if>
+            <if test="entityName != null">
+                entity_name,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="payTool != null">
+                pay_tool,
+            </if>
+            <if test="orderPrice != null">
+                order_price,
+            </if>
+            <if test="payPrice != null">
+                pay_price,
+            </if>
+            <if test="createAt != null">
+                create_at,
+            </if>
+            <if test="orderNo != null">
+                order_no,
+            </if>
+            <if test="payNo != null">
+                pay_no,
+            </if>
+            <if test="invateCode != null">
+                invate_code,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="entityType != null">
+                #{entityType,jdbcType=VARCHAR},
+            </if>
+            <if test="entityId != null">
+                #{entityId,jdbcType=INTEGER},
+            </if>
+            <if test="entityName != null">
+                #{entityName,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="payTool != null">
+                #{payTool,jdbcType=VARCHAR},
+            </if>
+            <if test="orderPrice != null">
+                #{orderPrice,jdbcType=INTEGER},
+            </if>
+            <if test="payPrice != null">
+                #{payPrice,jdbcType=INTEGER},
+            </if>
+            <if test="createAt != null">
+                #{createAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderNo != null">
+                #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payNo != null">
+                #{payNo,jdbcType=VARCHAR},
+            </if>
+            <if test="invateCode != null">
+                #{invateCode,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.dongfan.dongfanapi.entity.Order">
+        update order
+        <set>
+            <if test="entityType != null">
+                entity_type = #{entityType,jdbcType=VARCHAR},
+            </if>
+            <if test="entityId != null">
+                entity_id = #{entityId,jdbcType=INTEGER},
+            </if>
+            <if test="entityName != null">
+                entity_name = #{entityName,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="payTool != null">
+                pay_tool = #{payTool,jdbcType=VARCHAR},
+            </if>
+            <if test="orderPrice != null">
+                order_price = #{orderPrice,jdbcType=INTEGER},
+            </if>
+            <if test="payPrice != null">
+                pay_price = #{payPrice,jdbcType=INTEGER},
+            </if>
+            <if test="createAt != null">
+                create_at = #{createAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="orderNo != null">
+                order_no = #{orderNo,jdbcType=VARCHAR},
+            </if>
+            <if test="payNo != null">
+                pay_no = #{payNo,jdbcType=VARCHAR},
+            </if>
+            <if test="invateCode != null">
+                invate_code = #{invateCode,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.dongfan.dongfanapi.entity.Order">
+        update order
+        set entity_type = #{entityType,jdbcType=VARCHAR},
         entity_id = #{entityId,jdbcType=INTEGER},
-      </if>
-      <if test="entityName != null">
         entity_name = #{entityName,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
         status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
         user_id = #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="type != null">
         type = #{type,jdbcType=INTEGER},
-      </if>
-      <if test="payTool != null">
         pay_tool = #{payTool,jdbcType=VARCHAR},
-      </if>
-      <if test="orderPrice != null">
         order_price = #{orderPrice,jdbcType=INTEGER},
-      </if>
-      <if test="payPrice != null">
         pay_price = #{payPrice,jdbcType=INTEGER},
-      </if>
-      <if test="createAt != null">
         create_at = #{createAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="orderNo != null">
         order_no = #{orderNo,jdbcType=VARCHAR},
-      </if>
-      <if test="payNo != null">
         pay_no = #{payNo,jdbcType=VARCHAR},
-      </if>
-      <if test="invateCode != null">
-        invate_code = #{invateCode,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.dongfan.dongfanapi.entity.Order">
-    update order
-    set entity_type = #{entityType,jdbcType=VARCHAR},
-      entity_id = #{entityId,jdbcType=INTEGER},
-      entity_name = #{entityName,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER},
-      type = #{type,jdbcType=INTEGER},
-      pay_tool = #{payTool,jdbcType=VARCHAR},
-      order_price = #{orderPrice,jdbcType=INTEGER},
-      pay_price = #{payPrice,jdbcType=INTEGER},
-      create_at = #{createAt,jdbcType=TIMESTAMP},
-      order_no = #{orderNo,jdbcType=VARCHAR},
-      pay_no = #{payNo,jdbcType=VARCHAR},
-      invate_code = #{invateCode,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        invate_code = #{invateCode,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

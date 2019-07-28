@@ -1,4 +1,4 @@
-package com.dongfan.dongfanapi.configuration;
+package com.dongfan.dongfanapi.globalconfig;
 
 import com.dongfan.dongfanapi.untils.Response;
 import com.dongfan.dongfanapi.untils.ResponseData;
@@ -18,12 +18,13 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
     public ResponseData allHandler(HttpServletRequest req, Exception e) throws Exception {
-        return Response.error("未知错误",e.getMessage());
+        return Response.error("未知错误", e.getMessage());
     }
+
     @ExceptionHandler(value = MethodArgumentNotValidException.class)
     @ResponseBody
     public ResponseData paramValidateHandler(HttpServletRequest req, Exception e) throws Exception {
-            return Response.error("参数异常");
+        return Response.error("参数异常");
     }
 
     @ExceptionHandler({MissingServletRequestParameterException.class, TypeMismatchException.class})
@@ -44,7 +45,7 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(UnauthorizedException.class)
     @ResponseBody
-    public ResponseData defaultExceptionHandler(HttpServletRequest req,Exception e){
+    public ResponseData defaultExceptionHandler(HttpServletRequest req, Exception e) {
         return Response.error("not allowed", 402);
     }
 

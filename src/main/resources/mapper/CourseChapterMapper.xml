@@ -1,239 +1,239 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dongfan.dongfanapi.mapper.CourseChapterMapper">
-  <resultMap id="BaseResultMap" type="com.dongfan.dongfanapi.entity.CourseChapter">
-    <constructor>
-      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="course_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="url" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="smeta" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="hits" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="sort" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="likes" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="create_at" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="update_at" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="parent_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-    </constructor>
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.dongfan.dongfanapi.entity.CourseChapter">
-    <constructor>
-      <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT" />
-      <arg column="course_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="url" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="smeta" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="hits" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="sort" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="likes" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="create_at" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="update_at" javaType="java.util.Date" jdbcType="TIMESTAMP" />
-      <arg column="parent_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="content" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, course_id, title, url, status, type, smeta, hits, sort, likes, create_at, update_at, 
-    parent_id
-  </sql>
-  <sql id="Blob_Column_List">
-    content
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from course_chapter
-    where id = #{id,jdbcType=BIGINT}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
-    delete from course_chapter
-    where id = #{id,jdbcType=BIGINT}
-  </delete>
-  <insert id="insert" parameterType="com.dongfan.dongfanapi.entity.CourseChapter">
-    insert into course_chapter (id, course_id, title, 
-      url, status, type, 
-      smeta, hits, sort, 
-      likes, create_at, update_at, 
-      parent_id, content)
-    values (#{id,jdbcType=BIGINT}, #{courseId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, 
-      #{url,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{type,jdbcType=INTEGER}, 
-      #{smeta,jdbcType=VARCHAR}, #{hits,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER}, 
-      #{likes,jdbcType=INTEGER}, #{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP}, 
-      #{parentId,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.dongfan.dongfanapi.entity.CourseChapter">
-    insert into course_chapter
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="courseId != null">
-        course_id,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="url != null">
-        url,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-      <if test="smeta != null">
-        smeta,
-      </if>
-      <if test="hits != null">
-        hits,
-      </if>
-      <if test="sort != null">
-        sort,
-      </if>
-      <if test="likes != null">
-        likes,
-      </if>
-      <if test="createAt != null">
-        create_at,
-      </if>
-      <if test="updateAt != null">
-        update_at,
-      </if>
-      <if test="parentId != null">
-        parent_id,
-      </if>
-      <if test="content != null">
-        content,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=BIGINT},
-      </if>
-      <if test="courseId != null">
-        #{courseId,jdbcType=INTEGER},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null">
-        #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=INTEGER},
-      </if>
-      <if test="smeta != null">
-        #{smeta,jdbcType=VARCHAR},
-      </if>
-      <if test="hits != null">
-        #{hits,jdbcType=INTEGER},
-      </if>
-      <if test="sort != null">
-        #{sort,jdbcType=INTEGER},
-      </if>
-      <if test="likes != null">
-        #{likes,jdbcType=INTEGER},
-      </if>
-      <if test="createAt != null">
-        #{createAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateAt != null">
-        #{updateAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="parentId != null">
-        #{parentId,jdbcType=INTEGER},
-      </if>
-      <if test="content != null">
-        #{content,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dongfan.dongfanapi.entity.CourseChapter">
-    update course_chapter
-    <set>
-      <if test="courseId != null">
-        course_id = #{courseId,jdbcType=INTEGER},
-      </if>
-      <if test="title != null">
+    <resultMap id="BaseResultMap" type="com.dongfan.dongfanapi.entity.CourseChapter">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="course_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="url" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="smeta" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="hits" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="sort" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="likes" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="create_at" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="update_at" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="parent_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        </constructor>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.dongfan.dongfanapi.entity.CourseChapter">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+            <arg column="course_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="url" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="smeta" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="hits" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="sort" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="likes" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="create_at" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="update_at" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
+            <arg column="parent_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="content" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, course_id, title, url, status, type, smeta, hits, sort, likes, create_at, update_at,
+        parent_id
+    </sql>
+    <sql id="Blob_Column_List">
+        content
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from course_chapter
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from course_chapter
+        where id = #{id,jdbcType=BIGINT}
+    </delete>
+    <insert id="insert" parameterType="com.dongfan.dongfanapi.entity.CourseChapter">
+        insert into course_chapter (id, course_id, title,
+        url, status, type,
+        smeta, hits, sort,
+        likes, create_at, update_at,
+        parent_id, content)
+        values (#{id,jdbcType=BIGINT}, #{courseId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR},
+        #{url,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, #{type,jdbcType=INTEGER},
+        #{smeta,jdbcType=VARCHAR}, #{hits,jdbcType=INTEGER}, #{sort,jdbcType=INTEGER},
+        #{likes,jdbcType=INTEGER}, #{createAt,jdbcType=TIMESTAMP}, #{updateAt,jdbcType=TIMESTAMP},
+        #{parentId,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.dongfan.dongfanapi.entity.CourseChapter">
+        insert into course_chapter
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="courseId != null">
+                course_id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="url != null">
+                url,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="smeta != null">
+                smeta,
+            </if>
+            <if test="hits != null">
+                hits,
+            </if>
+            <if test="sort != null">
+                sort,
+            </if>
+            <if test="likes != null">
+                likes,
+            </if>
+            <if test="createAt != null">
+                create_at,
+            </if>
+            <if test="updateAt != null">
+                update_at,
+            </if>
+            <if test="parentId != null">
+                parent_id,
+            </if>
+            <if test="content != null">
+                content,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="courseId != null">
+                #{courseId,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="smeta != null">
+                #{smeta,jdbcType=VARCHAR},
+            </if>
+            <if test="hits != null">
+                #{hits,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null">
+                #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="likes != null">
+                #{likes,jdbcType=INTEGER},
+            </if>
+            <if test="createAt != null">
+                #{createAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateAt != null">
+                #{updateAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="parentId != null">
+                #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.dongfan.dongfanapi.entity.CourseChapter">
+        update course_chapter
+        <set>
+            <if test="courseId != null">
+                course_id = #{courseId,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                url = #{url,jdbcType=VARCHAR},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="smeta != null">
+                smeta = #{smeta,jdbcType=VARCHAR},
+            </if>
+            <if test="hits != null">
+                hits = #{hits,jdbcType=INTEGER},
+            </if>
+            <if test="sort != null">
+                sort = #{sort,jdbcType=INTEGER},
+            </if>
+            <if test="likes != null">
+                likes = #{likes,jdbcType=INTEGER},
+            </if>
+            <if test="createAt != null">
+                create_at = #{createAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updateAt != null">
+                update_at = #{updateAt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="parentId != null">
+                parent_id = #{parentId,jdbcType=INTEGER},
+            </if>
+            <if test="content != null">
+                content = #{content,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dongfan.dongfanapi.entity.CourseChapter">
+        update course_chapter
+        set course_id = #{courseId,jdbcType=INTEGER},
         title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null">
         url = #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="status != null">
         status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="type != null">
         type = #{type,jdbcType=INTEGER},
-      </if>
-      <if test="smeta != null">
         smeta = #{smeta,jdbcType=VARCHAR},
-      </if>
-      <if test="hits != null">
         hits = #{hits,jdbcType=INTEGER},
-      </if>
-      <if test="sort != null">
         sort = #{sort,jdbcType=INTEGER},
-      </if>
-      <if test="likes != null">
         likes = #{likes,jdbcType=INTEGER},
-      </if>
-      <if test="createAt != null">
         create_at = #{createAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="updateAt != null">
         update_at = #{updateAt,jdbcType=TIMESTAMP},
-      </if>
-      <if test="parentId != null">
         parent_id = #{parentId,jdbcType=INTEGER},
-      </if>
-      <if test="content != null">
-        content = #{content,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dongfan.dongfanapi.entity.CourseChapter">
-    update course_chapter
-    set course_id = #{courseId,jdbcType=INTEGER},
-      title = #{title,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
-      type = #{type,jdbcType=INTEGER},
-      smeta = #{smeta,jdbcType=VARCHAR},
-      hits = #{hits,jdbcType=INTEGER},
-      sort = #{sort,jdbcType=INTEGER},
-      likes = #{likes,jdbcType=INTEGER},
-      create_at = #{createAt,jdbcType=TIMESTAMP},
-      update_at = #{updateAt,jdbcType=TIMESTAMP},
-      parent_id = #{parentId,jdbcType=INTEGER},
-      content = #{content,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.dongfan.dongfanapi.entity.CourseChapter">
-    update course_chapter
-    set course_id = #{courseId,jdbcType=INTEGER},
-      title = #{title,jdbcType=VARCHAR},
-      url = #{url,jdbcType=VARCHAR},
-      status = #{status,jdbcType=INTEGER},
-      type = #{type,jdbcType=INTEGER},
-      smeta = #{smeta,jdbcType=VARCHAR},
-      hits = #{hits,jdbcType=INTEGER},
-      sort = #{sort,jdbcType=INTEGER},
-      likes = #{likes,jdbcType=INTEGER},
-      create_at = #{createAt,jdbcType=TIMESTAMP},
-      update_at = #{updateAt,jdbcType=TIMESTAMP},
-      parent_id = #{parentId,jdbcType=INTEGER}
-    where id = #{id,jdbcType=BIGINT}
-  </update>
+        content = #{content,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.dongfan.dongfanapi.entity.CourseChapter">
+        update course_chapter
+        set course_id = #{courseId,jdbcType=INTEGER},
+        title = #{title,jdbcType=VARCHAR},
+        url = #{url,jdbcType=VARCHAR},
+        status = #{status,jdbcType=INTEGER},
+        type = #{type,jdbcType=INTEGER},
+        smeta = #{smeta,jdbcType=VARCHAR},
+        hits = #{hits,jdbcType=INTEGER},
+        sort = #{sort,jdbcType=INTEGER},
+        likes = #{likes,jdbcType=INTEGER},
+        create_at = #{createAt,jdbcType=TIMESTAMP},
+        update_at = #{updateAt,jdbcType=TIMESTAMP},
+        parent_id = #{parentId,jdbcType=INTEGER}
+        where id = #{id,jdbcType=BIGINT}
+    </update>
 </mapper>

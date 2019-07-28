@@ -1,4 +1,4 @@
-package com.dongfan.dongfanapi.configuration;
+package com.dongfan.dongfanapi.shiroconfig;
 
 import org.apache.shiro.authc.AuthenticationInfo;
 import org.apache.shiro.authc.AuthenticationToken;

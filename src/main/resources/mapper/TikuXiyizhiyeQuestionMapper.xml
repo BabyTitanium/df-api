@@ -1,394 +1,396 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dongfan.dongfanapi.mapper.TikuXiyizhiyeQuestionMapper">
-  <resultMap id="BaseResultMap" type="com.dongfan.dongfanapi.entity.TikuXiyizhiyeQuestion">
-    <constructor>
-      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="question_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="chapter_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="chapter_parent_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="title_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="s_num" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="number" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="year" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="question_type" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="unit" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="number_number" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="syllabus" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="explain_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="answer" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="media_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="media_url" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="media_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="knowledge_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-    </constructor>
-  </resultMap>
-  <resultMap id="ResultMapWithBLOBs" type="com.dongfan.dongfanapi.entity.TikuXiyizhiyeQuestionWithBLOBs">
-    <constructor>
-      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="question_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="chapter_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="chapter_parent_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="title_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="s_num" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="number" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="year" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="question_type" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="unit" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="number_number" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="syllabus" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="explain_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="answer" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="media_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="media_url" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="media_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="knowledge_img" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="restore" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
-      <arg column="explain" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
-      <arg column="option" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
-      <arg column="knowledge" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
-      <arg column="restoren" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
-      <arg column="explainn" javaType="java.lang.String" jdbcType="LONGVARCHAR" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, question_id, chapter_id, chapter_parent_id, title, title_img, s_num, number, 
-    year, question_type, unit, number_number, syllabus, explain_img, type, answer, media_id, 
-    media_url, media_img, knowledge_img
-  </sql>
-  <sql id="Blob_Column_List">
-    restore, explain, option, knowledge, restoren, explainn
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from tiku_xiyizhiye_question
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tiku_xiyizhiye_question
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.dongfan.dongfanapi.entity.TikuXiyizhiyeQuestionWithBLOBs">
-    insert into tiku_xiyizhiye_question (id, question_id, chapter_id, 
-      chapter_parent_id, title, title_img, 
-      s_num, number, year, 
-      question_type, unit, number_number, 
-      syllabus, explain_img, type, 
-      answer, media_id, media_url, 
-      media_img, knowledge_img, restore, 
-      explain, option, knowledge, 
-      restoren, explainn)
-    values (#{id,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, #{chapterId,jdbcType=INTEGER}, 
-      #{chapterParentId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{titleImg,jdbcType=VARCHAR}, 
-      #{sNum,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR}, 
-      #{questionType,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{numberNumber,jdbcType=VARCHAR}, 
-      #{syllabus,jdbcType=VARCHAR}, #{explainImg,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, 
-      #{answer,jdbcType=VARCHAR}, #{mediaId,jdbcType=INTEGER}, #{mediaUrl,jdbcType=VARCHAR}, 
-      #{mediaImg,jdbcType=VARCHAR}, #{knowledgeImg,jdbcType=VARCHAR}, #{restore,jdbcType=LONGVARCHAR}, 
-      #{explain,jdbcType=LONGVARCHAR}, #{option,jdbcType=LONGVARCHAR}, #{knowledge,jdbcType=LONGVARCHAR}, 
-      #{restoren,jdbcType=LONGVARCHAR}, #{explainn,jdbcType=LONGVARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.dongfan.dongfanapi.entity.TikuXiyizhiyeQuestionWithBLOBs">
-    insert into tiku_xiyizhiye_question
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="questionId != null">
-        question_id,
-      </if>
-      <if test="chapterId != null">
-        chapter_id,
-      </if>
-      <if test="chapterParentId != null">
-        chapter_parent_id,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="titleImg != null">
-        title_img,
-      </if>
-      <if test="sNum != null">
-        s_num,
-      </if>
-      <if test="number != null">
-        number,
-      </if>
-      <if test="year != null">
-        year,
-      </if>
-      <if test="questionType != null">
-        question_type,
-      </if>
-      <if test="unit != null">
-        unit,
-      </if>
-      <if test="numberNumber != null">
-        number_number,
-      </if>
-      <if test="syllabus != null">
-        syllabus,
-      </if>
-      <if test="explainImg != null">
-        explain_img,
-      </if>
-      <if test="type != null">
-        type,
-      </if>
-      <if test="answer != null">
-        answer,
-      </if>
-      <if test="mediaId != null">
-        media_id,
-      </if>
-      <if test="mediaUrl != null">
-        media_url,
-      </if>
-      <if test="mediaImg != null">
-        media_img,
-      </if>
-      <if test="knowledgeImg != null">
-        knowledge_img,
-      </if>
-      <if test="restore != null">
-        restore,
-      </if>
-      <if test="explain != null">
-        explain,
-      </if>
-      <if test="option != null">
-        option,
-      </if>
-      <if test="knowledge != null">
-        knowledge,
-      </if>
-      <if test="restoren != null">
-        restoren,
-      </if>
-      <if test="explainn != null">
-        explainn,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="questionId != null">
-        #{questionId,jdbcType=INTEGER},
-      </if>
-      <if test="chapterId != null">
-        #{chapterId,jdbcType=INTEGER},
-      </if>
-      <if test="chapterParentId != null">
-        #{chapterParentId,jdbcType=INTEGER},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="titleImg != null">
-        #{titleImg,jdbcType=VARCHAR},
-      </if>
-      <if test="sNum != null">
-        #{sNum,jdbcType=INTEGER},
-      </if>
-      <if test="number != null">
-        #{number,jdbcType=VARCHAR},
-      </if>
-      <if test="year != null">
-        #{year,jdbcType=VARCHAR},
-      </if>
-      <if test="questionType != null">
-        #{questionType,jdbcType=VARCHAR},
-      </if>
-      <if test="unit != null">
-        #{unit,jdbcType=VARCHAR},
-      </if>
-      <if test="numberNumber != null">
-        #{numberNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="syllabus != null">
-        #{syllabus,jdbcType=VARCHAR},
-      </if>
-      <if test="explainImg != null">
-        #{explainImg,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
-        #{type,jdbcType=INTEGER},
-      </if>
-      <if test="answer != null">
-        #{answer,jdbcType=VARCHAR},
-      </if>
-      <if test="mediaId != null">
-        #{mediaId,jdbcType=INTEGER},
-      </if>
-      <if test="mediaUrl != null">
-        #{mediaUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="mediaImg != null">
-        #{mediaImg,jdbcType=VARCHAR},
-      </if>
-      <if test="knowledgeImg != null">
-        #{knowledgeImg,jdbcType=VARCHAR},
-      </if>
-      <if test="restore != null">
-        #{restore,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="explain != null">
-        #{explain,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="option != null">
-        #{option,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="knowledge != null">
-        #{knowledge,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="restoren != null">
-        #{restoren,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="explainn != null">
-        #{explainn,jdbcType=LONGVARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dongfan.dongfanapi.entity.TikuXiyizhiyeQuestionWithBLOBs">
-    update tiku_xiyizhiye_question
-    <set>
-      <if test="questionId != null">
-        question_id = #{questionId,jdbcType=INTEGER},
-      </if>
-      <if test="chapterId != null">
+    <resultMap id="BaseResultMap" type="com.dongfan.dongfanapi.entity.TikuXiyizhiyeQuestion">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="question_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="chapter_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="chapter_parent_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="title_img" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="s_num" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="number" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="year" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="question_type" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="unit" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="number_number" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="syllabus" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="explain_img" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="answer" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="media_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="media_url" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="media_img" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="knowledge_img" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        </constructor>
+    </resultMap>
+    <resultMap id="ResultMapWithBLOBs" type="com.dongfan.dongfanapi.entity.TikuXiyizhiyeQuestionWithBLOBs">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="question_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="chapter_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="chapter_parent_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="title_img" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="s_num" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="number" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="year" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="question_type" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="unit" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="number_number" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="syllabus" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="explain_img" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="type" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="answer" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="media_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="media_url" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="media_img" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="knowledge_img" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="restore" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
+            <arg column="explain" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
+            <arg column="option" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
+            <arg column="knowledge" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
+            <arg column="restoren" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
+            <arg column="explainn" javaType="java.lang.String" jdbcType="LONGVARCHAR"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, question_id, chapter_id, chapter_parent_id, title, title_img, s_num, number,
+        year, question_type, unit, number_number, syllabus, explain_img, type, answer, media_id,
+        media_url, media_img, knowledge_img
+    </sql>
+    <sql id="Blob_Column_List">
+        restore, explain, option, knowledge, restoren, explainn
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from tiku_xiyizhiye_question
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from tiku_xiyizhiye_question
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.dongfan.dongfanapi.entity.TikuXiyizhiyeQuestionWithBLOBs">
+        insert into tiku_xiyizhiye_question (id, question_id, chapter_id,
+        chapter_parent_id, title, title_img,
+        s_num, number, year,
+        question_type, unit, number_number,
+        syllabus, explain_img, type,
+        answer, media_id, media_url,
+        media_img, knowledge_img, restore,
+        explain, option, knowledge,
+        restoren, explainn)
+        values (#{id,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, #{chapterId,jdbcType=INTEGER},
+        #{chapterParentId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{titleImg,jdbcType=VARCHAR},
+        #{sNum,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR},
+        #{questionType,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{numberNumber,jdbcType=VARCHAR},
+        #{syllabus,jdbcType=VARCHAR}, #{explainImg,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER},
+        #{answer,jdbcType=VARCHAR}, #{mediaId,jdbcType=INTEGER}, #{mediaUrl,jdbcType=VARCHAR},
+        #{mediaImg,jdbcType=VARCHAR}, #{knowledgeImg,jdbcType=VARCHAR}, #{restore,jdbcType=LONGVARCHAR},
+        #{explain,jdbcType=LONGVARCHAR}, #{option,jdbcType=LONGVARCHAR}, #{knowledge,jdbcType=LONGVARCHAR},
+        #{restoren,jdbcType=LONGVARCHAR}, #{explainn,jdbcType=LONGVARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.dongfan.dongfanapi.entity.TikuXiyizhiyeQuestionWithBLOBs">
+        insert into tiku_xiyizhiye_question
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="questionId != null">
+                question_id,
+            </if>
+            <if test="chapterId != null">
+                chapter_id,
+            </if>
+            <if test="chapterParentId != null">
+                chapter_parent_id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="titleImg != null">
+                title_img,
+            </if>
+            <if test="sNum != null">
+                s_num,
+            </if>
+            <if test="number != null">
+                number,
+            </if>
+            <if test="year != null">
+                year,
+            </if>
+            <if test="questionType != null">
+                question_type,
+            </if>
+            <if test="unit != null">
+                unit,
+            </if>
+            <if test="numberNumber != null">
+                number_number,
+            </if>
+            <if test="syllabus != null">
+                syllabus,
+            </if>
+            <if test="explainImg != null">
+                explain_img,
+            </if>
+            <if test="type != null">
+                type,
+            </if>
+            <if test="answer != null">
+                answer,
+            </if>
+            <if test="mediaId != null">
+                media_id,
+            </if>
+            <if test="mediaUrl != null">
+                media_url,
+            </if>
+            <if test="mediaImg != null">
+                media_img,
+            </if>
+            <if test="knowledgeImg != null">
+                knowledge_img,
+            </if>
+            <if test="restore != null">
+                restore,
+            </if>
+            <if test="explain != null">
+                explain,
+            </if>
+            <if test="option != null">
+                option,
+            </if>
+            <if test="knowledge != null">
+                knowledge,
+            </if>
+            <if test="restoren != null">
+                restoren,
+            </if>
+            <if test="explainn != null">
+                explainn,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="questionId != null">
+                #{questionId,jdbcType=INTEGER},
+            </if>
+            <if test="chapterId != null">
+                #{chapterId,jdbcType=INTEGER},
+            </if>
+            <if test="chapterParentId != null">
+                #{chapterParentId,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="titleImg != null">
+                #{titleImg,jdbcType=VARCHAR},
+            </if>
+            <if test="sNum != null">
+                #{sNum,jdbcType=INTEGER},
+            </if>
+            <if test="number != null">
+                #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="year != null">
+                #{year,jdbcType=VARCHAR},
+            </if>
+            <if test="questionType != null">
+                #{questionType,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="numberNumber != null">
+                #{numberNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="syllabus != null">
+                #{syllabus,jdbcType=VARCHAR},
+            </if>
+            <if test="explainImg != null">
+                #{explainImg,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                #{type,jdbcType=INTEGER},
+            </if>
+            <if test="answer != null">
+                #{answer,jdbcType=VARCHAR},
+            </if>
+            <if test="mediaId != null">
+                #{mediaId,jdbcType=INTEGER},
+            </if>
+            <if test="mediaUrl != null">
+                #{mediaUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="mediaImg != null">
+                #{mediaImg,jdbcType=VARCHAR},
+            </if>
+            <if test="knowledgeImg != null">
+                #{knowledgeImg,jdbcType=VARCHAR},
+            </if>
+            <if test="restore != null">
+                #{restore,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="explain != null">
+                #{explain,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="option != null">
+                #{option,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="knowledge != null">
+                #{knowledge,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="restoren != null">
+                #{restoren,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="explainn != null">
+                #{explainn,jdbcType=LONGVARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective"
+            parameterType="com.dongfan.dongfanapi.entity.TikuXiyizhiyeQuestionWithBLOBs">
+        update tiku_xiyizhiye_question
+        <set>
+            <if test="questionId != null">
+                question_id = #{questionId,jdbcType=INTEGER},
+            </if>
+            <if test="chapterId != null">
+                chapter_id = #{chapterId,jdbcType=INTEGER},
+            </if>
+            <if test="chapterParentId != null">
+                chapter_parent_id = #{chapterParentId,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="titleImg != null">
+                title_img = #{titleImg,jdbcType=VARCHAR},
+            </if>
+            <if test="sNum != null">
+                s_num = #{sNum,jdbcType=INTEGER},
+            </if>
+            <if test="number != null">
+                number = #{number,jdbcType=VARCHAR},
+            </if>
+            <if test="year != null">
+                year = #{year,jdbcType=VARCHAR},
+            </if>
+            <if test="questionType != null">
+                question_type = #{questionType,jdbcType=VARCHAR},
+            </if>
+            <if test="unit != null">
+                unit = #{unit,jdbcType=VARCHAR},
+            </if>
+            <if test="numberNumber != null">
+                number_number = #{numberNumber,jdbcType=VARCHAR},
+            </if>
+            <if test="syllabus != null">
+                syllabus = #{syllabus,jdbcType=VARCHAR},
+            </if>
+            <if test="explainImg != null">
+                explain_img = #{explainImg,jdbcType=VARCHAR},
+            </if>
+            <if test="type != null">
+                type = #{type,jdbcType=INTEGER},
+            </if>
+            <if test="answer != null">
+                answer = #{answer,jdbcType=VARCHAR},
+            </if>
+            <if test="mediaId != null">
+                media_id = #{mediaId,jdbcType=INTEGER},
+            </if>
+            <if test="mediaUrl != null">
+                media_url = #{mediaUrl,jdbcType=VARCHAR},
+            </if>
+            <if test="mediaImg != null">
+                media_img = #{mediaImg,jdbcType=VARCHAR},
+            </if>
+            <if test="knowledgeImg != null">
+                knowledge_img = #{knowledgeImg,jdbcType=VARCHAR},
+            </if>
+            <if test="restore != null">
+                restore = #{restore,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="explain != null">
+                explain = #{explain,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="option != null">
+                option = #{option,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="knowledge != null">
+                knowledge = #{knowledge,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="restoren != null">
+                restoren = #{restoren,jdbcType=LONGVARCHAR},
+            </if>
+            <if test="explainn != null">
+                explainn = #{explainn,jdbcType=LONGVARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKeyWithBLOBs"
+            parameterType="com.dongfan.dongfanapi.entity.TikuXiyizhiyeQuestionWithBLOBs">
+        update tiku_xiyizhiye_question
+        set question_id = #{questionId,jdbcType=INTEGER},
         chapter_id = #{chapterId,jdbcType=INTEGER},
-      </if>
-      <if test="chapterParentId != null">
         chapter_parent_id = #{chapterParentId,jdbcType=INTEGER},
-      </if>
-      <if test="title != null">
         title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="titleImg != null">
         title_img = #{titleImg,jdbcType=VARCHAR},
-      </if>
-      <if test="sNum != null">
         s_num = #{sNum,jdbcType=INTEGER},
-      </if>
-      <if test="number != null">
         number = #{number,jdbcType=VARCHAR},
-      </if>
-      <if test="year != null">
         year = #{year,jdbcType=VARCHAR},
-      </if>
-      <if test="questionType != null">
         question_type = #{questionType,jdbcType=VARCHAR},
-      </if>
-      <if test="unit != null">
         unit = #{unit,jdbcType=VARCHAR},
-      </if>
-      <if test="numberNumber != null">
         number_number = #{numberNumber,jdbcType=VARCHAR},
-      </if>
-      <if test="syllabus != null">
         syllabus = #{syllabus,jdbcType=VARCHAR},
-      </if>
-      <if test="explainImg != null">
         explain_img = #{explainImg,jdbcType=VARCHAR},
-      </if>
-      <if test="type != null">
         type = #{type,jdbcType=INTEGER},
-      </if>
-      <if test="answer != null">
         answer = #{answer,jdbcType=VARCHAR},
-      </if>
-      <if test="mediaId != null">
         media_id = #{mediaId,jdbcType=INTEGER},
-      </if>
-      <if test="mediaUrl != null">
         media_url = #{mediaUrl,jdbcType=VARCHAR},
-      </if>
-      <if test="mediaImg != null">
         media_img = #{mediaImg,jdbcType=VARCHAR},
-      </if>
-      <if test="knowledgeImg != null">
         knowledge_img = #{knowledgeImg,jdbcType=VARCHAR},
-      </if>
-      <if test="restore != null">
         restore = #{restore,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="explain != null">
         explain = #{explain,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="option != null">
         option = #{option,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="knowledge != null">
         knowledge = #{knowledge,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="restoren != null">
         restoren = #{restoren,jdbcType=LONGVARCHAR},
-      </if>
-      <if test="explainn != null">
-        explainn = #{explainn,jdbcType=LONGVARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.dongfan.dongfanapi.entity.TikuXiyizhiyeQuestionWithBLOBs">
-    update tiku_xiyizhiye_question
-    set question_id = #{questionId,jdbcType=INTEGER},
-      chapter_id = #{chapterId,jdbcType=INTEGER},
-      chapter_parent_id = #{chapterParentId,jdbcType=INTEGER},
-      title = #{title,jdbcType=VARCHAR},
-      title_img = #{titleImg,jdbcType=VARCHAR},
-      s_num = #{sNum,jdbcType=INTEGER},
-      number = #{number,jdbcType=VARCHAR},
-      year = #{year,jdbcType=VARCHAR},
-      question_type = #{questionType,jdbcType=VARCHAR},
-      unit = #{unit,jdbcType=VARCHAR},
-      number_number = #{numberNumber,jdbcType=VARCHAR},
-      syllabus = #{syllabus,jdbcType=VARCHAR},
-      explain_img = #{explainImg,jdbcType=VARCHAR},
-      type = #{type,jdbcType=INTEGER},
-      answer = #{answer,jdbcType=VARCHAR},
-      media_id = #{mediaId,jdbcType=INTEGER},
-      media_url = #{mediaUrl,jdbcType=VARCHAR},
-      media_img = #{mediaImg,jdbcType=VARCHAR},
-      knowledge_img = #{knowledgeImg,jdbcType=VARCHAR},
-      restore = #{restore,jdbcType=LONGVARCHAR},
-      explain = #{explain,jdbcType=LONGVARCHAR},
-      option = #{option,jdbcType=LONGVARCHAR},
-      knowledge = #{knowledge,jdbcType=LONGVARCHAR},
-      restoren = #{restoren,jdbcType=LONGVARCHAR},
-      explainn = #{explainn,jdbcType=LONGVARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.dongfan.dongfanapi.entity.TikuXiyizhiyeQuestion">
-    update tiku_xiyizhiye_question
-    set question_id = #{questionId,jdbcType=INTEGER},
-      chapter_id = #{chapterId,jdbcType=INTEGER},
-      chapter_parent_id = #{chapterParentId,jdbcType=INTEGER},
-      title = #{title,jdbcType=VARCHAR},
-      title_img = #{titleImg,jdbcType=VARCHAR},
-      s_num = #{sNum,jdbcType=INTEGER},
-      number = #{number,jdbcType=VARCHAR},
-      year = #{year,jdbcType=VARCHAR},
-      question_type = #{questionType,jdbcType=VARCHAR},
-      unit = #{unit,jdbcType=VARCHAR},
-      number_number = #{numberNumber,jdbcType=VARCHAR},
-      syllabus = #{syllabus,jdbcType=VARCHAR},
-      explain_img = #{explainImg,jdbcType=VARCHAR},
-      type = #{type,jdbcType=INTEGER},
-      answer = #{answer,jdbcType=VARCHAR},
-      media_id = #{mediaId,jdbcType=INTEGER},
-      media_url = #{mediaUrl,jdbcType=VARCHAR},
-      media_img = #{mediaImg,jdbcType=VARCHAR},
-      knowledge_img = #{knowledgeImg,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        explainn = #{explainn,jdbcType=LONGVARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.dongfan.dongfanapi.entity.TikuXiyizhiyeQuestion">
+        update tiku_xiyizhiye_question
+        set question_id = #{questionId,jdbcType=INTEGER},
+        chapter_id = #{chapterId,jdbcType=INTEGER},
+        chapter_parent_id = #{chapterParentId,jdbcType=INTEGER},
+        title = #{title,jdbcType=VARCHAR},
+        title_img = #{titleImg,jdbcType=VARCHAR},
+        s_num = #{sNum,jdbcType=INTEGER},
+        number = #{number,jdbcType=VARCHAR},
+        year = #{year,jdbcType=VARCHAR},
+        question_type = #{questionType,jdbcType=VARCHAR},
+        unit = #{unit,jdbcType=VARCHAR},
+        number_number = #{numberNumber,jdbcType=VARCHAR},
+        syllabus = #{syllabus,jdbcType=VARCHAR},
+        explain_img = #{explainImg,jdbcType=VARCHAR},
+        type = #{type,jdbcType=INTEGER},
+        answer = #{answer,jdbcType=VARCHAR},
+        media_id = #{mediaId,jdbcType=INTEGER},
+        media_url = #{mediaUrl,jdbcType=VARCHAR},
+        media_img = #{mediaImg,jdbcType=VARCHAR},
+        knowledge_img = #{knowledgeImg,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

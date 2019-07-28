@@ -1,95 +1,95 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dongfan.dongfanapi.mapper.BookMapper">
-  <resultMap id="BaseResultMap" type="com.dongfan.dongfanapi.entity.Book">
-    <constructor>
-      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
-      <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="describe" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="cover" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="author" javaType="java.lang.String" jdbcType="VARCHAR" />
-    </constructor>
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, title, describe, cover, author
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from book
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from book
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.dongfan.dongfanapi.entity.Book">
-    insert into book (id, title, describe, 
-      cover, author)
-    values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR}, 
-      #{cover,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.dongfan.dongfanapi.entity.Book">
-    insert into book
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="title != null">
-        title,
-      </if>
-      <if test="describe != null">
-        describe,
-      </if>
-      <if test="cover != null">
-        cover,
-      </if>
-      <if test="author != null">
-        author,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="title != null">
-        #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="describe != null">
-        #{describe,jdbcType=VARCHAR},
-      </if>
-      <if test="cover != null">
-        #{cover,jdbcType=VARCHAR},
-      </if>
-      <if test="author != null">
-        #{author,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.dongfan.dongfanapi.entity.Book">
-    update book
-    <set>
-      <if test="title != null">
-        title = #{title,jdbcType=VARCHAR},
-      </if>
-      <if test="describe != null">
+    <resultMap id="BaseResultMap" type="com.dongfan.dongfanapi.entity.Book">
+        <constructor>
+            <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+            <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="describe" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="cover" javaType="java.lang.String" jdbcType="VARCHAR"/>
+            <arg column="author" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        </constructor>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, title, describe, cover, author
+    </sql>
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from book
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from book
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="com.dongfan.dongfanapi.entity.Book">
+        insert into book (id, title, describe,
+        cover, author)
+        values (#{id,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{describe,jdbcType=VARCHAR},
+        #{cover,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" parameterType="com.dongfan.dongfanapi.entity.Book">
+        insert into book
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="title != null">
+                title,
+            </if>
+            <if test="describe != null">
+                describe,
+            </if>
+            <if test="cover != null">
+                cover,
+            </if>
+            <if test="author != null">
+                author,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="title != null">
+                #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="describe != null">
+                #{describe,jdbcType=VARCHAR},
+            </if>
+            <if test="cover != null">
+                #{cover,jdbcType=VARCHAR},
+            </if>
+            <if test="author != null">
+                #{author,jdbcType=VARCHAR},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.dongfan.dongfanapi.entity.Book">
+        update book
+        <set>
+            <if test="title != null">
+                title = #{title,jdbcType=VARCHAR},
+            </if>
+            <if test="describe != null">
+                describe = #{describe,jdbcType=VARCHAR},
+            </if>
+            <if test="cover != null">
+                cover = #{cover,jdbcType=VARCHAR},
+            </if>
+            <if test="author != null">
+                author = #{author,jdbcType=VARCHAR},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.dongfan.dongfanapi.entity.Book">
+        update book
+        set title = #{title,jdbcType=VARCHAR},
         describe = #{describe,jdbcType=VARCHAR},
-      </if>
-      <if test="cover != null">
         cover = #{cover,jdbcType=VARCHAR},
-      </if>
-      <if test="author != null">
-        author = #{author,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.dongfan.dongfanapi.entity.Book">
-    update book
-    set title = #{title,jdbcType=VARCHAR},
-      describe = #{describe,jdbcType=VARCHAR},
-      cover = #{cover,jdbcType=VARCHAR},
-      author = #{author,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        author = #{author,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

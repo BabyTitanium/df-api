@@ -19,8 +19,10 @@ public interface UserMapper {
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);
+
     List<User> getUserList(Map map);
 
     User selectUserByNickname(String nickname);
+
     User selectUserByOpenId(String openId);
 }

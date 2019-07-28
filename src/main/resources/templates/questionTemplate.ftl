@@ -1221,11 +1221,11 @@
                     <w:t>${question.title}</w:t>
                 </w:r>
             </w:p>
-                    <#assign text>
-                        ${question.option}
-                    </#assign>
-                    <#assign json=text?eval />
-                    <#list json as option>
+                <#assign text>
+                    ${question.option}
+                </#assign>
+                <#assign json=text?eval />
+                <#list json as option>
             <w:p wsp:rsidR="00F579DE" wsp:rsidRPr="00C9254E" wsp:rsidRDefault="00F579DE" wsp:rsidP="00F579DE">
                 <w:pPr>
                     <w:ind w:left="360"/>
@@ -1254,7 +1254,7 @@
                     <w:t>${option.value}</w:t>
                 </w:r>
             </w:p>
-            </#list>
+                </#list>
             <w:p wsp:rsidR="00F579DE" wsp:rsidRPr="00C9254E" wsp:rsidRDefault="00F579DE" wsp:rsidP="00F579DE">
                 <w:pPr>
                     <w:ind w:left="360"/>
@@ -1347,8 +1347,7 @@
                 </w:pPr>
             </w:p>
 
-        </#list>
-      
+            </#list>
 
             <w:sectPr wsp:rsidR="00F579DE" wsp:rsidRPr="00F579DE" wsp:rsidSect="000606FE">
                 <w:pgSz w:w="11906" w:h="16838"/>

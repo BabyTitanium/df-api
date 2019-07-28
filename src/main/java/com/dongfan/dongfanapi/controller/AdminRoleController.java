@@ -23,24 +23,27 @@ import javax.validation.Valid;
 public class AdminRoleController {
     @Autowired
     private AuthRoleService authRoleService;
+
     @ApiOperation("给系统添加角色")
     @PostMapping("addRole")
     //@RequiresPermissions("ROLE_ADD")
-    public ResponseData addAuthRole(@RequestBody @Valid  AuthRole authRole){
+    public ResponseData addAuthRole(@RequestBody @Valid AuthRole authRole) {
         authRoleService.addRole(authRole);
         return Response.success();
     }
+
     @ApiOperation("删除系统角色")
     @GetMapping("deleteRole")
     @RequiresPermissions("ROLE_DELETE")
-    public ResponseData deleteAuthRole(@RequestParam(required = true) int roleId){
+    public ResponseData deleteAuthRole(@RequestParam(required = true) int roleId) {
         authRoleService.deleteRole(roleId);
         return Response.success();
     }
+
     @ApiOperation("修改系统角色")
     @PostMapping("editRole")
     @RequiresPermissions("ROLE_EDIT")
-    public ResponseData editAuthRole(@RequestBody AuthRole authRole){
+    public ResponseData editAuthRole(@RequestBody @Valid AuthRole authRole) {
         authRoleService.editRole(authRole);
         return Response.success();
     }
@@ -48,15 +51,16 @@ public class AdminRoleController {
     @ApiOperation("给角色添加权限")
     @PostMapping("addPermissionToRole")
     @RequiresPermissions("ADD_PERMISSION_TO_ROLE")
-    public ResponseData addPermissionToRole(@RequestBody AuthRolePermission authRolePermission){
+    public ResponseData addPermissionToRole(@RequestBody @Valid AuthRolePermission authRolePermission) {
         authRoleService.addPermissionToRole(authRolePermission);
-        return  Response.success();
+        return Response.success();
     }
+
     @ApiOperation("给角色移除权限")
     @GetMapping("removePermissionFromRole")
     @RequiresPermissions("REMOVE_PERMISSION_FROM_ROLE")
-    public ResponseData removePermissionFromRole(@RequestParam(required = true)int id){
+    public ResponseData removePermissionFromRole(@RequestParam(required = true) int id) {
         authRoleService.removePermissionFromRole(id);
-        return  Response.success();
+        return Response.success();
     }
 }

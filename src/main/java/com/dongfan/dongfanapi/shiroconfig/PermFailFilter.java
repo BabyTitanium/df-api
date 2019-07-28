@@ -1,4 +1,4 @@
-package com.dongfan.dongfanapi.configuration;
+package com.dongfan.dongfanapi.shiroconfig;
 
 import com.alibaba.fastjson.JSONObject;
 import com.dongfan.dongfanapi.untils.Response;

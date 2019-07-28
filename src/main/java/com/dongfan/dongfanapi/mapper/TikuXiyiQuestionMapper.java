@@ -24,7 +24,7 @@ public interface TikuXiyiQuestionMapper {
 
     int updateByPrimaryKey(TikuXiyiQuestion record);
 
-    List<Map<String,Object>> getXiyiTiKuQuestion(@Param("start")int start,@Param("limit") int limit);
+    List<Map<String, Object>> getXiyiTiKuQuestion(@Param("start") int start, @Param("limit") int limit);
 
     int getXiyiTiKuQuestionCount();
 

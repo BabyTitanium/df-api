@@ -26,20 +26,21 @@ import java.util.Map;
 @Controller
 @RequestMapping("admin/user")
 public class AdminUserController {
-    private  final Logger logger=LoggerFactory.getLogger(this.getClass());
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
     private UserService userService;
+
     @ApiOperation("获取用户列表（可自定义条件，可分页）")
     @GetMapping("getUserList")
     @RequiresPermissions("USER_GETLIST")
-    public ResponseData getUserList(@RequestParam Map<String,Object> map ){
-        if(map!=null){
+    public ResponseData getUserList(@RequestParam Map<String, Object> map) {
+        if (map != null) {
             PageUtil.changeToPage(map);
         }
         try {
-            List<User> userList=userService.getUserList(map);
+            List<User> userList = userService.getUserList(map);
             return Response.success(userList);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
             return Response.error("查询失败");
         }

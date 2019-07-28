@@ -1,4 +1,4 @@
-package com.dongfan.dongfanapi.configuration;
+package com.dongfan.dongfanapi.shiroconfig;
 
 
 import com.alibaba.fastjson.JSONObject;
@@ -35,9 +35,9 @@ public class ShiroLoginFilter extends FormAuthenticationFilter {
         return false;
     }
 
-    private boolean isAjax(ServletRequest request){
+    private boolean isAjax(ServletRequest request) {
         String header = ((HttpServletRequest) request).getHeader("X-Requested-With");
-        if("XMLHttpRequest".equalsIgnoreCase(header)){
+        if ("XMLHttpRequest".equalsIgnoreCase(header)) {
             return Boolean.TRUE;
         }
         return Boolean.FALSE;

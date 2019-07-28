@@ -7,7 +7,7 @@ public class AuthRole {
 
     @NotNull(message = "角色名称不能为空")
     private String name;
-    @NotNull@NotNull(message = "角色code不能为空")
+    @NotNull(message = "角色code不能为空")
     private String code;
 
     public AuthRole(Integer id, String name, String code) {

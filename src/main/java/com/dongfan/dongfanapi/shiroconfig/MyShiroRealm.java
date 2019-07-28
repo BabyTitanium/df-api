@@ -1,4 +1,4 @@
-package com.dongfan.dongfanapi.configuration;
+package com.dongfan.dongfanapi.shiroconfig;
 
 import com.dongfan.dongfanapi.entity.AuthPermission;
 import com.dongfan.dongfanapi.entity.AuthRole;
@@ -21,17 +21,18 @@ import java.util.List;
 public class MyShiroRealm extends AuthorizingRealm {
     @Autowired
     private UserService userService;
+
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
         String username = (String) getAvailablePrincipal(principalCollection);
-        User user=userService.getUserByNickname(username);
-        List<AuthRole> authRoles=userService.getUserAuthRoles(user.getId());
-        List<AuthPermission> authPermissions=userService.getUserAuthPermissions(user.getId());
+        User user = userService.getUserByNickname(username);
+        List<AuthRole> authRoles = userService.getUserAuthRoles(user.getId());
+        List<AuthPermission> authPermissions = userService.getUserAuthPermissions(user.getId());
         SimpleAuthorizationInfo simpleAuthorizationInfo = new SimpleAuthorizationInfo();
-        for(AuthRole authRole:authRoles){
+        for (AuthRole authRole : authRoles) {
             simpleAuthorizationInfo.addRole(authRole.getCode());
         }
-        for(AuthPermission authPermission:authPermissions){
+        for (AuthPermission authPermission : authPermissions) {
             simpleAuthorizationInfo.addStringPermission(authPermission.getCode());
         }
         return simpleAuthorizationInfo;
@@ -42,7 +43,7 @@ public class MyShiroRealm extends AuthorizingRealm {
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         String username = token.getUsername();
-        User user=userService.getUserByNickname(username);
+        User user = userService.getUserByNickname(username);
         return new SimpleAuthenticationInfo(username, user.getNickName(), getName());
     }
 }

@@ -1,5 +1,7 @@
-package com.dongfan.dongfanapi.configuration;
+package com.dongfan.dongfanapi.globalconfig;
 
+import com.dongfan.dongfanapi.untils.JWTUtils;
+import com.dongfan.dongfanapi.untils.UserTokenInfo;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.CorsFilter;
 
@@ -22,25 +24,37 @@ public class GlobalCorsConfig implements Filter {
     public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) throws IOException, ServletException {
         HttpServletResponse response = (HttpServletResponse) res;
         HttpServletRequest request = (HttpServletRequest) req;
-        String method=request.getMethod();
+        String method = request.getMethod();
 //        response.setHeader("Access-Control-Allow-Origin", "http://spcc-admin.houserqu.com");
         response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
 
         response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
         response.setHeader("Access-Control-Max-Age", "3600");
         response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,token");
-        response.setHeader("Access-Control-Allow-Credentials","true");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
 
-        response.addHeader("Access-Control-Expose-Headers","Content-Type,token");
+        response.addHeader("Access-Control-Expose-Headers", "Content-Type,token");
 
         System.out.println("*********************************过滤器被使用**************************");
 
-        if(method.equalsIgnoreCase("options")){
-
+        if (method.equalsIgnoreCase("options")) {
             response.setStatus(200);
             return;
-        }else{
-            chain.doFilter(req, res);
+        } else {
+            if(request.getRequestURI().contains("user/webLogin")){
+                chain.doFilter(req,res);
+            }else{
+                String token=request.getHeader("token");
+                UserTokenInfo userTokenInfo=JWTUtils.getUserInfo(token);
+                if(userTokenInfo!=null){
+                 //   UsernamePasswordToken usernamePasswordToken=new UsernamePasswordToken(userTokenInfo.getNickName(),userTokenInfo.getNickName());
+                //    SecurityUtils.getSubject().login(usernamePasswordToken);
+                }else{
+                    return;
+                }
+                chain.doFilter(req, res);
+            }
+
         }
 
     }
