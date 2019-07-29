@@ -16,6 +16,8 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 /**
  * @Author: lll
  * @Date: 2019/6/29 21:42
@@ -31,7 +33,7 @@ public class UserController {
 
     @ApiOperation("用户网页登录")
     @PostMapping("webLogin")
-    public ResponseData webLogin(@RequestBody UserLogin userLogin) {
+    public ResponseData webLogin(@RequestBody @Valid UserLogin userLogin) {
 //        Subject subject = SecurityUtils.getSubject();
 //        UsernamePasswordToken usernamePasswordToken = new UsernamePasswordToken(userLogin.getUsername(), userLogin.getPassword());
 //        subject.login(usernamePasswordToken);

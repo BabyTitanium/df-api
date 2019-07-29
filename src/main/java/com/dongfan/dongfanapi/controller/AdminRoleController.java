@@ -26,7 +26,7 @@ public class AdminRoleController {
 
     @ApiOperation("给系统添加角色")
     @PostMapping("addRole")
-    //@RequiresPermissions("ROLE_ADD")
+    @RequiresPermissions("ROLE_ADD")
     public ResponseData addAuthRole(@RequestBody @Valid AuthRole authRole) {
         authRoleService.addRole(authRole);
         return Response.success();

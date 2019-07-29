@@ -24,12 +24,9 @@ public class JWTUtils {
 
     private static long expireTime=60*60*24*7;
 
-//解析jwt
+    //解析jwt
     /**
      * 创建jwt
-
-
-
      * @return
      * @throws Exception
      */
@@ -37,9 +34,7 @@ public class JWTUtils {
         String subject=JSON.toJSONString(userTokenInfo);
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256; //指定签名的时候使用的签名算法，也就是header那部分，jjwt已经将这部分内容封装好了。
         long nowMillis = System.currentTimeMillis();//生成JWT的时间
-        Date now = new Date(nowMillis);
         Map<String,Object> map=new HashMap<>();
-      //  map.put("name","uuuu");
         map.put("nickName","Houser");
         map.put("userId",1);
         //下面就是在为payload添加各种标准声明和私有声明了

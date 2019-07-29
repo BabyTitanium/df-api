@@ -2,6 +2,8 @@ package com.dongfan.dongfanapi.globalconfig;
 
 import com.dongfan.dongfanapi.untils.JWTUtils;
 import com.dongfan.dongfanapi.untils.UserTokenInfo;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.CorsFilter;
 
@@ -45,13 +47,17 @@ public class GlobalCorsConfig implements Filter {
                 chain.doFilter(req,res);
             }else{
                 String token=request.getHeader("token");
-                UserTokenInfo userTokenInfo=JWTUtils.getUserInfo(token);
-                if(userTokenInfo!=null){
-                 //   UsernamePasswordToken usernamePasswordToken=new UsernamePasswordToken(userTokenInfo.getNickName(),userTokenInfo.getNickName());
-                //    SecurityUtils.getSubject().login(usernamePasswordToken);
-                }else{
+                if(token==null){
+                    response.sendError(HttpStatus.BAD_REQUEST.value(), "未携带token");
                     return;
+                }else{
+                    UserTokenInfo userTokenInfo=JWTUtils.getUserInfo(token);
+                    if(userTokenInfo==null){
+                        response.sendError(HttpStatus.BAD_REQUEST.value(), "无效token");
+                        return;
+                    }
                 }
+
                 chain.doFilter(req, res);
             }
 
