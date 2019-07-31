@@ -1,6 +1,7 @@
 package com.dongfan.dongfanapi.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.dongfan.dongfanapi.myAnnotation.SysPermission;
 import com.dongfan.dongfanapi.untils.RedisUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -26,7 +27,7 @@ import java.io.Serializable;
 public class TestController {
 
     @RequestMapping("test1")
-    @RequiresPermissions("userAuth")
+    @SysPermission("userAuth")
     public String test1(HttpServletRequest request){
        // String token=request.getHeader("token");
         return "test1 request success!";

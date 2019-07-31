@@ -43,6 +43,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User getUserByUnionId(String unionId) {
+        return userMapper.selectUserByUnionId(unionId);
+    }
+
+    @Override
     public List<AuthRole> getUserAuthRoles(int userId) {
         return authRoleMapper.selectUserAuthRoles(userId);
     }
@@ -51,4 +56,11 @@ public class UserServiceImpl implements UserService {
     public List<AuthPermission> getUserAuthPermissions(int userId) {
         return authPermissionMapper.selectUserAuthPermissions(userId);
     }
+
+    @Override
+    public void adduser(User user) {
+        userMapper.insertSelective(user);
+    }
+
+
 }

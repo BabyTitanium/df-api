@@ -1,6 +1,8 @@
 package com.dongfan.dongfanapi.globalconfig;
 
 import com.dongfan.dongfanapi.Interceptor.AuthenticationInterceptor;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupport;
 
@@ -9,6 +11,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurationSupp
  * @Date: 2019/7/29 20:43
  * @Version 1.0
  */
+
+@Configuration
 public class InterceptorConfig  extends WebMvcConfigurationSupport {
     /*
      * 拦截器配置
@@ -18,9 +22,14 @@ public class InterceptorConfig  extends WebMvcConfigurationSupport {
     public void addInterceptors(InterceptorRegistry registry) {
 
         // 权限校验拦截器配置
-        registry.addInterceptor(new AuthenticationInterceptor()).addPathPatterns("/**");
+        registry.addInterceptor(securityInterceptor()).addPathPatterns("/**");
 
         // 父类的配置
         super.addInterceptors(registry);
     }
+    @Bean
+    public AuthenticationInterceptor securityInterceptor() {
+        return new AuthenticationInterceptor();
+    }
+
 }

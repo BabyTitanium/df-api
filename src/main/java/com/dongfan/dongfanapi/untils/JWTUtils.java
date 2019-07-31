@@ -20,9 +20,9 @@ import java.util.Map;
 
 public class JWTUtils {
 
-    private static String secret="r398cjd26%h$jfeio";
+    private static String secret="r398!jd26%h$jfeio";
 
-    private static long expireTime=60*60*24*7;
+    private static long expireTime=2592000;//一个月
 
     //解析jwt
     /**

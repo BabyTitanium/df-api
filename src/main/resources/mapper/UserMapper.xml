@@ -1,200 +1,242 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.dongfan.dongfanapi.mapper.UserMapper">
-    <resultMap id="BaseResultMap" type="com.dongfan.dongfanapi.entity.User">
-        <constructor>
-            <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="nick_name" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="gender" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="language" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="city" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="province" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="country" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="avatar_url" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="phone" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="openid" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="session_key" javaType="java.lang.String" jdbcType="VARCHAR"/>
-            <arg column="create_at" javaType="java.util.Date" jdbcType="TIMESTAMP"/>
-            <arg column="invate_code" javaType="java.lang.String" jdbcType="VARCHAR"/>
-        </constructor>
-    </resultMap>
-    <sql id="Base_Column_List">
-        id, nick_name, gender, language, city, province, country, avatar_url, phone, openid,
-        session_key, create_at,invate_code
-    </sql>
-    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from user
-        where id = #{id,jdbcType=INTEGER}
-    </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-        delete from user
-        where id = #{id,jdbcType=INTEGER}
-    </delete>
-    <insert id="insert" parameterType="com.dongfan.dongfanapi.entity.User">
-        insert into user (id, nick_name, gender,
-        language, city, province,
-        country, avatar_url, phone,
-        openid, session_key, create_at
-        )
-        values (#{id,jdbcType=INTEGER}, #{nickName,jdbcType=VARCHAR}, #{gender,jdbcType=INTEGER},
-        #{language,jdbcType=VARCHAR}, #{city,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR},
-        #{country,jdbcType=VARCHAR}, #{avatarUrl,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR},
-        #{openid,jdbcType=VARCHAR}, #{sessionKey,jdbcType=VARCHAR}, #{createAt,jdbcType=TIMESTAMP}
-        )
-    </insert>
-    <insert id="insertSelective" parameterType="com.dongfan.dongfanapi.entity.User">
-        insert into user
-        <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
-            <if test="nickName != null">
-                nick_name,
-            </if>
-            <if test="gender != null">
-                gender,
-            </if>
-            <if test="language != null">
-                language,
-            </if>
-            <if test="city != null">
-                city,
-            </if>
-            <if test="province != null">
-                province,
-            </if>
-            <if test="country != null">
-                country,
-            </if>
-            <if test="avatarUrl != null">
-                avatar_url,
-            </if>
-            <if test="phone != null">
-                phone,
-            </if>
-            <if test="openid != null">
-                openid,
-            </if>
-            <if test="sessionKey != null">
-                session_key,
-            </if>
-            <if test="createAt != null">
-                create_at,
-            </if>
-        </trim>
-        <trim prefix="values (" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                #{id,jdbcType=INTEGER},
-            </if>
-            <if test="nickName != null">
-                #{nickName,jdbcType=VARCHAR},
-            </if>
-            <if test="gender != null">
-                #{gender,jdbcType=INTEGER},
-            </if>
-            <if test="language != null">
-                #{language,jdbcType=VARCHAR},
-            </if>
-            <if test="city != null">
-                #{city,jdbcType=VARCHAR},
-            </if>
-            <if test="province != null">
-                #{province,jdbcType=VARCHAR},
-            </if>
-            <if test="country != null">
-                #{country,jdbcType=VARCHAR},
-            </if>
-            <if test="avatarUrl != null">
-                #{avatarUrl,jdbcType=VARCHAR},
-            </if>
-            <if test="phone != null">
-                #{phone,jdbcType=VARCHAR},
-            </if>
-            <if test="openid != null">
-                #{openid,jdbcType=VARCHAR},
-            </if>
-            <if test="sessionKey != null">
-                #{sessionKey,jdbcType=VARCHAR},
-            </if>
-            <if test="createAt != null">
-                #{createAt,jdbcType=TIMESTAMP},
-            </if>
-        </trim>
-    </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="com.dongfan.dongfanapi.entity.User">
-        update user
-        <set>
-            <if test="nickName != null">
-                nick_name = #{nickName,jdbcType=VARCHAR},
-            </if>
-            <if test="gender != null">
-                gender = #{gender,jdbcType=INTEGER},
-            </if>
-            <if test="language != null">
-                language = #{language,jdbcType=VARCHAR},
-            </if>
-            <if test="city != null">
-                city = #{city,jdbcType=VARCHAR},
-            </if>
-            <if test="province != null">
-                province = #{province,jdbcType=VARCHAR},
-            </if>
-            <if test="country != null">
-                country = #{country,jdbcType=VARCHAR},
-            </if>
-            <if test="avatarUrl != null">
-                avatar_url = #{avatarUrl,jdbcType=VARCHAR},
-            </if>
-            <if test="phone != null">
-                phone = #{phone,jdbcType=VARCHAR},
-            </if>
-            <if test="openid != null">
-                openid = #{openid,jdbcType=VARCHAR},
-            </if>
-            <if test="sessionKey != null">
-                session_key = #{sessionKey,jdbcType=VARCHAR},
-            </if>
-            <if test="createAt != null">
-                create_at = #{createAt,jdbcType=TIMESTAMP},
-            </if>
-        </set>
-        where id = #{id,jdbcType=INTEGER}
-    </update>
-    <update id="updateByPrimaryKey" parameterType="com.dongfan.dongfanapi.entity.User">
-        update user
-        set nick_name = #{nickName,jdbcType=VARCHAR},
-        gender = #{gender,jdbcType=INTEGER},
-        language = #{language,jdbcType=VARCHAR},
-        city = #{city,jdbcType=VARCHAR},
-        province = #{province,jdbcType=VARCHAR},
-        country = #{country,jdbcType=VARCHAR},
-        avatar_url = #{avatarUrl,jdbcType=VARCHAR},
-        phone = #{phone,jdbcType=VARCHAR},
+  <resultMap id="BaseResultMap" type="com.dongfan.dongfanapi.entity.User">
+    <constructor>
+      <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="openid" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="nick_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="sex" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="headimgurl" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="privilege" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="unionid" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="phone" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="province" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="city" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="country" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="language" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="invate_code" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="real_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="type" javaType="java.lang.String" jdbcType="VARCHAR" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, openid, nick_name, sex, headimgurl, privilege, unionid, phone, province, city, 
+    country, language, invate_code, real_name, type
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from user
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from user
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.dongfan.dongfanapi.entity.User">
+    insert into user (id, openid, nick_name, 
+      sex, headimgurl, privilege, 
+      unionid, phone, province, 
+      city, country, language, 
+      invate_code, real_name, type
+      )
+    values (#{id,jdbcType=INTEGER}, #{openid,jdbcType=VARCHAR}, #{nickName,jdbcType=VARCHAR}, 
+      #{sex,jdbcType=INTEGER}, #{headimgurl,jdbcType=VARCHAR}, #{privilege,jdbcType=VARCHAR}, 
+      #{unionid,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{province,jdbcType=VARCHAR}, 
+      #{city,jdbcType=VARCHAR}, #{country,jdbcType=VARCHAR}, #{language,jdbcType=VARCHAR}, 
+      #{invateCode,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert keyColumn="id" useGeneratedKeys="true"  id="insertSelective" parameterType="com.dongfan.dongfanapi.entity.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="openid != null">
+        openid,
+      </if>
+      <if test="nickName != null">
+        nick_name,
+      </if>
+      <if test="sex != null">
+        sex,
+      </if>
+      <if test="headimgurl != null">
+        headimgurl,
+      </if>
+      <if test="privilege != null">
+        privilege,
+      </if>
+      <if test="unionid != null">
+        unionid,
+      </if>
+      <if test="phone != null">
+        phone,
+      </if>
+      <if test="province != null">
+        province,
+      </if>
+      <if test="city != null">
+        city,
+      </if>
+      <if test="country != null">
+        country,
+      </if>
+      <if test="language != null">
+        language,
+      </if>
+      <if test="invateCode != null">
+        invate_code,
+      </if>
+      <if test="realName != null">
+        real_name,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="openid != null">
+        #{openid,jdbcType=VARCHAR},
+      </if>
+      <if test="nickName != null">
+        #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="headimgurl != null">
+        #{headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="privilege != null">
+        #{privilege,jdbcType=VARCHAR},
+      </if>
+      <if test="unionid != null">
+        #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null">
+        #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="invateCode != null">
+        #{invateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.dongfan.dongfanapi.entity.User">
+    update user
+    <set>
+      <if test="openid != null">
         openid = #{openid,jdbcType=VARCHAR},
-        session_key = #{sessionKey,jdbcType=VARCHAR},
-        create_at = #{createAt,jdbcType=TIMESTAMP}
-        where id = #{id,jdbcType=INTEGER}
-    </update>
-    <select id="getUserList" resultType="com.dongfan.dongfanapi.entity.User" parameterType="java.util.Map">
-        select * from user where 1=1
-        <if test="pageStart!=null and pageSize!=null">
-            limit #{pageStart},#{pageSize}
-        </if>
-        ;
-    </select>
+      </if>
+      <if test="nickName != null">
+        nick_name = #{nickName,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null">
+        sex = #{sex,jdbcType=INTEGER},
+      </if>
+      <if test="headimgurl != null">
+        headimgurl = #{headimgurl,jdbcType=VARCHAR},
+      </if>
+      <if test="privilege != null">
+        privilege = #{privilege,jdbcType=VARCHAR},
+      </if>
+      <if test="unionid != null">
+        unionid = #{unionid,jdbcType=VARCHAR},
+      </if>
+      <if test="phone != null">
+        phone = #{phone,jdbcType=VARCHAR},
+      </if>
+      <if test="province != null">
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="city != null">
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="country != null">
+        country = #{country,jdbcType=VARCHAR},
+      </if>
+      <if test="language != null">
+        language = #{language,jdbcType=VARCHAR},
+      </if>
+      <if test="invateCode != null">
+        invate_code = #{invateCode,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null">
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.dongfan.dongfanapi.entity.User">
+    update user
+    set openid = #{openid,jdbcType=VARCHAR},
+      nick_name = #{nickName,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=INTEGER},
+      headimgurl = #{headimgurl,jdbcType=VARCHAR},
+      privilege = #{privilege,jdbcType=VARCHAR},
+      unionid = #{unionid,jdbcType=VARCHAR},
+      phone = #{phone,jdbcType=VARCHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city = #{city,jdbcType=VARCHAR},
+      country = #{country,jdbcType=VARCHAR},
+      language = #{language,jdbcType=VARCHAR},
+      invate_code = #{invateCode,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      type = #{type,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 
-    <select id="selectUserByNickname" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from user
-        where nick_name = #{nickname,jdbcType=VARCHAR}
-    </select>
-    <select id="selectUserByOpenId" parameterType="java.lang.String" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        from user
-        where openid = #{openId,jdbcType=VARCHAR}
-    </select>
+
+  <select id="getUserList" resultType="com.dongfan.dongfanapi.entity.User" parameterType="java.util.Map">
+    select * from user where 1=1
+    <if test="pageStart!=null and pageSize!=null">
+      limit #{pageStart},#{pageSize}
+    </if>
+    ;
+  </select>
+
+  <select id="selectUserByNickname" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from user
+    where nick_name = #{nickname,jdbcType=VARCHAR}
+  </select>
+  <select id="selectUserByOpenId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from user
+    where openid = #{openId,jdbcType=VARCHAR}
+  </select>
+  <select id="selectUserByUnionId" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from user
+    where unionid = #{unionId,jdbcType=VARCHAR}
+  </select>
 </mapper>

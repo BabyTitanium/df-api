@@ -1,48 +1,52 @@
 package com.dongfan.dongfanapi.entity;
 
-import java.util.Date;
-
 public class User {
     private Integer id;
 
+    private String openid;
+
     private String nickName;
 
-    private Integer gender;
+    private Integer sex;
 
-    private String language;
+    private String headimgurl;
 
-    private String city;
+    private String privilege;
 
-    private String province;
-
-    private String country;
-
-    private String avatarUrl;
+    private String unionid;
 
     private String phone;
 
-    private String openid;
+    private String province;
 
-    private String sessionKey;
+    private String city;
 
-    private Date createAt;
+    private String country;
+
+    private String language;
 
     private String invateCode;
 
-    public User(Integer id, String nickName, Integer gender, String language, String city, String province, String country, String avatarUrl, String phone, String openid, String sessionKey, Date createAt, String invateCode) {
+    private String realName;
+
+    private String type;
+
+    public User(Integer id, String openid, String nickName, Integer sex, String headimgurl, String privilege, String unionid, String phone, String province, String city, String country, String language, String invateCode, String realName, String type) {
         this.id = id;
-        this.nickName = nickName;
-        this.gender = gender;
-        this.language = language;
-        this.city = city;
-        this.province = province;
-        this.country = country;
-        this.avatarUrl = avatarUrl;
-        this.phone = phone;
         this.openid = openid;
-        this.sessionKey = sessionKey;
-        this.createAt = createAt;
+        this.nickName = nickName;
+        this.sex = sex;
+        this.headimgurl = headimgurl;
+        this.privilege = privilege;
+        this.unionid = unionid;
+        this.phone = phone;
+        this.province = province;
+        this.city = city;
+        this.country = country;
+        this.language = language;
         this.invateCode = invateCode;
+        this.realName = realName;
+        this.type = type;
     }
 
     public User() {
@@ -57,6 +61,14 @@ public class User {
         this.id = id;
     }
 
+    public String getOpenid() {
+        return openid;
+    }
+
+    public void setOpenid(String openid) {
+        this.openid = openid == null ? null : openid.trim();
+    }
+
     public String getNickName() {
         return nickName;
     }
@@ -65,52 +77,36 @@ public class User {
         this.nickName = nickName == null ? null : nickName.trim();
     }
 
-    public Integer getGender() {
-        return gender;
+    public Integer getSex() {
+        return sex;
     }
 
-    public void setGender(Integer gender) {
-        this.gender = gender;
+    public void setSex(Integer sex) {
+        this.sex = sex;
     }
 
-    public String getLanguage() {
-        return language;
+    public String getHeadimgurl() {
+        return headimgurl;
     }
 
-    public void setLanguage(String language) {
-        this.language = language == null ? null : language.trim();
+    public void setHeadimgurl(String headimgurl) {
+        this.headimgurl = headimgurl == null ? null : headimgurl.trim();
     }
 
-    public String getCity() {
-        return city;
+    public String getPrivilege() {
+        return privilege;
     }
 
-    public void setCity(String city) {
-        this.city = city == null ? null : city.trim();
+    public void setPrivilege(String privilege) {
+        this.privilege = privilege == null ? null : privilege.trim();
     }
 
-    public String getProvince() {
-        return province;
+    public String getUnionid() {
+        return unionid;
     }
 
-    public void setProvince(String province) {
-        this.province = province == null ? null : province.trim();
-    }
-
-    public String getCountry() {
-        return country;
-    }
-
-    public void setCountry(String country) {
-        this.country = country == null ? null : country.trim();
-    }
-
-    public String getAvatarUrl() {
-        return avatarUrl;
-    }
-
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl == null ? null : avatarUrl.trim();
+    public void setUnionid(String unionid) {
+        this.unionid = unionid == null ? null : unionid.trim();
     }
 
     public String getPhone() {
@@ -121,28 +117,36 @@ public class User {
         this.phone = phone == null ? null : phone.trim();
     }
 
-    public String getOpenid() {
-        return openid;
+    public String getProvince() {
+        return province;
     }
 
-    public void setOpenid(String openid) {
-        this.openid = openid == null ? null : openid.trim();
+    public void setProvince(String province) {
+        this.province = province == null ? null : province.trim();
     }
 
-    public String getSessionKey() {
-        return sessionKey;
+    public String getCity() {
+        return city;
     }
 
-    public void setSessionKey(String sessionKey) {
-        this.sessionKey = sessionKey == null ? null : sessionKey.trim();
+    public void setCity(String city) {
+        this.city = city == null ? null : city.trim();
     }
 
-    public Date getCreateAt() {
-        return createAt;
+    public String getCountry() {
+        return country;
     }
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
+    public void setCountry(String country) {
+        this.country = country == null ? null : country.trim();
+    }
+
+    public String getLanguage() {
+        return language;
+    }
+
+    public void setLanguage(String language) {
+        this.language = language == null ? null : language.trim();
     }
 
     public String getInvateCode() {
@@ -151,5 +155,21 @@ public class User {
 
     public void setInvateCode(String invateCode) {
         this.invateCode = invateCode == null ? null : invateCode.trim();
+    }
+
+    public String getRealName() {
+        return realName;
+    }
+
+    public void setRealName(String realName) {
+        this.realName = realName == null ? null : realName.trim();
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type == null ? null : type.trim();
     }
 }

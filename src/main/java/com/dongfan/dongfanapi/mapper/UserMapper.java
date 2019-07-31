@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 import java.util.List;
 import java.util.Map;
 
+
 @Mapper
 public interface UserMapper {
     int deleteByPrimaryKey(Integer id);
@@ -25,4 +26,6 @@ public interface UserMapper {
     User selectUserByNickname(String nickname);
 
     User selectUserByOpenId(String openId);
+
+    User selectUserByUnionId(String unionId);
 }

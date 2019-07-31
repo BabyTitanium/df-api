@@ -1,12 +1,12 @@
 package com.dongfan.dongfanapi.controller;
 
 import com.dongfan.dongfanapi.entity.User;
+import com.dongfan.dongfanapi.myAnnotation.SysPermission;
 import com.dongfan.dongfanapi.service.UserService;
 import com.dongfan.dongfanapi.untils.PageUtil;
 import com.dongfan.dongfanapi.untils.Response;
 import com.dongfan.dongfanapi.untils.ResponseData;
 import io.swagger.annotations.ApiOperation;
-import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,7 +32,7 @@ public class AdminUserController {
 
     @ApiOperation("获取用户列表（可自定义条件，可分页）")
     @GetMapping("getUserList")
-    @RequiresPermissions("USER_GETLIST")
+    @SysPermission("USER_GETLIST")
     public ResponseData getUserList(@RequestParam Map<String, Object> map) {
         if (map != null) {
             PageUtil.changeToPage(map);
