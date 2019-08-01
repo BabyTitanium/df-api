@@ -30,11 +30,16 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     private UserService userService;
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+
+        if(request.getRequestURI().contains("user/webLogin")){
+            return true;
+        }
         // 防止 userService 注入不进来
         if (null == userService) {
             BeanFactory factory = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext());
             userService = (UserService) factory.getBean("userService");
         }
+
         String token=request.getHeader("token");
         UserTokenInfo userTokenInfo=JWTUtils.getUserInfo(token);
 

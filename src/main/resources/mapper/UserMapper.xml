@@ -48,7 +48,7 @@
       #{invateCode,jdbcType=VARCHAR}, #{realName,jdbcType=VARCHAR}, #{type,jdbcType=VARCHAR}
       )
   </insert>
-  <insert keyColumn="id" useGeneratedKeys="true"  id="insertSelective" parameterType="com.dongfan.dongfanapi.entity.User">
+  <insert keyColumn="id" useGeneratedKeys="true" keyProperty="id"  id="insertSelective" parameterType="com.dongfan.dongfanapi.entity.User">
     insert into user
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="id != null">

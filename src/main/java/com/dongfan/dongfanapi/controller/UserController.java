@@ -14,8 +14,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpRequest;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
 import java.util.HashMap;
 import java.util.Map;
@@ -26,7 +30,10 @@ import java.util.Map;
  * @Version 1.0
  */
 
-@RestController
+//
+//https://open.weixin.qq.com/connect/qrconnect?appid=wx919c848e8e0ea1a0&redirect_uri=http%3A%2F%2Fdfadmin.itwang.wang%2Fuser%2FwebLogin&response_type=code&scope=snsapi_login&state=STATE#wechat_redirect
+
+@Controller
 @RequestMapping("user")
 public class UserController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -40,7 +47,7 @@ public class UserController {
 
     @ApiOperation("用户网页登录")
     @GetMapping("webLogin")
-    public ResponseData webLogin(@RequestParam(required = true) String code) {
+    public String webLogin(@RequestParam(required = true) String code, HttpServletRequest request, HttpServletResponse response) {
         String loginUrl="https://api.weixin.qq.com/sns/oauth2/access_token";
         Map<String, String> loginParam = new HashMap<>();
         loginParam.put("appid", appId);
@@ -49,14 +56,14 @@ public class UserController {
         loginParam.put("grant_type", "authorization_code");
         String loginResponse = HttpUtils.sendGet(loginUrl, loginParam);
         if(loginResponse==null||loginResponse==""){
-            return Response.error("登录失败");
+            return "登录失败";
         }else{
             JSONObject loginObj = JSON.parseObject(loginResponse);
             if (loginObj.getString("unionid") != null) {
                 String unionId = loginObj.getString("unionid");
                 User user=userService.getUserByUnionId(unionId);
                 if(user==null){
-                    String  authUrl="https://api.weixin.qq.com/sns/userinfo?";
+                    String  authUrl="https://api.weixin.qq.com/sns/userinfo";
                     String accessToken=loginObj.getString("access_token");
                     Map<String, String> authParam = new HashMap<>();
                     authParam.put("access_token", accessToken);
@@ -70,10 +77,11 @@ public class UserController {
                     String jwt=null;
                     try {
                         jwt=JWTUtils.createJWT(userTokenInfo);
+                        response.setHeader("token",jwt);
                     } catch (Exception e) {
-                        return Response.error("token生成失败");
+                        return "token生成失败";
                     }
-                    return Response.success(jwt);
+                    return "redirect:http://25472238pm.wicp.vip:39967/dfTest/";
                 }else{
                     UserTokenInfo userTokenInfo=new UserTokenInfo();
                     userTokenInfo.setNickName(user.getNickName());
@@ -81,13 +89,14 @@ public class UserController {
                     String jwt=null;
                     try {
                         jwt=JWTUtils.createJWT(userTokenInfo);
+                        response.setHeader("token",jwt);
                     } catch (Exception e) {
-                        return Response.error("token生成失败");
+                        return "token生成失败";
                     }
-                    return Response.success(jwt);
+                    return "redirect:http://25472238pm.wicp.vip:39967/dfTest/";
                 }
             }else{
-                return Response.error("验证失败");
+                return "验证失败";
             }
         }
     }
