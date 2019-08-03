@@ -2,7 +2,9 @@ package com.dongfan.dongfanapi.mapper;
 
 import com.dongfan.dongfanapi.entity.TikuZhongyizhiyeQuestion;
 import com.dongfan.dongfanapi.entity.TikuZhongyizhiyeQuestionWithBLOBs;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface TikuZhongyizhiyeQuestionMapper {
     int deleteByPrimaryKey(Integer id);
 

@@ -1,7 +1,9 @@
 package com.dongfan.dongfanapi.mapper;
 
 import com.dongfan.dongfanapi.entity.TikuXiyiYearScore;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface TikuXiyiYearScoreMapper {
     int deleteByPrimaryKey(Integer id);
 

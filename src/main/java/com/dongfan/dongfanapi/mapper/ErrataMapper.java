@@ -2,7 +2,9 @@ package com.dongfan.dongfanapi.mapper;
 
 import com.dongfan.dongfanapi.entity.Errata;
 import com.dongfan.dongfanapi.entity.ErrataWithBLOBs;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface ErrataMapper {
     int deleteByPrimaryKey(Integer id);
 

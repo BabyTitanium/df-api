@@ -1,7 +1,9 @@
 package com.dongfan.dongfanapi.mapper;
 
 import com.dongfan.dongfanapi.entity.TikuKouqiangChapter;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface TikuKouqiangChapterMapper {
     int deleteByPrimaryKey(Integer id);
 

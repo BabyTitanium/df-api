@@ -1,7 +1,9 @@
 package com.dongfan.dongfanapi.mapper;
 
 import com.dongfan.dongfanapi.entity.AuthRoleUser;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface AuthRoleUserMapper {
     int deleteByPrimaryKey(Integer id);
 

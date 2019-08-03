@@ -1,7 +1,9 @@
 package com.dongfan.dongfanapi.mapper;
 
 import com.dongfan.dongfanapi.entity.News;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface NewsMapper {
     int deleteByPrimaryKey(Integer id);
 

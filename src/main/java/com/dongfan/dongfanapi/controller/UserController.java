@@ -40,18 +40,19 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @Value("${weixin.appId}")
-    private String appId;
-    @Value("${weixin.secret}")
-    private String secret;
-
+    @Value("${weixin.web.appId}")
+    private String appId_web;
+    @Value("${weixin.web.secret}")
+    private String secret_web;
+    @Value("${weixin.xcx.appId}")
+    private String appId_xcx;
     @ApiOperation("用户网页登录")
     @GetMapping("webLogin")
     public String webLogin(@RequestParam(required = true) String code, HttpServletRequest request, HttpServletResponse response) {
         String loginUrl="https://api.weixin.qq.com/sns/oauth2/access_token";
         Map<String, String> loginParam = new HashMap<>();
-        loginParam.put("appid", appId);
-        loginParam.put("secret", secret);
+        loginParam.put("appid", appId_web);
+        loginParam.put("secret", secret_web);
         loginParam.put("code", code);
         loginParam.put("grant_type", "authorization_code");
         String loginResponse = HttpUtils.sendGet(loginUrl, loginParam);
@@ -81,7 +82,7 @@ public class UserController {
                     } catch (Exception e) {
                         return "token生成失败";
                     }
-                    return "redirect:http://25472238pm.wicp.vip:39967/dfTest/";
+                    return "redirect:http://df-dashboard.itwang.wang:7002/#/?token="+jwt;
                 }else{
                     UserTokenInfo userTokenInfo=new UserTokenInfo();
                     userTokenInfo.setNickName(user.getNickName());
@@ -93,13 +94,60 @@ public class UserController {
                     } catch (Exception e) {
                         return "token生成失败";
                     }
-                    return "redirect:http://25472238pm.wicp.vip:39967/dfTest/";
+                    return "redirect:http://df-dashboard.itwang.wang:7002/#/?token="+jwt;
                 }
             }else{
                 return "验证失败";
             }
         }
     }
+
+    @ApiOperation("用户小程序登录")
+    @GetMapping("xcxLogin")
+    public ResponseData xcxLogin(String code, String nickName, Integer gender, String language, String city, String province, String country, String avatarUrl) {
+        String url = "https://api.weixin.qq.com/sns/jscode2session";
+        Map<String, String> param = new HashMap<>();
+        param.put("appid", appId_xcx);
+        param.put("secret", secret_web);
+        param.put("grant_type", "authorization_code");
+        param.put("js_code", code);
+        String respose = HttpUtils.sendGet(url, param);
+        if (respose == null || respose == "") {
+            return Response.error("获取数据失败");
+        } else {
+            JSONObject jsonObject = JSON.parseObject(respose);
+            if (jsonObject.getString("openid") != null) {
+
+                String unionId = jsonObject.getString("unionid");
+                String sessionKey = jsonObject.getString("session_key");
+
+                // 查找用户是否存在
+                User user = userService.getUserByUnionId(unionId);
+
+                if (user == null) {
+                    User u = new User();
+//                    u.setNick_name(nickName);
+//                    u.setGender(gender);
+//                    u.setCity(city);
+//                    u.setProvince(province);
+//                    u.setLanguage(language);
+//                    u.setCountry(country);
+//                    u.setAvatar_url(avatarUrl);
+//                    u.setOpenid(openId);
+//                    u.setSession_key(sessionKey);
+//                    userService.addUser(u);
+                    return Response.success(u);
+                } else {
+                    return Response.success(user);
+                }
+            } else {
+                return Response.error("失败");
+            }
+        }
+
+    }
+
+
 
     @ApiOperation("获取个人信息")
     @GetMapping("getUserInfo")

@@ -61,7 +61,7 @@
         media_url, media_img, knowledge_img
     </sql>
     <sql id="Blob_Column_List">
-        restore, explain, option, knowledge, restoren, explainn
+        tiku_xiyizhiye_question.restore, tiku_xiyizhiye_question.explain, tiku_xiyizhiye_question.option, knowledge, restoren, explainn
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
         select
@@ -393,4 +393,12 @@
         knowledge_img = #{knowledgeImg,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="getListByChapterId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from tiku_xiyizhiye_question
+        where chapter_id = #{chapterId,jdbcType=INTEGER}
+    </select>
 </mapper>

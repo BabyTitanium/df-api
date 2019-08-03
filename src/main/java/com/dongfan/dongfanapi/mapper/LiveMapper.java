@@ -1,7 +1,9 @@
 package com.dongfan.dongfanapi.mapper;
 
 import com.dongfan.dongfanapi.entity.Live;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface LiveMapper {
     int deleteByPrimaryKey(Integer id);
 

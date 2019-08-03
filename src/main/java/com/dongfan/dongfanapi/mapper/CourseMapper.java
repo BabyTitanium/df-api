@@ -1,7 +1,9 @@
 package com.dongfan.dongfanapi.mapper;
 
 import com.dongfan.dongfanapi.entity.Course;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface CourseMapper {
     int deleteByPrimaryKey(Integer id);
 

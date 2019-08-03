@@ -1,7 +1,9 @@
 package com.dongfan.dongfanapi.mapper;
 
 import com.dongfan.dongfanapi.entity.Feedback;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface FeedbackMapper {
     int deleteByPrimaryKey(Integer id);
 
