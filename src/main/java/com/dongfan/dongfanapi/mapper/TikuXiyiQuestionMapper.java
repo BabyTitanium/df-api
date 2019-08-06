@@ -28,4 +28,5 @@ public interface TikuXiyiQuestionMapper {
 
     int getXiyiTiKuQuestionCount();
 
+    List<Map> getListByChapterId(@Param("chapterId") int chapterId,@Param("userId")int userId);
 }

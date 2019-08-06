@@ -34,7 +34,8 @@ public class UserQuestionController {
         return Response.success(list);
     }
     @GetMapping("getQuestionRecordByChapter")
-    public ResponseData getQuestionRecordByChapter(@RequestParam(required = true) int chaperId,@RequestParam(required = true) String name){
-        return Response.success();
+    public ResponseData getQuestionRecordByChapter(@RequestParam(required = true) int userId,@RequestParam(required = true) String name){
+        List list= questionService.getQuestionRecordByTikuName(userId,name);
+        return Response.success(list);
     }
 }

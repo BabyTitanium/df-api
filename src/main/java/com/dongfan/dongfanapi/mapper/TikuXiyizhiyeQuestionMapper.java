@@ -5,6 +5,7 @@ import com.dongfan.dongfanapi.entity.TikuXiyizhiyeQuestionWithBLOBs;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface TikuXiyizhiyeQuestionMapper {
@@ -22,5 +23,5 @@ public interface TikuXiyizhiyeQuestionMapper {
 
     int updateByPrimaryKey(TikuXiyizhiyeQuestion record);
 
-    List getListByChapterId(int chapterId);
+    List<Map> getListByChapterId(int chapterId);
 }

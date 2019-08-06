@@ -393,11 +393,13 @@
         knowledge_img = #{knowledgeImg,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <select id="getListByChapterId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    <select id="getListByChapterId" parameterType="java.lang.Integer" resultType="java.util.Map">
         select
         <include refid="Base_Column_List"/>
         ,
         <include refid="Blob_Column_List"/>
+
+        ,( CASE WHEN tiku_xiyizhiye_question.id in (SELECT question_id from tiku_record where tiku_name='xiyizhiye' and user_id=1) THEN '1'  ELSE '0' end) as isTaken
         from tiku_xiyizhiye_question
         where chapter_id = #{chapterId,jdbcType=INTEGER}
     </select>

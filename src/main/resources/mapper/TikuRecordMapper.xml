@@ -127,4 +127,8 @@
       result = #{result,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+  <select id="getXiyiRecord" parameterType="java.lang.Integer" resultType="com.dongfan.dongfanapi.entity.questionRecord">
+
+  </select>
 </mapper>

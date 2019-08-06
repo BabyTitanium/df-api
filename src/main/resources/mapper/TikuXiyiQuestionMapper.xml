@@ -59,7 +59,7 @@
         media_url, media_img, is_high_test
     </sql>
     <sql id="Blob_Column_List">
-        restore, recovery, explain, option, restoren, explainn
+        tiku_xiyi_question.restore, tiku_xiyi_question.recovery, tiku_xiyi_question.explain, tiku_xiyi_question.option, tiku_xiyi_question.restoren, tiku_xiyi_question.explainn
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
         select
@@ -385,5 +385,16 @@
     </select>
     <select id="getXiyiTiKuQuestionCount" resultType="java.lang.Integer">
         SELECT count(*) from tiku_xiyi_info;
+    </select>
+
+    <select id="getListByChapterId" parameterType="java.lang.Integer" resultType="java.util.Map">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        ,
+        ( CASE WHEN tiku_xiyi_question.id in (SELECT question_id from tiku_record where tiku_name='xiyi' and user_id=1) THEN '1'  ELSE '0' end) as isTaken
+        from tiku_xiyi_question
+        where chapter_id = #{chapterId,jdbcType=INTEGER}
     </select>
 </mapper>

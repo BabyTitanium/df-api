@@ -22,7 +22,7 @@ public class JWTUtils {
 
     private static String secret="r398!jd26%h$jfeio";
 
-    private static long expireTime=2592000;//一个月
+   // private static long expireTime=2592000;//一个月
 
     //解析jwt
     /**
@@ -30,13 +30,10 @@ public class JWTUtils {
      * @return
      * @throws Exception
      */
-    public static String createJWT(UserTokenInfo userTokenInfo) throws Exception {
+    public static String createJWT(UserTokenInfo userTokenInfo,long expireTime) throws Exception {
         String subject=JSON.toJSONString(userTokenInfo);
         SignatureAlgorithm signatureAlgorithm = SignatureAlgorithm.HS256; //指定签名的时候使用的签名算法，也就是header那部分，jjwt已经将这部分内容封装好了。
         long nowMillis = System.currentTimeMillis();//生成JWT的时间
-        Map<String,Object> map=new HashMap<>();
-        map.put("nickName","Houser");
-        map.put("userId",1);
         //下面就是在为payload添加各种标准声明和私有声明了
         JwtBuilder builder = Jwts.builder() //这里其实就是new一个JwtBuilder，设置jwt的body
                 .setSubject(subject)        //sub(Subject)：代表这个JWT的主体，即它的所有人，这个是一个json格式的字符串，可以存放什么userid，roldid之类的，作为什么用户的唯一标志。
@@ -79,4 +76,10 @@ public class JWTUtils {
 
     }
 
+
+    public static void main(String[] args) {
+        String token="eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJuaWNrTmFtZVwiOlwi5YiY6Lmm5ZOSXHVEODNEXHVEQzhCXCIsXCJ1c2VySWRcIjoyMH0iLCJleHAiOjE1NjQ4NDM4Njl9.f-4HI5Z2mAxpjw-QYX-G7y3_kSkQfpmLjevYk7zbPl8";
+        UserTokenInfo userTokenInfo=getUserInfo(token);
+        System.out.println(userTokenInfo.getUserId());
+    }
     }

@@ -54,7 +54,9 @@
         media_img
     </sql>
     <sql id="Blob_Column_List">
-        restore, explain, option
+        tiku_zhiyezhongyaoshi_question.restore,
+        tiku_zhiyezhongyaoshi_question.explain,
+         tiku_zhiyezhongyaoshi_question.option
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
         select
@@ -332,4 +334,12 @@
         media_img = #{mediaImg,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="getListByChapterId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        ,
+        <include refid="Blob_Column_List"/>
+        from tiku_zhiyezhongyaoshi_question
+        where chapter_id = #{chapterId,jdbcType=INTEGER}
+    </select>
 </mapper>

@@ -31,7 +31,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        if(request.getRequestURI().contains("user/webLogin")){
+        if(request.getRequestURI().contains("Login")){
             return true;
         }
         // 防止 userService 注入不进来

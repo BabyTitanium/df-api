@@ -43,7 +43,7 @@ public class GlobalCorsConfig implements Filter {
             response.setStatus(200);
             return;
         } else {
-            if(request.getRequestURI().contains("user/webLogin")){
+            if(request.getRequestURI().contains("Login")){
                 chain.doFilter(req,res);
             }else{
                 String token=request.getHeader("token");

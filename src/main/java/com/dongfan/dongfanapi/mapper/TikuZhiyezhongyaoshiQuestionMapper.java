@@ -4,6 +4,8 @@ import com.dongfan.dongfanapi.entity.TikuZhiyezhongyaoshiQuestion;
 import com.dongfan.dongfanapi.entity.TikuZhiyezhongyaoshiQuestionWithBLOBs;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 @Mapper
 public interface TikuZhiyezhongyaoshiQuestionMapper {
     int deleteByPrimaryKey(Integer id);
@@ -19,4 +21,5 @@ public interface TikuZhiyezhongyaoshiQuestionMapper {
     int updateByPrimaryKeyWithBLOBs(TikuZhiyezhongyaoshiQuestionWithBLOBs record);
 
     int updateByPrimaryKey(TikuZhiyezhongyaoshiQuestion record);
+    List getListByChapterId(int chapterId);
 }
