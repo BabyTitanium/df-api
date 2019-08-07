@@ -12,6 +12,6 @@ import java.util.List;
 
 public interface QuestionService {
     void addQuestionRecord(TikuRecord tikuRecord);
-    List getQuestionListByChapter(int chapterId, String name,int userId);
+    List getQuestionListByChapter(int chapterId,int userId, String name);
 //    List getQuestionRecordByTikuName(int chapterId, String name);
 }

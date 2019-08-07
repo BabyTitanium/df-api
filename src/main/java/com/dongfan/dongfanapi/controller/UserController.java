@@ -82,7 +82,7 @@ public class UserController {
                     userTokenInfo.setUserId(insertUser.getId());
                     String jwt=null;
                     try {
-                        jwt=JWTUtils.createJWT(userTokenInfo,2592000);
+                        jwt=JWTUtils.createJWT(userTokenInfo,2592000000L);
                         response.setHeader("token",jwt);
                     } catch (Exception e) {
                         return "token生成失败";
@@ -94,7 +94,7 @@ public class UserController {
                     userTokenInfo.setUserId(user.getId());
                     String jwt=null;
                     try {
-                        jwt=JWTUtils.createJWT(userTokenInfo,2592000);
+                        jwt=JWTUtils.createJWT(userTokenInfo,2592000000L);
                         response.setHeader("token",jwt);
                     } catch (Exception e) {
                         return "token生成失败";
@@ -139,7 +139,7 @@ public class UserController {
                     userTokenInfo.setUserId(insertUser.getId());
                     String jwt=null;
                     try {
-                        jwt=JWTUtils.createJWT(userTokenInfo,604800);
+                        jwt=JWTUtils.createJWT(userTokenInfo,604800000);
                     } catch (Exception e) {
                         return Response.error("token生成失败");
                     }
@@ -150,7 +150,7 @@ public class UserController {
                     userTokenInfo.setUserId(user.getId());
                     String jwt=null;
                     try {
-                        jwt=JWTUtils.createJWT(userTokenInfo,604800);
+                        jwt=JWTUtils.createJWT(userTokenInfo,604800000);
                     } catch (Exception e) {
                         return Response.success(jwt);
                     }

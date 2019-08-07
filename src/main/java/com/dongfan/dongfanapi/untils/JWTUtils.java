@@ -78,8 +78,16 @@ public class JWTUtils {
 
 
     public static void main(String[] args) {
-        String token="eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJuaWNrTmFtZVwiOlwi5YiY6Lmm5ZOSXHVEODNEXHVEQzhCXCIsXCJ1c2VySWRcIjoyMH0iLCJleHAiOjE1NjQ4NDM4Njl9.f-4HI5Z2mAxpjw-QYX-G7y3_kSkQfpmLjevYk7zbPl8";
-        UserTokenInfo userTokenInfo=getUserInfo(token);
-        System.out.println(userTokenInfo.getUserId());
+        UserTokenInfo userTokenInfo=new UserTokenInfo();
+        userTokenInfo.setUserId(20);
+        userTokenInfo.setNickName("刘蹦哒\uD83D\uDC8B");
+        try {
+            String str=createJWT(userTokenInfo,2592000000L);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+//        String token="eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ7XCJuaWNrTmFtZVwiOlwi5YiY6Lmm5ZOSXHVEODNEXHVEQzhCXCIsXCJ1c2VySWRcIjoyMH0iLCJleHAiOjE1NjQ4NDM4Njl9.f-4HI5Z2mAxpjw-QYX-G7y3_kSkQfpmLjevYk7zbPl8";
+//        UserTokenInfo userTokenInfo=getUserInfo(token);
+//        System.out.println(userTokenInfo.getUserId());
     }
     }

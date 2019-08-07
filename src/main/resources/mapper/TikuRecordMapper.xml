@@ -127,8 +127,11 @@
       result = #{result,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+<select id="getQuestionList"  resultType="java.util.Map">
+ SELECT tiku.*,g.id as record_id,g.create_at,g.answer as user_answer,g.result FROM
+ ${dataname} tiku LEFT JOIN (select tiku_record.* from tiku_record where tiku_record.user_id=#{userId}  and tiku_record.tiku_name=#{name} ) g on tiku.id=g.question_id where tiku.chapter_id=#{chapterId}
 
-  <select id="getXiyiRecord" parameterType="java.lang.Integer" resultType="com.dongfan.dongfanapi.entity.questionRecord">
 
-  </select>
+</select>
+
 </mapper>

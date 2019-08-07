@@ -29,13 +29,13 @@ public class UserQuestionController {
         return Response.success();
     }
     @GetMapping("getQuestionListByChapter")
-    public ResponseData getQuestionListByChapter(@RequestParam(required = true) int chapterId,@RequestParam(required = true) String name){
-        List list= questionService.getQuestionListByChapter(chapterId,name);
+    public ResponseData getQuestionListByChapter(@RequestParam(required = true) int chapterId,@RequestParam(required = true) int userId,@RequestParam(required = true) String name){
+        List list= questionService.getQuestionListByChapter(chapterId,userId,name);
         return Response.success(list);
     }
-    @GetMapping("getQuestionRecordByChapter")
-    public ResponseData getQuestionRecordByChapter(@RequestParam(required = true) int userId,@RequestParam(required = true) String name){
-        List list= questionService.getQuestionRecordByTikuName(userId,name);
-        return Response.success(list);
-    }
+//    @GetMapping("getQuestionRecordByChapter")
+//    public ResponseData getQuestionRecordByChapter(@RequestParam(required = true) int userId,@RequestParam(required = true) String name){
+//        List list= questionService.getQuestionRecordByTikuName(userId,name);
+//        return Response.success(list);
+//    }
 }

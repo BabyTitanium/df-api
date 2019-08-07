@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface TikuRecordMapper {
@@ -21,10 +22,5 @@ public interface TikuRecordMapper {
 
     int updateByPrimaryKey(TikuRecord record);
 
-    List getXiyizhiyeRecord(int userId);
-    List getXiyiRecord(int userId);
-    List getZhongyizhiyeRecord(int userId);
-    List getKouqiangRecord(int userId);
-    List getZhiyexiyaoshiRecord(int userId);
-    List getZhiyezhongyaoshiRecord(int userId);
+    List<Map> getQuestionList(@Param("chapterId") int chapterId, @Param("userId") int userId,@Param("name") String name, @Param("dataname") String dataname);
 }

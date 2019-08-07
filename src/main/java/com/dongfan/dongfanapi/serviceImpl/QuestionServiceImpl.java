@@ -41,10 +41,10 @@ public class QuestionServiceImpl implements QuestionService {
 //  xiyi     kouqiang     xiyizhiye    zhiyexiyaoshi    zhiyezhongyaoshi    zhongyizhiye
 
     @Override
-    public List getQuestionListByChapter(int chapterId, String name,int userId) {
+    public List getQuestionListByChapter(int chapterId,int userId, String name) {
         String dataname="tiku_"+name+"_question";
         List<Map> list=new ArrayList();
-     //   list=tikuRecordMapper.getQuestionRecord(chapterId,dataname,userId);
+        list=tikuRecordMapper.getQuestionList(chapterId,userId,name,dataname);
 //        if(name.equals("xiyizhiye")){
 //            list=tikuXiyizhiyeQuestionMapper.getListByChapterId(chapterId);
 //        }else if(name.equals("xiyi")){

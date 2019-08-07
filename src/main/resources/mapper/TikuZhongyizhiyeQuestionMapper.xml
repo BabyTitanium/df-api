@@ -355,12 +355,5 @@
         from tiku_zhongyizhiye_question
         where chapter_id = #{chapterId,jdbcType=INTEGER}
     </select>
-    <select id="getListByChapterId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-        select
-        <include refid="Base_Column_List"/>
-        ,
-        <include refid="Blob_Column_List"/>
-        from tiku_zhongyizhiye_question
-        where chapter_id = #{chapterId,jdbcType=INTEGER}
-    </select>
+
 </mapper>
