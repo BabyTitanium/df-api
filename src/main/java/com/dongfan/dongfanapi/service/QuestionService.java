@@ -1,5 +1,6 @@
 package com.dongfan.dongfanapi.service;
 
+import com.dongfan.dongfanapi.entity.TikuCollection;
 import com.dongfan.dongfanapi.entity.TikuRecord;
 
 import java.util.List;
@@ -13,5 +14,7 @@ import java.util.List;
 public interface QuestionService {
     void addQuestionRecord(TikuRecord tikuRecord);
     List getQuestionListByChapter(int chapterId,int userId, String name);
+    void addTikuCollection(TikuCollection tikuCollection);
+    void deleteTikuCollection(int id);
 //    List getQuestionRecordByTikuName(int chapterId, String name);
 }

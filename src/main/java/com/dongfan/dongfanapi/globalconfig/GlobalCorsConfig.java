@@ -56,6 +56,7 @@ public class GlobalCorsConfig implements Filter {
                         response.sendError(HttpStatus.BAD_REQUEST.value(), "无效token");
                         return;
                     }
+                    request.setAttribute("userId",userTokenInfo.getUserId());
                 }
 
                 chain.doFilter(req, res);

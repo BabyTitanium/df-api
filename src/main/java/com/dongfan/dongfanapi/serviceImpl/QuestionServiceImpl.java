@@ -1,5 +1,6 @@
 package com.dongfan.dongfanapi.serviceImpl;
 
+import com.dongfan.dongfanapi.entity.TikuCollection;
 import com.dongfan.dongfanapi.entity.TikuRecord;
 import com.dongfan.dongfanapi.entity.TikuXiyiQuestion;
 import com.dongfan.dongfanapi.mapper.*;
@@ -34,6 +35,8 @@ public class QuestionServiceImpl implements QuestionService {
     private TikuZhiyezhongyaoshiQuestionMapper tikuZhiyezhongyaoshiQuestionMapper;
     @Resource
     private TikuZhongyizhiyeQuestionMapper tikuZhongyizhiyeQuestionMapper;
+    @Resource
+    private TikuCollectionMapper tikuCollectionMapper;
     @Override
     public void addQuestionRecord(TikuRecord tikuRecord) {
         tikuRecordMapper.insertSelective(tikuRecord);
@@ -59,6 +62,16 @@ public class QuestionServiceImpl implements QuestionService {
 //            list = tikuZhongyizhiyeQuestionMapper.getListByChapterId(chapterId);
 //        }
         return list;
+    }
+
+    @Override
+    public void addTikuCollection(TikuCollection tikuCollection) {
+        tikuCollectionMapper.insertSelective(tikuCollection);
+    }
+
+    @Override
+    public void deleteTikuCollection(int id) {
+        tikuCollectionMapper.deleteByPrimaryKey(id);
     }
 
 //    @Override
