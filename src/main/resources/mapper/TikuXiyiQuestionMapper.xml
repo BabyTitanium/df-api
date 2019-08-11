@@ -375,9 +375,9 @@
         SELECT xiyi.id,xiyi.title,xiyi.answer,xiyi.option,xiyi.explain,xiyi.chapter_name FROM tiku_xiyi_info xiyi limit
         #{start},#{limit}
     </select>
-    <select id="getXiyiTiKuQuestionCount" resultType="java.lang.Integer">
-        SELECT count(*) from tiku_xiyi_info;
-    </select>
+    <!--<select id="getXiyiTiKuQuestionCount" resultType="java.lang.Integer">-->
+        <!--SELECT count(*) from tiku_xiyi_info;-->
+    <!--</select>-->
 
     <select id="getListByChapterId" parameterType="java.lang.Integer" resultType="java.util.Map">
         select

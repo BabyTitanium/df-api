@@ -26,7 +26,7 @@ public interface TikuXiyiQuestionMapper {
 
     List<Map<String, Object>> getXiyiTiKuQuestion(@Param("start") int start, @Param("limit") int limit);
 
-    int getXiyiTiKuQuestionCount();
+//    int getXiyiTiKuQuestionCount();
 
     List<Map> getListByChapterId(@Param("chapterId") int chapterId,@Param("userId")int userId);
 }

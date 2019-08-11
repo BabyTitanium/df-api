@@ -27,17 +27,5 @@ public class TelephoneAspect {
     public void annotationPointcut() {
     }
 
-    @Before("annotationPointcut()")
-    public void beforePointcut(JoinPoint joinPoint) {
 
-        MethodSignature methodSignature =  (MethodSignature) joinPoint.getSignature();
-        Method method = methodSignature.getMethod();
-        RequireTelephone annotation = method.getAnnotation(RequireTelephone.class);
-        logger.info("需要手机号");
-
-    }
-    @AfterReturning(pointcut = "annotationPointcut()",returning = "obj")
-    public void afterReturning(JoinPoint joinPoint,Object obj) {
-        System.out.println("obj:"+obj);
-    }
 }

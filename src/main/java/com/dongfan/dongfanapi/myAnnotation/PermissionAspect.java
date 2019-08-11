@@ -25,16 +25,6 @@ public class PermissionAspect {
     public void annotationPointcut() {
     }
 
-    @Before("annotationPointcut()")
-    public void beforePointcut(JoinPoint joinPoint) {
-        Object[] objects = joinPoint.getArgs();
-        MethodSignature methodSignature =  (MethodSignature) joinPoint.getSignature();
-        Method method = methodSignature.getMethod();
-        SysPermission annotation = method.getAnnotation(SysPermission.class);
-        String value = annotation.value();
-        System.out.println("准备"+value);
-
-    }
 
 
 }
