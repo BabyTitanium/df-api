@@ -18,7 +18,7 @@ import java.util.List;
  */
 @RestController
 @RequestMapping("tiku/chapter")
-public class UserChapterController {
+public class TikuChapterController {
     @Autowired
     private ChapterService chapterService;
     @GetMapping("getChapterList")

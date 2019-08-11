@@ -3,7 +3,7 @@ package com.dongfan.dongfanapi.entity;
 public class TikuXiyizhiyeQuestion {
     private Integer id;
 
-    private Integer questionId;
+
 
     private Integer chapterId;
 
@@ -43,7 +43,6 @@ public class TikuXiyizhiyeQuestion {
 
     public TikuXiyizhiyeQuestion(Integer id, Integer questionId, Integer chapterId, Integer chapterParentId, String title, String titleImg, Integer sNum, String number, String year, String questionType, String unit, String numberNumber, String syllabus, String explainImg, Integer type, String answer, Integer mediaId, String mediaUrl, String mediaImg, String knowledgeImg) {
         this.id = id;
-        this.questionId = questionId;
         this.chapterId = chapterId;
         this.chapterParentId = chapterParentId;
         this.title = title;
@@ -76,13 +75,6 @@ public class TikuXiyizhiyeQuestion {
         this.id = id;
     }
 
-    public Integer getQuestionId() {
-        return questionId;
-    }
-
-    public void setQuestionId(Integer questionId) {
-        this.questionId = questionId;
-    }
 
     public Integer getChapterId() {
         return chapterId;

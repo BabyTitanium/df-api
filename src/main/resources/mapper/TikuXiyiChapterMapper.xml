@@ -4,14 +4,13 @@
     <resultMap id="BaseResultMap" type="com.dongfan.dongfanapi.entity.TikuXiyiChapter">
         <constructor>
             <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="chapter_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
             <arg column="chapter_parent_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
             <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR"/>
             <arg column="sort" javaType="java.lang.Integer" jdbcType="INTEGER"/>
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        id, chapter_id, chapter_parent_id, title, sort
+        id, chapter_parent_id, title, sort
     </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
@@ -24,7 +23,7 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.dongfan.dongfanapi.entity.TikuXiyiChapter">
-        insert into tiku_xiyi_chapter (id, chapter_id, chapter_parent_id,
+        insert into tiku_xiyi_chapter (id, chapter_parent_id,
         title, sort)
         values (#{id,jdbcType=INTEGER}, #{chapterId,jdbcType=INTEGER}, #{chapterParentId,jdbcType=INTEGER},
         #{title,jdbcType=VARCHAR}, #{sort,jdbcType=INTEGER})
@@ -35,9 +34,7 @@
             <if test="id != null">
                 id,
             </if>
-            <if test="chapterId != null">
-                chapter_id,
-            </if>
+
             <if test="chapterParentId != null">
                 chapter_parent_id,
             </if>
@@ -52,9 +49,7 @@
             <if test="id != null">
                 #{id,jdbcType=INTEGER},
             </if>
-            <if test="chapterId != null">
-                #{chapterId,jdbcType=INTEGER},
-            </if>
+
             <if test="chapterParentId != null">
                 #{chapterParentId,jdbcType=INTEGER},
             </if>
@@ -69,9 +64,7 @@
     <update id="updateByPrimaryKeySelective" parameterType="com.dongfan.dongfanapi.entity.TikuXiyiChapter">
         update tiku_xiyi_chapter
         <set>
-            <if test="chapterId != null">
-                chapter_id = #{chapterId,jdbcType=INTEGER},
-            </if>
+
             <if test="chapterParentId != null">
                 chapter_parent_id = #{chapterParentId,jdbcType=INTEGER},
             </if>
@@ -86,7 +79,6 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.dongfan.dongfanapi.entity.TikuXiyiChapter">
         update tiku_xiyi_chapter
-        set chapter_id = #{chapterId,jdbcType=INTEGER},
         chapter_parent_id = #{chapterParentId,jdbcType=INTEGER},
         title = #{title,jdbcType=VARCHAR},
         sort = #{sort,jdbcType=INTEGER}

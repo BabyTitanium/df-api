@@ -4,7 +4,6 @@
     <resultMap id="BaseResultMap" type="com.dongfan.dongfanapi.entity.TikuKouqiangQuestion">
         <constructor>
             <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="question_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
             <arg column="chapter_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
             <arg column="chapter_parent_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
             <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR"/>
@@ -27,7 +26,6 @@
     <resultMap id="ResultMapWithBLOBs" type="com.dongfan.dongfanapi.entity.TikuKouqiangQuestionWithBLOBs">
         <constructor>
             <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
-            <arg column="question_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
             <arg column="chapter_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
             <arg column="chapter_parent_id" javaType="java.lang.Integer" jdbcType="INTEGER"/>
             <arg column="title" javaType="java.lang.String" jdbcType="VARCHAR"/>
@@ -51,7 +49,7 @@
         </constructor>
     </resultMap>
     <sql id="Base_Column_List">
-        id, question_id, chapter_id, chapter_parent_id, title, title_img, s_num, number,
+        id, chapter_id, chapter_parent_id, title, title_img, s_num, number,
         year, question_type, unit, number_number, syllabus, explain_img, type, answer, media_id,
         media_url, media_img
     </sql>
@@ -71,7 +69,7 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="com.dongfan.dongfanapi.entity.TikuKouqiangQuestionWithBLOBs">
-        insert into tiku_kouqiang_question (id, question_id, chapter_id,
+        insert into tiku_kouqiang_question (id, chapter_id,
         chapter_parent_id, title, title_img,
         s_num, number, year,
         question_type, unit, number_number,
@@ -79,7 +77,7 @@
         answer, media_id, media_url,
         media_img, restore, explain,
         option)
-        values (#{id,jdbcType=INTEGER}, #{questionId,jdbcType=INTEGER}, #{chapterId,jdbcType=INTEGER},
+        values (#{id,jdbcType=INTEGER}, #{chapterId,jdbcType=INTEGER},
         #{chapterParentId,jdbcType=INTEGER}, #{title,jdbcType=VARCHAR}, #{titleImg,jdbcType=VARCHAR},
         #{sNum,jdbcType=INTEGER}, #{number,jdbcType=VARCHAR}, #{year,jdbcType=VARCHAR},
         #{questionType,jdbcType=VARCHAR}, #{unit,jdbcType=VARCHAR}, #{numberNumber,jdbcType=VARCHAR},
@@ -94,9 +92,7 @@
             <if test="id != null">
                 id,
             </if>
-            <if test="questionId != null">
-                question_id,
-            </if>
+
             <if test="chapterId != null">
                 chapter_id,
             </if>
@@ -162,9 +158,7 @@
             <if test="id != null">
                 #{id,jdbcType=INTEGER},
             </if>
-            <if test="questionId != null">
-                #{questionId,jdbcType=INTEGER},
-            </if>
+
             <if test="chapterId != null">
                 #{chapterId,jdbcType=INTEGER},
             </if>
@@ -231,9 +225,7 @@
             parameterType="com.dongfan.dongfanapi.entity.TikuKouqiangQuestionWithBLOBs">
         update tiku_kouqiang_question
         <set>
-            <if test="questionId != null">
-                question_id = #{questionId,jdbcType=INTEGER},
-            </if>
+
             <if test="chapterId != null">
                 chapter_id = #{chapterId,jdbcType=INTEGER},
             </if>
@@ -300,7 +292,6 @@
     <update id="updateByPrimaryKeyWithBLOBs"
             parameterType="com.dongfan.dongfanapi.entity.TikuKouqiangQuestionWithBLOBs">
         update tiku_kouqiang_question
-        set question_id = #{questionId,jdbcType=INTEGER},
         chapter_id = #{chapterId,jdbcType=INTEGER},
         chapter_parent_id = #{chapterParentId,jdbcType=INTEGER},
         title = #{title,jdbcType=VARCHAR},
@@ -325,7 +316,6 @@
     </update>
     <update id="updateByPrimaryKey" parameterType="com.dongfan.dongfanapi.entity.TikuKouqiangQuestion">
         update tiku_kouqiang_question
-        set question_id = #{questionId,jdbcType=INTEGER},
         chapter_id = #{chapterId,jdbcType=INTEGER},
         chapter_parent_id = #{chapterParentId,jdbcType=INTEGER},
         title = #{title,jdbcType=VARCHAR},

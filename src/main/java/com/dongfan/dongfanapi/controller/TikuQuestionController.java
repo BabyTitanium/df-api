@@ -23,7 +23,7 @@ import java.util.Map;
  */
 @RestController
 @RequestMapping("tiku/question")
-public class UserQuestionController {
+public class TikuQuestionController {
     @Autowired
     private QuestionService questionService;
     @PostMapping("submitQuestionRecord")
@@ -56,7 +56,6 @@ public class UserQuestionController {
     @GetMapping("getTikuCollectionList")
     @ApiOperation("获取当前用户题目收藏列表")
     public ResponseData getTikuCollectionRecord(@RequestAttribute("userId") int userId,@RequestParam("name")String name,@RequestParam("page")int page,@RequestParam("pageSize")int pageSize){
-
         List list=new ArrayList();
         list=questionService.getTikuCollection(userId,name,page,pageSize);
         return Response.success(list);

@@ -188,7 +188,7 @@ public class UserController {
 
                 if (user == null) {
                     User u = new User();
-//                    u.setNick_name(nickName);
+//                    u.setNick_name(nickName);k
 //                    u.setGender(gender);
 //                    u.setCity(city);
 //                    u.setProvince(province);

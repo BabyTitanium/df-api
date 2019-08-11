@@ -3,7 +3,6 @@ package com.dongfan.dongfanapi.entity;
 public class TikuKouqiangChapter {
     private Integer id;
 
-    private Integer chapterId;
 
     private Integer chapterParentId;
 
@@ -13,7 +12,6 @@ public class TikuKouqiangChapter {
 
     public TikuKouqiangChapter(Integer id, Integer chapterId, Integer chapterParentId, String title, Integer sort) {
         this.id = id;
-        this.chapterId = chapterId;
         this.chapterParentId = chapterParentId;
         this.title = title;
         this.sort = sort;
@@ -31,13 +29,7 @@ public class TikuKouqiangChapter {
         this.id = id;
     }
 
-    public Integer getChapterId() {
-        return chapterId;
-    }
 
-    public void setChapterId(Integer chapterId) {
-        this.chapterId = chapterId;
-    }
 
     public Integer getChapterParentId() {
         return chapterParentId;
