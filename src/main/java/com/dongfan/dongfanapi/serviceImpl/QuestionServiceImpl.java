@@ -5,11 +5,13 @@ import com.dongfan.dongfanapi.entity.TikuRecord;
 import com.dongfan.dongfanapi.entity.TikuXiyiQuestion;
 import com.dongfan.dongfanapi.mapper.*;
 import com.dongfan.dongfanapi.service.QuestionService;
+import com.dongfan.dongfanapi.untils.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -72,6 +74,19 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public void deleteTikuCollection(int id) {
         tikuCollectionMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public List getTikuCollection(int userId, String name,int page,int pageSize) {
+        Map<String,Object> map=new HashMap<>();
+        map.put("userId",userId);
+        String dataneme="tiku_"+name+"_question";
+        map.put("dataname",dataneme);
+        map.put("name",name);
+        map.put("page",page);
+        map.put("pageSize",pageSize);
+        PageUtil.changeToPage(map);
+        return tikuCollectionMapper.getTikuCollection(map);
     }
 
 //    @Override

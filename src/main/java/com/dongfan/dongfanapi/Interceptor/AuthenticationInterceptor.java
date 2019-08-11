@@ -1,22 +1,30 @@
 package com.dongfan.dongfanapi.Interceptor;
 
+import com.alibaba.fastjson.JSON;
 import com.dongfan.dongfanapi.entity.AuthPermission;
+import com.dongfan.dongfanapi.entity.User;
+import com.dongfan.dongfanapi.myAnnotation.RequireTelephone;
 import com.dongfan.dongfanapi.myAnnotation.SysPermission;
 import com.dongfan.dongfanapi.service.UserService;
 import com.dongfan.dongfanapi.untils.JWTUtils;
+import com.dongfan.dongfanapi.untils.Response;
+import com.dongfan.dongfanapi.untils.ResponseData;
 import com.dongfan.dongfanapi.untils.UserTokenInfo;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.lang.Nullable;
 import org.springframework.stereotype.Component;
 import org.springframework.util.CollectionUtils;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.HandlerInterceptor;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.List;
 
 /**
@@ -31,7 +39,8 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
 
-        if(request.getRequestURI().contains("Login")){
+        String requri=request.getRequestURI();
+        if(requri.contains("Login")){
             return true;
         }
         // 防止 userService 注入不进来
@@ -39,54 +48,94 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
             BeanFactory factory = WebApplicationContextUtils.getRequiredWebApplicationContext(request.getServletContext());
             userService = (UserService) factory.getBean("userService");
         }
-
-        String token=request.getHeader("token");
-        UserTokenInfo userTokenInfo=JWTUtils.getUserInfo(token);
-
+        Object u=request.getAttribute("userId");
+        int userId=Integer.parseInt(String.valueOf(u));
+//        User user=userService.getUserById(userId);
+//        if(StringUtils.isBlank(user.getPhone())){
+//            response.setStatus(HttpStatus.UNAUTHORIZED.value());
+//        }
         // 验证权限
-        if (this.hasPermission(userTokenInfo.getUserId(),handler)) {
+        if (this.hasPermission(request,response,handler,userId)) {
             return true;
         }
         //  null == request.getHeader("x-requested-with") TODO 暂时用这个来判断是否为ajax请求
         // 如果没有权限 则抛403异常 springboot会处理，跳转到 /error/403 页面
-        response.sendError(HttpStatus.FORBIDDEN.value(), "无权限");
+      //  response.sendError(response.getStatus(),"无权限");
         return false;
     }
 
     /**
      * 是否有权限
      */
-    private boolean hasPermission(int userId,Object handler) {
+    private boolean hasPermission(HttpServletRequest request,HttpServletResponse response, Object handler,int userId) throws IOException {
         if (handler instanceof HandlerMethod) {
             HandlerMethod handlerMethod = (HandlerMethod) handler;
             // 获取方法上的注解
             SysPermission requiredPermission = handlerMethod.getMethod().getAnnotation(SysPermission.class);
+            RequireTelephone requireTelephone=handlerMethod.getMethod().getAnnotation(RequireTelephone.class);
             // 如果方法上的注解为空 则获取类的注解
             if (requiredPermission == null) {
                 requiredPermission = handlerMethod.getMethod().getDeclaringClass().getAnnotation(SysPermission.class);
             }
+            if(requireTelephone == null){
+                requireTelephone=handlerMethod.getMethod().getDeclaringClass().getAnnotation(RequireTelephone.class);
+            }
             // 如果注解为null, 说明不需要拦截, 直接放过
-            if (requiredPermission == null) {
+            if (requiredPermission == null&& requireTelephone==null) {
                 return true;
             }
-            // 如果标记了注解，则判断权限
-            if (StringUtils.isNotBlank(requiredPermission.value())) {
-                // 应该到 redis 或数据库 中获取该用户的权限信息 并判断是否有权限
-                //Set<String> permissionSet = userService.getPermissionSet();
-                // 这里测试使用 直接add
 
-                List<AuthPermission> permissionList=userService.getUserAuthPermissions(userId);
+            if(requiredPermission!=null){
+                // 如果标记了注解，则判断权限
+                if (StringUtils.isNotBlank(requiredPermission.value())) {
 
-                if (CollectionUtils.isEmpty(permissionList) ){
-                    return false;
+//                String token=request.getHeader("token");
+//                UserTokenInfo userTokenInfo=JWTUtils.getUserInfo(token);
+
+                    List<AuthPermission> permissionList=userService.getUserAuthPermissions(userId);
+
+                    if (CollectionUtils.isEmpty(permissionList) ){
+                        return false;
+                    }
+                    boolean flag=false;
+                    for(AuthPermission authPermission:permissionList){
+                        if(authPermission.getCode().equalsIgnoreCase(requiredPermission.value())){
+                            flag=true;
+                        }
+                    }
+                    if(!flag){
+                      //  response.sendError(403,"无权限");
+                        return false;
+                    }
+
                 }
-                return permissionList.contains(requiredPermission.value());
             }
+            if(requireTelephone!=null){
+                if (StringUtils.isNotBlank(requireTelephone.value())) {
+
+                    //List<AuthPermission> permissionList=userService.getUserAuthPermissions(userTokenInfo.getUserId());
+                    User user=userService.getUserById(userId);
+                    if (StringUtils.isBlank(user.getPhone() )){
+                        //response.sendError(401,"未绑定手机号");
+                        ResponseData responseData=Response.noPhone();
+                        response.getWriter().write(JSON.toJSONString(responseData));
+                        return false;
+                    }
+
+                }
+            }
+
+
         }
         return true;
     }
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        System.out.println("afterCompletion");
+    }
+    @Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler, @Nullable ModelAndView modelAndView) throws Exception {
+        System.out.println("--"+modelAndView);
     }
 }

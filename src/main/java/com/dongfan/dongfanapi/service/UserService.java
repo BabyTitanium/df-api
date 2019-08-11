@@ -23,4 +23,6 @@ public interface UserService {
     List<AuthPermission> getUserAuthPermissions(int userId);//根据用户ID获取用户权限
 
     void adduser(User user);
+
+    User getUserById(int userId);
 }

@@ -132,5 +132,7 @@
  ${dataname} tiku LEFT JOIN (select tiku_record.* from tiku_record where tiku_record.user_id=#{userId}  and tiku_record.tiku_name=#{name} ) g on tiku.id=g.question_id where tiku.chapter_id=#{chapterId}
 
 </select>
-
+  <select id="getChapterList"  resultType="java.util.Map">
+ SELECT * from ${dataname}
+</select>
 </mapper>

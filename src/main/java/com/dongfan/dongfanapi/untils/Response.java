@@ -59,4 +59,12 @@ public class Response<T> {
         return responseData;
 
     }
+    public static <T> ResponseData noPhone() {
+        ResponseData responseData = new ResponseData<T>();
+        responseData.setCode(401);
+        responseData.setMessage("telephone is not bind");
+        responseData.setData("");
+        return responseData;
+
+    }
 }

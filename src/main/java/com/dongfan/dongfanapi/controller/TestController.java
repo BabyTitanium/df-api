@@ -1,6 +1,7 @@
 package com.dongfan.dongfanapi.controller;
 
 import com.alibaba.fastjson.JSON;
+import com.dongfan.dongfanapi.myAnnotation.RequireTelephone;
 import com.dongfan.dongfanapi.myAnnotation.SysPermission;
 import com.dongfan.dongfanapi.untils.RedisUtils;
 import org.apache.shiro.SecurityUtils;
@@ -24,7 +25,7 @@ import java.io.Serializable;
 
 @RestController
 @RequestMapping("test")
-public class TestController {
+public class  TestController {
 
     @RequestMapping("test1")
     @SysPermission("userAuth")
@@ -33,8 +34,14 @@ public class TestController {
         return "test1 request success!";
     }
     @RequestMapping("test2")
+    @RequireTelephone
     public String test2(){
         return "test2 request success!";
+    }
+    @RequestMapping("test3")
+    @SysPermission("userA3uth")
+    public String test3(){
+        return "test3 request success!";
     }
 
     @RequestMapping("login")

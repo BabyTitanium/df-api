@@ -16,5 +16,6 @@ public interface QuestionService {
     List getQuestionListByChapter(int chapterId,int userId, String name);
     void addTikuCollection(TikuCollection tikuCollection);
     void deleteTikuCollection(int id);
+    List getTikuCollection(int userId,String name,int page,int pageSize);
 //    List getQuestionRecordByTikuName(int chapterId, String name);
 }

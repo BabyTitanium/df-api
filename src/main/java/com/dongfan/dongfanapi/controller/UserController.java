@@ -2,6 +2,7 @@ package com.dongfan.dongfanapi.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
+import com.dongfan.dongfanapi.myAnnotation.RequireTelephone;
 import com.dongfan.dongfanapi.params.UserLogin;
 import com.dongfan.dongfanapi.service.UserService;
 import com.dongfan.dongfanapi.untils.*;
@@ -206,6 +207,16 @@ public class UserController {
             }
         }
 
+    }
+
+
+    @ApiOperation("获取用户信息")
+    @GetMapping("getUserInfo")
+    @ResponseBody
+    public ResponseData getUserInfo(@RequestAttribute("userId") int userId) {
+        logger.info("获取用户信息：userId="+userId);
+        User user=userService.getUserById(userId);
+        return Response.success(user);
     }
 
 }

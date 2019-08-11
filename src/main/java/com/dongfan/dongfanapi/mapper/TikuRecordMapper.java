@@ -23,4 +23,6 @@ public interface TikuRecordMapper {
     int updateByPrimaryKey(TikuRecord record);
 
     List<Map> getQuestionList(@Param("chapterId") int chapterId, @Param("userId") int userId,@Param("name") String name, @Param("dataname") String dataname);
+    List<Map> getChapterList( @Param("dataname") String dataname);
+
 }

@@ -1,7 +1,11 @@
 package com.dongfan.dongfanapi.globalconfig;
 
+import com.alibaba.fastjson.JSON;
 import com.dongfan.dongfanapi.untils.JWTUtils;
+import com.dongfan.dongfanapi.untils.Response;
+import com.dongfan.dongfanapi.untils.ResponseData;
 import com.dongfan.dongfanapi.untils.UserTokenInfo;
+import com.sun.org.apache.regexp.internal.RE;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -43,17 +47,20 @@ public class GlobalCorsConfig implements Filter {
             response.setStatus(200);
             return;
         } else {
-            if(request.getRequestURI().contains("Login")){
+            String requri=request.getRequestURI();
+            if(requri.contains("Login")||requri.contains("swagger")||requri.contains("webjars")||requri.contains("v2")||requri.contains("favicon")){
                 chain.doFilter(req,res);
             }else{
                 String token=request.getHeader("token");
                 if(token==null){
-                    response.sendError(HttpStatus.BAD_REQUEST.value(), "未携带token");
+                    ResponseData responseData=Response.error("invalid token");
+                    response.getWriter().write(JSON.toJSONString(responseData));
                     return;
                 }else{
                     UserTokenInfo userTokenInfo=JWTUtils.getUserInfo(token);
                     if(userTokenInfo==null){
-                        response.sendError(HttpStatus.BAD_REQUEST.value(), "无效token");
+                        ResponseData responseData=Response.error("invalid token");
+                        response.getWriter().write(JSON.toJSONString(responseData));
                         return;
                     }
                     request.setAttribute("userId",userTokenInfo.getUserId());

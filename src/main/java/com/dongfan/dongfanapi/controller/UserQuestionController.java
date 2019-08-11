@@ -12,7 +12,9 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: lll
@@ -20,7 +22,7 @@ import java.util.List;
  * @Version 1.0
  */
 @RestController
-@RequestMapping("user/question")
+@RequestMapping("tiku/question")
 public class UserQuestionController {
     @Autowired
     private QuestionService questionService;
@@ -39,7 +41,8 @@ public class UserQuestionController {
 
     @PostMapping("addTikuCollection")
     @ApiOperation("添加题目收藏")
-    public ResponseData addTikuCollection(@RequestBody TikuCollection tikuCollection){
+    public ResponseData addTikuCollection(@RequestAttribute("userId") int userId,@RequestBody TikuCollection tikuCollection){
+        tikuCollection.setUserId(userId);
         questionService.addTikuCollection(tikuCollection);
         return Response.success();
     }
@@ -52,8 +55,10 @@ public class UserQuestionController {
     //当前用户收藏列表
     @GetMapping("getTikuCollectionList")
     @ApiOperation("获取当前用户题目收藏列表")
-    public ResponseData getTikuCollectionRecord(){
+    public ResponseData getTikuCollectionRecord(@RequestAttribute("userId") int userId,@RequestParam("name")String name,@RequestParam("page")int page,@RequestParam("pageSize")int pageSize){
+
         List list=new ArrayList();
+        list=questionService.getTikuCollection(userId,name,page,pageSize);
         return Response.success(list);
 
     }

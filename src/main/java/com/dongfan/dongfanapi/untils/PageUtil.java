@@ -13,6 +13,9 @@ public class PageUtil {
             int sizeNum = Integer.valueOf(String.valueOf(sizeObj));
             map.put("pageStart", (pagenum - 1) * sizeNum);
             map.put("pageSize", sizeNum);
+        }else{
+            map.put("pageStart", 0);
+            map.put("pageSize", 10);
         }
     }
 }
