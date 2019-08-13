@@ -1,6 +1,7 @@
 package com.dongfan.dongfanapi.serviceImpl;
 
 import com.dongfan.dongfanapi.entity.TikuCollection;
+import com.dongfan.dongfanapi.entity.TikuComment;
 import com.dongfan.dongfanapi.entity.TikuRecord;
 import com.dongfan.dongfanapi.entity.TikuXiyiQuestion;
 import com.dongfan.dongfanapi.mapper.*;
@@ -25,6 +26,8 @@ import java.util.Map;
 public class QuestionServiceImpl implements QuestionService {
     @Resource
     private TikuRecordMapper tikuRecordMapper;
+    @Resource
+    private TikuCommentMapper tikuCommentMapper;
     @Resource
     private TikuXiyiQuestionMapper tikuXiyiQuestionMapper;
     @Resource
@@ -87,6 +90,15 @@ public class QuestionServiceImpl implements QuestionService {
         map.put("pageSize",pageSize);
         PageUtil.changeToPage(map);
         return tikuCollectionMapper.getTikuCollection(map);
+    }
+
+    @Override
+    public void addQuestionComment(TikuComment tikuComment) {
+        tikuCommentMapper.insertSelective(tikuComment);
+    }
+    @Override
+    public void deleteQuestionComment(int id) {
+        tikuCommentMapper.deleteByPrimaryKey(id);
     }
 
 //    @Override

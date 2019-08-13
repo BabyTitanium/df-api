@@ -12,11 +12,9 @@ public class TikuRecord {
     private String tikuName;
 
     @NotNull
-    @NotEmpty
     private Integer questionId;
 
-    @NotNull
-    @NotEmpty
+
     private Integer userId;
 
     @NotNull
@@ -31,7 +29,6 @@ public class TikuRecord {
     @NotEmpty
     private String correctAnswer;
     @NotNull
-    @NotEmpty
     private Integer result;
 
     public TikuRecord(Integer id, String tikuName, Integer questionId, Integer userId, Date createAt, String answer, String correctAnswer, Integer result) {

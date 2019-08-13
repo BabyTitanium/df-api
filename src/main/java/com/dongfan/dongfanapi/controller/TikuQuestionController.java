@@ -1,6 +1,7 @@
 package com.dongfan.dongfanapi.controller;
 
 import com.dongfan.dongfanapi.entity.TikuCollection;
+import com.dongfan.dongfanapi.entity.TikuComment;
 import com.dongfan.dongfanapi.entity.TikuRecord;
 import com.dongfan.dongfanapi.service.QuestionService;
 import com.dongfan.dongfanapi.untils.Response;
@@ -41,7 +42,7 @@ public class TikuQuestionController {
 
     @PostMapping("addTikuCollection")
     @ApiOperation("添加题目收藏")
-    public ResponseData addTikuCollection(@RequestAttribute("userId") int userId,@RequestBody TikuCollection tikuCollection){
+    public ResponseData addTikuCollection(@RequestAttribute("userId") int userId,@RequestBody @Valid TikuCollection tikuCollection){
         tikuCollection.setUserId(userId);
         questionService.addTikuCollection(tikuCollection);
         return Response.success();
@@ -61,10 +62,23 @@ public class TikuQuestionController {
         return Response.success(list);
 
     }
+    @PostMapping("submitQuestionComment")
+    @ApiOperation("用户添加题目评论")
+    public ResponseData submitQuestionComment(@RequestAttribute("userId") int userId,@Valid TikuComment tikuComment){
+        tikuComment.setUserId(userId);
+        questionService.addQuestionComment(tikuComment);
+        return Response.success();
+    }
+    @PostMapping("deleteQuestionComment")
+    @ApiOperation("用户删除题目评论")
+    public ResponseData deleteQuestionComment(@RequestParam int id){
+        questionService.deleteQuestionComment(id);
+        return Response.success();
+    }
+    @PostMapping("addCommentLike")
+    @ApiOperation("点赞评论")
+    public ResponseData addCommentLike(){
+        return Response.success();
+    }
 
-//    @GetMapping("getQuestionRecordByChapter")
-//    public ResponseData getQuestionRecordByChapter(@RequestParam(required = true) int userId,@RequestParam(required = true) String name){
-//        List list= questionService.getQuestionRecordByTikuName(userId,name);
-//        return Response.success(list);
-//    }
 }
