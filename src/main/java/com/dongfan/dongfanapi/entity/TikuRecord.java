@@ -17,8 +17,7 @@ public class TikuRecord {
 
     private Integer userId;
 
-    @NotNull
-    @NotEmpty
+
     private Date createAt;
 
     @NotNull

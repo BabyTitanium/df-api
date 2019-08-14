@@ -101,6 +101,13 @@ public class QuestionServiceImpl implements QuestionService {
         tikuCommentMapper.deleteByPrimaryKey(id);
     }
 
+    @Override
+    public Map getQueationById(String name, int id) {
+        String dataname="tiku_"+name+"_queation";
+        tikuRecordMapper.getTikuQuestionById(dataname,id);
+        return null;
+    }
+
 //    @Override
 //    public List getQuestionRecordByTikuName(int userId, String name) {
 //        List<Object> list=new ArrayList();

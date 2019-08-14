@@ -5,6 +5,7 @@ import com.dongfan.dongfanapi.entity.TikuComment;
 import com.dongfan.dongfanapi.entity.TikuRecord;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: lll
@@ -20,5 +21,6 @@ public interface QuestionService {
     List getTikuCollection(int userId,String name,int page,int pageSize);
     void addQuestionComment(TikuComment tikuComment);
     void deleteQuestionComment(int id);
+    Map getQueationById(String name, int id);
 //    List getQuestionRecordByTikuName(int chapterId, String name);
 }

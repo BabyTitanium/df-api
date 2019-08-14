@@ -135,4 +135,7 @@
   <select id="getChapterList"  resultType="java.util.Map">
  SELECT * from ${dataname}
 </select>
+  <select id="getTikuQuestionById" resultType="java.util.Map">
+    select * from ${dataname} where id=#{questionId}
+  </select>
 </mapper>

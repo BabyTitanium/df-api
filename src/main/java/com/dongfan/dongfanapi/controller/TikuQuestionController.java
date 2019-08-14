@@ -29,7 +29,11 @@ public class TikuQuestionController {
     private QuestionService questionService;
     @PostMapping("submitQuestionRecord")
     @ApiOperation("提交用户答题记录")
-    public ResponseData submitQuestionRecord(@Valid TikuRecord tikuRecord){
+    public ResponseData submitQuestionRecord(@RequestAttribute("userId") int userId,@RequestBody @Valid TikuRecord tikuRecord){
+//        String tikuName=tikuRecord.getTikuName();
+//        int questionId=tikuRecord.getQuestionId();
+//        Map result=questionService.getQueationById(tikuName,questionId);
+        tikuRecord.setUserId(userId);
         questionService.addQuestionRecord(tikuRecord);
         return Response.success();
     }
@@ -64,21 +68,22 @@ public class TikuQuestionController {
     }
     @PostMapping("submitQuestionComment")
     @ApiOperation("用户添加题目评论")
-    public ResponseData submitQuestionComment(@RequestAttribute("userId") int userId,@Valid TikuComment tikuComment){
+    public ResponseData submitQuestionComment(@RequestAttribute("userId") int userId,@RequestBody @Valid TikuComment tikuComment){
         tikuComment.setUserId(userId);
         questionService.addQuestionComment(tikuComment);
         return Response.success();
     }
-    @PostMapping("deleteQuestionComment")
+    @GetMapping("deleteQuestionComment")
     @ApiOperation("用户删除题目评论")
     public ResponseData deleteQuestionComment(@RequestParam int id){
         questionService.deleteQuestionComment(id);
         return Response.success();
     }
-    @PostMapping("addCommentLike")
-    @ApiOperation("点赞评论")
-    public ResponseData addCommentLike(){
-        return Response.success();
-    }
+//    @PostMapping("addCommentLike")
+//    @ApiOperation("点赞评论")
+//    public ResponseData addCommentLike(){
+//
+//        return Response.success();
+//    }
 
 }
