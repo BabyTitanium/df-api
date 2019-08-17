@@ -1,7 +1,5 @@
 package com.dongfan.dongfanapi.untils;
 
-import io.swagger.models.auth.In;
-
 import java.util.Map;
 
 public class PageUtil {
@@ -13,9 +11,14 @@ public class PageUtil {
             int sizeNum = Integer.valueOf(String.valueOf(sizeObj));
             map.put("pageStart", (pagenum - 1) * sizeNum);
             map.put("pageSize", sizeNum);
-        }else{
-            map.put("pageStart", 0);
-            map.put("pageSize", 10);
         }
+    }
+    public static int getStart(int page, int pageSize) {
+
+        if (page != -1 && pageSize != -1) {
+
+            return (page - 1) * pageSize;
+        }
+        return -1;
     }
 }

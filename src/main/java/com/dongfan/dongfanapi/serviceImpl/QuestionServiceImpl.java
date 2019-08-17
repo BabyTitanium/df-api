@@ -7,6 +7,7 @@ import com.dongfan.dongfanapi.entity.TikuXiyiQuestion;
 import com.dongfan.dongfanapi.mapper.*;
 import com.dongfan.dongfanapi.service.QuestionService;
 import com.dongfan.dongfanapi.untils.PageUtil;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -49,23 +50,12 @@ public class QuestionServiceImpl implements QuestionService {
 //  xiyi     kouqiang     xiyizhiye    zhiyexiyaoshi    zhiyezhongyaoshi    zhongyizhiye
 
     @Override
-    public List getQuestionListByChapter(int chapterId,int userId, String name) {
+    public List getQuestionListByChapter(int chapterId,int userId, String name,int page,int pageSize) {
         String dataname="tiku_"+name+"_question";
         List<Map> list=new ArrayList();
-        list=tikuRecordMapper.getQuestionList(chapterId,userId,name,dataname);
-//        if(name.equals("xiyizhiye")){
-//            list=tikuXiyizhiyeQuestionMapper.getListByChapterId(chapterId);
-//        }else if(name.equals("xiyi")){
-//            list=tikuXiyiQuestionMapper.getListByChapterId(chapterId,userId);
-//        }else if(name.equals("kouqiang")){
-//            list=tikuKouqiangQuestionMapper.getListByChapterId(chapterId);
-//        }else if(name.equals("zhiyexiyaoshi")){
-//            list=tikuZhiyexiyaoshiQuestionMapper.getListByChapterId(chapterId);
-//        }else if(name.equals("zhiyezhongyaoshi")){
-//            list=tikuZhiyezhongyaoshiQuestionMapper.getListByChapterId(chapterId);
-//        }else if(name.equals("zhongyizhiye")) {
-//            list = tikuZhongyizhiyeQuestionMapper.getListByChapterId(chapterId);
-//        }
+        Map<String,Object> map=new HashMap<>();
+        int pageStart=PageUtil.getStart(page,pageSize);
+        list=tikuRecordMapper.getQuestionList(chapterId,userId,name,dataname,pageStart,pageSize);
         return list;
     }
 
@@ -81,15 +71,9 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     public List getTikuCollection(int userId, String name,int page,int pageSize) {
-        Map<String,Object> map=new HashMap<>();
-        map.put("userId",userId);
         String dataneme="tiku_"+name+"_question";
-        map.put("dataname",dataneme);
-        map.put("name",name);
-        map.put("page",page);
-        map.put("pageSize",pageSize);
-        PageUtil.changeToPage(map);
-        return tikuCollectionMapper.getTikuCollection(map);
+        int pageStart=PageUtil.getStart(page,pageSize);
+        return tikuCollectionMapper.getTikuCollection(dataneme,name,userId,pageStart,pageSize);
     }
 
     @Override
@@ -97,15 +81,22 @@ public class QuestionServiceImpl implements QuestionService {
         tikuCommentMapper.insertSelective(tikuComment);
     }
     @Override
+    public void userDeleteQuestionComment(int userId ,int id) {
+        tikuCommentMapper.deleteByUserAndId(userId,id);
+    }
+    @Override
     public void deleteQuestionComment(int id) {
         tikuCommentMapper.deleteByPrimaryKey(id);
     }
-
     @Override
     public Map getQueationById(String name, int id) {
         String dataname="tiku_"+name+"_queation";
-        tikuRecordMapper.getTikuQuestionById(dataname,id);
-        return null;
+        return    tikuRecordMapper.getTikuQuestionById(dataname,id);
+    }
+
+    @Override
+    public List<TikuComment> getTikuCommentList(String name, int questionId) {
+        return tikuCommentMapper.getTikuCommentList(name,questionId);
     }
 
 //    @Override

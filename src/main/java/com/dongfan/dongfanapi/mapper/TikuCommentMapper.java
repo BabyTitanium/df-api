@@ -2,6 +2,9 @@ package com.dongfan.dongfanapi.mapper;
 
 import com.dongfan.dongfanapi.entity.TikuComment;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface TikuCommentMapper {
@@ -16,4 +19,8 @@ public interface TikuCommentMapper {
     int updateByPrimaryKeySelective(TikuComment record);
 
     int updateByPrimaryKey(TikuComment record);
+
+    void deleteByUserAndId(@Param("userId")int userId,@Param("id") int id);
+
+    List<TikuComment> getTikuCommentList(@Param("name") String name,@Param("questionId")int questionId);
 }

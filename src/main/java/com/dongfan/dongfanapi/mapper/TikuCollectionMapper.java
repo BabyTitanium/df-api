@@ -21,5 +21,5 @@ public interface TikuCollectionMapper {
 
     int updateByPrimaryKey(TikuCollection record);
 
-    List<Map> getTikuCollection(Map map);
+    List<Map> getTikuCollection(@Param("dataname") String dataname,@Param("name")String name,@Param("userId") int userId,@Param("pageStart") int pageStart,@Param("pageSize") int pageSize);
 }

@@ -116,4 +116,10 @@
       likes = #{likes,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <delete id="deleteByUserAndId">
+    delete from tiku_comment where user_id=#{userId} and id=#{id}
+  </delete>
+  <select id="getTikuCommentList" resultMap="BaseResultMap">
+    select tiku_comment.* from tiku_comment where tiku_name=#{name} and question_id=#{questionId}
+  </select>
 </mapper>

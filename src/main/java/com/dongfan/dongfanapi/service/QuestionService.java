@@ -15,12 +15,15 @@ import java.util.Map;
 
 public interface QuestionService {
     void addQuestionRecord(TikuRecord tikuRecord);
-    List getQuestionListByChapter(int chapterId,int userId, String name);
+    List getQuestionListByChapter(int chapterId,int userId, String name,int page,int pageSize);
     void addTikuCollection(TikuCollection tikuCollection);
     void deleteTikuCollection(int id);
     List getTikuCollection(int userId,String name,int page,int pageSize);
     void addQuestionComment(TikuComment tikuComment);
     void deleteQuestionComment(int id);
+    void userDeleteQuestionComment(int userId ,int id);
     Map getQueationById(String name, int id);
+
+    List<TikuComment> getTikuCommentList(String name,int questionId);
 //    List getQuestionRecordByTikuName(int chapterId, String name);
 }

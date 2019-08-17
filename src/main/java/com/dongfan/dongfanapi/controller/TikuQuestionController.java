@@ -39,8 +39,8 @@ public class TikuQuestionController {
     }
     @GetMapping("getQuestionListByChapter")
     @ApiOperation("获取当前用户章节下的题目列表")
-    public ResponseData getQuestionListByChapter(@RequestParam(required = true) int chapterId,@RequestAttribute("userId") int userId,@RequestParam(required = true) String name){
-        List list= questionService.getQuestionListByChapter(chapterId,userId,name);
+    public ResponseData getQuestionListByChapter(@RequestParam(required = true) int chapterId,@RequestAttribute("userId") int userId,@RequestParam(required = true) String name,@RequestParam(required = false,defaultValue = "-1")int page,@RequestParam(required = false,defaultValue = "-1")int pageSize){
+        List list= questionService.getQuestionListByChapter(chapterId,userId,name,page,pageSize);
         return Response.success(list);
     }
 
@@ -60,7 +60,7 @@ public class TikuQuestionController {
     //当前用户收藏列表
     @GetMapping("getTikuCollectionList")
     @ApiOperation("获取当前用户题目收藏列表")
-    public ResponseData getTikuCollectionRecord(@RequestAttribute("userId") int userId,@RequestParam("name")String name,@RequestParam("page")int page,@RequestParam("pageSize")int pageSize){
+    public ResponseData getTikuCollectionRecord(@RequestAttribute("userId") int userId,@RequestParam("name")String name,@RequestParam(required = false,defaultValue = "-1")int page,@RequestParam(required = false,defaultValue = "-1")int pageSize){
         List list=new ArrayList();
         list=questionService.getTikuCollection(userId,name,page,pageSize);
         return Response.success(list);
@@ -75,8 +75,8 @@ public class TikuQuestionController {
     }
     @GetMapping("deleteQuestionComment")
     @ApiOperation("用户删除题目评论")
-    public ResponseData deleteQuestionComment(@RequestParam int id){
-        questionService.deleteQuestionComment(id);
+    public ResponseData deleteQuestionComment(@RequestAttribute("userId") int userId,@RequestParam int id){
+        questionService.userDeleteQuestionComment(userId,id);
         return Response.success();
     }
 //    @PostMapping("addCommentLike")

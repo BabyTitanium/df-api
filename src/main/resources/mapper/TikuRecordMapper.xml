@@ -130,10 +130,15 @@
 <select id="getQuestionList"  resultType="java.util.Map">
  SELECT tiku.*,g.id as record_id,g.create_at,g.answer as user_answer,g.result FROM
  ${dataname} tiku LEFT JOIN (select tiku_record.* from tiku_record where tiku_record.user_id=#{userId}  and tiku_record.tiku_name=#{name} ) g on tiku.id=g.question_id where tiku.chapter_id=#{chapterId}
-
+<if test="pageStart!=-1 and pageSize!=-1">
+  limit #{pageStart},#{pageSize}
+</if>
 </select>
   <select id="getChapterList"  resultType="java.util.Map">
  SELECT * from ${dataname}
+ <if test="pageStart!=-1 and pageSize!=-1">
+   limit #{pageStart},#{pageSize}
+ </if>
 </select>
   <select id="getTikuQuestionById" resultType="java.util.Map">
     select * from ${dataname} where id=#{questionId}

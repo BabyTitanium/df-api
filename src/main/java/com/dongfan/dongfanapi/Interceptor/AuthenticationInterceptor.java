@@ -39,7 +39,7 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         System.out.println("**********拦截器被使用");
-        String requri=request.getRequestURI();
+           String requri=request.getRequestURI();
         if(requri.contains("Login")||requri.contains("swagger")||requri.contains("webjars")||requri.contains("v2")||requri.contains("favicon")){
             return true;
         }

@@ -93,8 +93,11 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="getTikuCollection" parameterType="java.util.Map" resultType="java.util.Map">
+  <select id="getTikuCollection"  resultType="java.util.Map">
     SELECT question.* from tiku_collection LEFT JOIN ${dataname} question on tiku_collection.question_id=question.id and tiku_collection.tiku_name=#{name} and tiku_collection.user_id=#{userId}
-    limit #{pageStart},#{pageSize}
+    <if test="pageStart!=-1 and pageSize!=-1">
+      limit #{pageStart},#{pageSize}
+    </if>
+
   </select>
 </mapper>

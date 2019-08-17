@@ -9,5 +9,5 @@ import java.util.List;
  */
 
 public interface ChapterService {
-    List getChapterList(String name);
+    List getChapterList(String name,int page,int pageSize);
 }
