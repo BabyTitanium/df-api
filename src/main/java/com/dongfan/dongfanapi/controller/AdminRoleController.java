@@ -1,5 +1,6 @@
 package com.dongfan.dongfanapi.controller;
 
+import com.dongfan.dongfanapi.entity.AuthPermission;
 import com.dongfan.dongfanapi.entity.AuthRole;
 import com.dongfan.dongfanapi.entity.AuthRolePermission;
 import com.dongfan.dongfanapi.myAnnotation.SysPermission;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 /**
  * @Author: lll
@@ -19,7 +21,7 @@ import javax.validation.Valid;
  * @Version 1.0
  */
 @RestController
-@RequestMapping("admin/role")
+@RequestMapping("admin/permission")
 public class AdminRoleController {
     @Autowired
     private AuthRoleService authRoleService;
@@ -63,4 +65,20 @@ public class AdminRoleController {
         authRoleService.removePermissionFromRole(id);
         return Response.success();
     }
+
+    @ApiOperation("获取系统所有角色")
+    @GetMapping("getAllRoles")
+    @SysPermission("ROLE_LIST")
+    public ResponseData getAllRoles(@RequestParam(required = false,defaultValue = "-1")int page,@RequestParam(required = false,defaultValue = "-1")int pageSize) {
+        List<AuthRole> list=authRoleService.getAllRoles(page,pageSize);
+        return Response.success(list);
+    }
+    @ApiOperation("获取角色权限")
+    @GetMapping("getRolePermissions")
+    @SysPermission("ROLE_PERMISSIONS")
+    public ResponseData getRolePermissions(@RequestParam(required = true)int roleId,@RequestParam(required = false,defaultValue = "-1")int page,@RequestParam(required = false,defaultValue = "-1")int pageSize) {
+        List<AuthPermission> list=authRoleService.getRolePermissions(roleId,page,pageSize);
+        return Response.success(list);
+    }
+
 }

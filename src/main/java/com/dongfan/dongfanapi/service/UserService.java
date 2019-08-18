@@ -10,7 +10,7 @@ import java.util.Map;
 
 public interface UserService {
 
-    List<User> getUserList(Map map);
+    List<User> getUserList(int page,int pageSize);
 
     User getUserByNickname(String nickname);//根据昵称获取用户信息
 

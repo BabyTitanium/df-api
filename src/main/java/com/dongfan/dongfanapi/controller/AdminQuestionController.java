@@ -33,8 +33,8 @@ public class AdminQuestionController {
     @SysPermission("COMMENT_LIST")
     @GetMapping("getCommentList")
     @ApiOperation("获取评论列表")
-    public ResponseData getCommentList(@RequestParam String name,@RequestParam int questionId){
-        List<TikuComment> list=questionService.getTikuCommentList(name,questionId);
+    public ResponseData getCommentList(@RequestParam(required = false,defaultValue = "-1")int userId,@RequestParam(required = false,defaultValue = "") String name,@RequestParam(required = false,defaultValue = "-1") int questionId,@RequestParam(required = false,defaultValue = "-1")int page,@RequestParam(required = false,defaultValue = "-1")int pageSize){
+        List<TikuComment> list=questionService.getTikuCommentList(userId,name,questionId,page,pageSize);
         return Response.success(list);
     }
 

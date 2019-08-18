@@ -181,4 +181,13 @@
         smeta = #{smeta,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="getNewsList" resultMap="BaseResultMap">
+        select * from news where 1=1
+        <if test="typeId!=-1">
+            and type_id=#{typeId}
+        </if>
+        <if test="pageStart!=-1 and pageSize!=-1">
+            limit #{pageStart},#{pageSize}
+        </if>
+    </select>
 </mapper>

@@ -120,6 +120,19 @@
     delete from tiku_comment where user_id=#{userId} and id=#{id}
   </delete>
   <select id="getTikuCommentList" resultMap="BaseResultMap">
-    select tiku_comment.* from tiku_comment where tiku_name=#{name} and question_id=#{questionId}
+    select tiku_comment.* from tiku_comment where 1=1
+    <if test="userId!=-1">
+      and user_id=#{userId}
+    </if>
+    <if test="name!=''">
+      and tiku_name=#{name}
+    </if>
+    <if test="questionId!=-1">
+      and question_id=#{questionId}
+    </if>
+    order by create_at desc
+    <if test="pageStart!=-1 and pageSize!=-1">
+      limit #{pageStart},#{pageSize}
+    </if>
   </select>
 </mapper>

@@ -1,9 +1,10 @@
+
 package com.dongfan.dongfanapi.mapper;
 
 import com.dongfan.dongfanapi.entity.AuthPermission;
 import com.dongfan.dongfanapi.entity.AuthRole;
-import com.dongfan.dongfanapi.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -22,4 +23,8 @@ public interface AuthRoleMapper {
     int updateByPrimaryKey(AuthRole record);
 
     List<AuthRole> selectUserAuthRoles(int userId);//根据用户ID获取用户角色
+
+    List<AuthRole> getAllRoles(@Param("pageStart") int pageStart,@Param("pageSize") int pageSize);
+
+    List<AuthPermission> getRolePermissions(@Param("roleId")int roleId, @Param("pageStart") int pageStart, @Param("pageSize") int pageSize);
 }

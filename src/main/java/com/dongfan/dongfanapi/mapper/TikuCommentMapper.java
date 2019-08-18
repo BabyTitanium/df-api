@@ -22,5 +22,5 @@ public interface TikuCommentMapper {
 
     void deleteByUserAndId(@Param("userId")int userId,@Param("id") int id);
 
-    List<TikuComment> getTikuCommentList(@Param("name") String name,@Param("questionId")int questionId);
+    List<TikuComment> getTikuCommentList(@Param("userId")int userId,@Param("name") String name,@Param("questionId")int questionId,@Param("pageStart")int pageStart,@Param("pageSize")int pageSize);
 }

@@ -7,6 +7,7 @@ import com.dongfan.dongfanapi.mapper.AuthPermissionMapper;
 import com.dongfan.dongfanapi.mapper.AuthRoleMapper;
 import com.dongfan.dongfanapi.mapper.UserMapper;
 import com.dongfan.dongfanapi.service.UserService;
+import com.dongfan.dongfanapi.untils.PageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
@@ -27,8 +28,9 @@ public class UserServiceImpl implements UserService {
     private AuthPermissionMapper authPermissionMapper;
 
     @Override
-    public List<User> getUserList(Map condition) {
-        return userMapper.getUserList(condition);
+    public List<User> getUserList(int page,int pageSize) {
+        int pageStart=PageUtil.getStart(page,pageSize);
+        return userMapper.getUserList(pageStart,pageSize);
     }
 
     @Override

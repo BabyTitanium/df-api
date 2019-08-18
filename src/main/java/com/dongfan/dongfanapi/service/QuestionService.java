@@ -24,6 +24,6 @@ public interface QuestionService {
     void userDeleteQuestionComment(int userId ,int id);
     Map getQueationById(String name, int id);
 
-    List<TikuComment> getTikuCommentList(String name,int questionId);
+    List<TikuComment> getTikuCommentList(int userId,String name,int questionId,int page,int pageSize);
 //    List getQuestionRecordByTikuName(int chapterId, String name);
 }

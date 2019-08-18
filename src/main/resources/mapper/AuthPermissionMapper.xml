@@ -75,4 +75,10 @@
         select ap.* from auth_role_user aru ,auth_role_permission arp,auth_permission ap where aru.user_id=#{userId}
         and aru.role_id=arp.role_id and arp.permission_id=ap.id
     </select>
+    <select id="getAllPermissions" resultMap="BaseResultMap">
+        select * from auth_permission
+        <if test="pageStart!=-1 and pageSize!=-1">
+            limit #{pageStart},#{pageSize}
+        </if>
+    </select>
 </mapper>

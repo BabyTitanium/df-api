@@ -95,26 +95,9 @@ public class QuestionServiceImpl implements QuestionService {
     }
 
     @Override
-    public List<TikuComment> getTikuCommentList(String name, int questionId) {
-        return tikuCommentMapper.getTikuCommentList(name,questionId);
+    public List<TikuComment> getTikuCommentList(int userId,String name, int questionId,int page,int pageSize) {
+        int pageStart=PageUtil.getStart(page,pageSize);
+        return tikuCommentMapper.getTikuCommentList(userId,name,questionId,pageStart,pageSize);
     }
 
-//    @Override
-//    public List getQuestionRecordByTikuName(int userId, String name) {
-//        List<Object> list=new ArrayList();
-//        if(name.equals("xiyizhiye")){
-//            list=tikuRecordMapper.getXiyizhiyeRecord(userId);
-//        }else if(name.equals("xiyi")){
-//            list=tikuRecordMapper.getXiyiRecord(userId);
-//        }else if(name.equals("kouqiang")){
-//            list=tikuRecordMapper.getKouqiangRecord(userId);
-//        }else if(name.equals("zhiyexiyaoshi")){
-//            list=tikuRecordMapper.getZhiyexiyaoshiRecord(userId);
-//        }else if(name.equals("zhiyezhongyaoshi")){
-//            list=tikuRecordMapper.getZhiyezhongyaoshiRecord(userId);
-//        }else if(name.equals("zhongyizhiye")) {
-//            list = tikuRecordMapper.getZhongyizhiyeRecord(userId);
-//        }
-//        return list;
-//    }
 }

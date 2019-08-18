@@ -33,16 +33,8 @@ public class AdminUserController {
     @ApiOperation("获取用户列表（可自定义条件，可分页）")
     @GetMapping("getUserList")
     @SysPermission("USER_GETLIST")
-    public ResponseData getUserList(@RequestParam Map<String, Object> map) {
-        if (map != null) {
-            PageUtil.changeToPage(map);
-        }
-        try {
-            List<User> userList = userService.getUserList(map);
+    public ResponseData getUserList(@RequestParam(required = false,defaultValue = "-1")int page,@RequestParam(required = false,defaultValue = "-1")int pageSize) {
+            List<User> userList = userService.getUserList(page,pageSize);
             return Response.success(userList);
-        } catch (Exception e) {
-            e.printStackTrace();
-            return Response.error("查询失败");
-        }
     }
 }

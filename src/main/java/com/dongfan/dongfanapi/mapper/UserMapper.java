@@ -2,6 +2,7 @@ package com.dongfan.dongfanapi.mapper;
 
 import com.dongfan.dongfanapi.entity.User;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,7 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    List<User> getUserList(Map map);
+    List<User> getUserList(@Param("pageStart")int pageStart,@Param("pageSize")int pageSize);
 
     User selectUserByNickname(String nickname);
 

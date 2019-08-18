@@ -1,7 +1,10 @@
 package com.dongfan.dongfanapi.service;
 
+import com.dongfan.dongfanapi.entity.AuthPermission;
 import com.dongfan.dongfanapi.entity.AuthRole;
 import com.dongfan.dongfanapi.entity.AuthRolePermission;
+
+import java.util.List;
 
 /**
  * @Author: lll
@@ -18,4 +21,8 @@ public interface AuthRoleService {
     void addPermissionToRole(AuthRolePermission authRolePermission);
 
     void removePermissionFromRole(int id);
+
+    List<AuthRole> getAllRoles(int page,int pageSize);
+
+    List<AuthPermission> getRolePermissions(int roleId,int page, int pageSize);
 }

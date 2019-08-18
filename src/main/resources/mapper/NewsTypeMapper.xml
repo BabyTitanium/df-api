@@ -57,4 +57,10 @@
         set title = #{title,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="getNewsTypeList" resultMap="BaseResultMap">
+        select * from news_type
+        <if test="pageStart!=-1 and pageSize!=-1">
+            limit #{pageStart},#{pageSize}
+        </if>
+    </select>
 </mapper>

@@ -2,6 +2,9 @@ package com.dongfan.dongfanapi.mapper;
 
 import com.dongfan.dongfanapi.entity.NewsType;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface NewsTypeMapper {
@@ -16,4 +19,6 @@ public interface NewsTypeMapper {
     int updateByPrimaryKeySelective(NewsType record);
 
     int updateByPrimaryKey(NewsType record);
+
+    List<NewsType> getNewsTypeList(@Param("pageStart")int pageStart,@Param("pageSize")int pageSize);
 }

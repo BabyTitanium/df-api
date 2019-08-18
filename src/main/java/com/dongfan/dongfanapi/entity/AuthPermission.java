@@ -1,10 +1,16 @@
 package com.dongfan.dongfanapi.entity;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class AuthPermission {
     private Integer id;
 
+    @NotEmpty
+    @NotNull
     private String code;
-
+    @NotEmpty
+    @NotNull
     private String name;
 
     public AuthPermission(Integer id, String code, String name) {

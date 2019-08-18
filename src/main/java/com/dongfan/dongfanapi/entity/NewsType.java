@@ -1,8 +1,12 @@
 package com.dongfan.dongfanapi.entity;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 public class NewsType {
     private Integer id;
-
+    @NotNull
+    @NotEmpty
     private String title;
 
     public NewsType(Integer id, String title) {
