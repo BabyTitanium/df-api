@@ -1,13 +1,17 @@
 package com.dongfan.dongfanapi.controller;
 
+import com.dongfan.dongfanapi.entity.News;
 import com.dongfan.dongfanapi.entity.NewsType;
 import com.dongfan.dongfanapi.myAnnotation.SysPermission;
+import com.dongfan.dongfanapi.params.UploadNews;
 import com.dongfan.dongfanapi.service.NewsService;
 import com.dongfan.dongfanapi.untils.Response;
 import com.dongfan.dongfanapi.untils.ResponseData;
+import com.dongfan.dongfanapi.untils.SSOUpload;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
@@ -63,6 +67,24 @@ public class AdminNewsController {
     @SysPermission("NEWS_DELETE")
     public ResponseData deleteNews(int id){
         newsService.deleteNews(id);
+        return Response.success();
+    }
+    @ApiOperation("添加新闻")
+    @GetMapping("addNews")
+    @SysPermission("NEWS_Add")
+    public ResponseData addNews(@Valid @RequestBody UploadNews uploadNews){
+        //newsService.deleteNews(id);
+        News news=new News();
+        news.setTitle(uploadNews.getTitle());
+        news.setContent(uploadNews.getContent());
+        news.getSort(uploadNews.getSort());
+        news.setTypeId(uploadNews.getTypeId());
+        news.setSmeta(uploadNews.getSmeta());
+        MultipartFile posterFile=uploadNews.getPoster();
+        if(posterFile!=null){
+           String poster= SSOUpload.uploadImage(uploadNews.getPoster(),uploadNews.getDic());
+           news.setPoster(poster);
+        }
         return Response.success();
     }
 }

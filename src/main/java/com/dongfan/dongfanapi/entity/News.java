@@ -108,8 +108,8 @@ public class News {
         this.typeId = typeId;
     }
 
-    public Integer getSort() {
-        return sort;
+    public Integer getSort(Integer sort) {
+        return this.sort;
     }
 
     public void setSort(Integer sort) {
