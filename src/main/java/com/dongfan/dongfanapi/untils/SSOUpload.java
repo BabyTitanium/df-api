@@ -21,7 +21,7 @@ public class SSOUpload {
     public static String endpoint = "http://oss-cn-beijing.aliyuncs.com";
     public static String accessKeyId = "<yourAccessKeyId>";
     public static String accessKeySecret = "<yourAccessKeySecret>";
-    public static String bucketName="dongfan/";
+    public static String bucketName="dongfan";
     private static String filedir="newsImage";
     public static OSS ossClient = new OSSClientBuilder().build(endpoint, accessKeyId, accessKeySecret);
     public static String  uploadImage(MultipartFile multipartFile,String dic){
@@ -108,10 +108,14 @@ public class SSOUpload {
         Date expiration = new Date(new Date().getTime() + 3600l * 1000 * 24 * 365 * 10);
         // 生成URL
         URL url = ossClient.generatePresignedUrl(bucketName, key, expiration);
-        ossClient.shutdown();
         if (url != null) {
             return url.toString();
         }
         return null;
     }
+
+    public static void shutDown(){
+        ossClient.shutdown();
+    }
+
 }

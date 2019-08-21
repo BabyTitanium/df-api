@@ -66,7 +66,10 @@ public class AdminNewsController {
     @GetMapping("deleteNews")
     @SysPermission("NEWS_DELETE")
     public ResponseData deleteNews(int id){
+        News news=newsService.getNews(id);
+        String imageUrl=news.getPoster();
         newsService.deleteNews(id);
+        SSOUpload.deleteImage(imageUrl);
         return Response.success();
     }
     @ApiOperation("添加新闻")
@@ -82,9 +85,12 @@ public class AdminNewsController {
         news.setSmeta(uploadNews.getSmeta());
         MultipartFile posterFile=uploadNews.getPoster();
         if(posterFile!=null){
-           String poster= SSOUpload.uploadImage(uploadNews.getPoster(),uploadNews.getDic());
-           news.setPoster(poster);
+            String poster= SSOUpload.uploadImage(uploadNews.getPoster(),uploadNews.getDic());
+            SSOUpload.shutDown();
+            news.setPoster(poster);
         }
+
         return Response.success();
     }
+
 }

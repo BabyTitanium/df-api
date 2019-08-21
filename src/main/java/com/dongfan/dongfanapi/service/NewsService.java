@@ -17,4 +17,5 @@ public interface NewsService {
     List<NewsType> getNewsTypeList(int page,int pageSize);
     List<News> getNewsList(int typeId,int page,int pageSize);
     void deleteNews(int id);
+    News getNews(int id);
 }
