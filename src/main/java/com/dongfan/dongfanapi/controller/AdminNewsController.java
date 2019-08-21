@@ -69,7 +69,7 @@ public class AdminNewsController {
         News news=newsService.getNews(id);
         String imageUrl=news.getPoster();
         newsService.deleteNews(id);
-        SSOUpload.deleteImage(imageUrl);
+        //SSOUpload.deleteImage(imageUrl);
         return Response.success();
     }
     @ApiOperation("添加新闻")
