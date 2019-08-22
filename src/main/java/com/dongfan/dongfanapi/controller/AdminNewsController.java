@@ -3,7 +3,7 @@ package com.dongfan.dongfanapi.controller;
 import com.dongfan.dongfanapi.entity.News;
 import com.dongfan.dongfanapi.entity.NewsType;
 import com.dongfan.dongfanapi.myAnnotation.SysPermission;
-import com.dongfan.dongfanapi.params.UploadNews;
+import com.dongfan.dongfanapi.params.NewsImage;
 import com.dongfan.dongfanapi.service.NewsService;
 import com.dongfan.dongfanapi.untils.Response;
 import com.dongfan.dongfanapi.untils.ResponseData;
@@ -72,24 +72,29 @@ public class AdminNewsController {
         //SSOUpload.deleteImage(imageUrl);
         return Response.success();
     }
+
+    @ApiOperation("上传图片")
+    @PostMapping("uploadImage")
+    @SysPermission("IMAGE_UPLOAD")
+    public ResponseData uploadImage(@RequestBody NewsImage newsImage){
+        MultipartFile multipartFile=newsImage.getMultipartFile();
+        String dic=newsImage.getDic();
+        String url=SSOUpload.uploadImage(multipartFile,dic);
+        return Response.success(url);
+    }
+
     @ApiOperation("添加新闻")
     @GetMapping("addNews")
     @SysPermission("NEWS_Add")
-    public ResponseData addNews(@Valid @RequestBody UploadNews uploadNews){
-        //newsService.deleteNews(id);
-        News news=new News();
-        news.setTitle(uploadNews.getTitle());
-        news.setContent(uploadNews.getContent());
-        news.getSort(uploadNews.getSort());
-        news.setTypeId(uploadNews.getTypeId());
-        news.setSmeta(uploadNews.getSmeta());
-        MultipartFile posterFile=uploadNews.getPoster();
-        if(posterFile!=null){
-            String poster= SSOUpload.uploadImage(uploadNews.getPoster(),uploadNews.getDic());
-            SSOUpload.shutDown();
-            news.setPoster(poster);
-        }
-
+    public ResponseData addNews(@Valid @RequestBody News news){
+        newsService.addNews(news);
+        return Response.success();
+    }
+    @ApiOperation("编辑新闻")
+    @GetMapping("editNews")
+    @SysPermission("NEWS_EDIT")
+    public ResponseData editNews(@Valid @RequestBody News news){
+        newsService.editNews(news);
         return Response.success();
     }
 

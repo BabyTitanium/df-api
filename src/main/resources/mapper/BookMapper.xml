@@ -92,4 +92,12 @@
         author = #{author,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
+
+    <select id="getBookList" resultMap="BaseResultMap">
+        select * from book
+        <if test="pageStart!=-1 and pageSize!=-1">
+            limit #{pageStart},#{pageSize}
+        </if>
+        ;
+    </select>
 </mapper>

@@ -1,6 +1,9 @@
 package com.dongfan.dongfanapi.mapper;
 
 import com.dongfan.dongfanapi.entity.Book;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface BookMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +17,7 @@ public interface BookMapper {
     int updateByPrimaryKeySelective(Book record);
 
     int updateByPrimaryKey(Book record);
+
+
+    List<Book> getBookList(@Param("pageStart") int pageStart,@Param("pageSize")int pageSize);
 }

@@ -1,26 +1,34 @@
 package com.dongfan.dongfanapi.entity;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.Date;
 
 public class News {
     private Integer id;
 
+    @NotEmpty
+    @NotNull
     private String title;
-
+    @NotEmpty
+    @NotNull
     private String thumb;
-
+    @NotEmpty
+    @NotNull
     private String poster;
 
     private Date createAt;
 
     private Date updateAt;
-
+    @NotNull
     private Integer typeId;
 
     private Integer sort;
-
+    @NotEmpty
+    @NotNull
     private String smeta;
-
+    @NotEmpty
+    @NotNull
     private String content;
 
     public News(Integer id, String title, String thumb, String poster, Date createAt, Date updateAt, Integer typeId, Integer sort, String smeta) {

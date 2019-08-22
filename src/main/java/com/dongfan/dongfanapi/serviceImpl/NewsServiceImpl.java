@@ -58,4 +58,14 @@ public class NewsServiceImpl implements NewsService {
     public News getNews(int id) {
         return newsMapper.selectByPrimaryKey(id);
     }
+
+    @Override
+    public void addNews(News news) {
+        newsMapper.insertSelective(news);
+    }
+
+    @Override
+    public void editNews(News news) {
+        newsMapper.updateByPrimaryKeySelective(news);
+    }
 }
