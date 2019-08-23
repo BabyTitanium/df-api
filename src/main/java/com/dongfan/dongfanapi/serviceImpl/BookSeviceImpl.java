@@ -65,11 +65,13 @@ public class BookSeviceImpl implements BookService {
 
     @Override
     public List<Map> getUserBookErrInfo(int userId, int page, int pageSize) {
-        return null;
+        int pageStart=PageUtil.getStart(page,pageSize);
+        return bookErrataMapper.getUserBookErrInfo(userId,pageStart,pageSize);
     }
 
     @Override
     public List<Map> getBookErrList(int id, int page, int pageSize) {
-        return null;
+        int pageStart=PageUtil.getStart(page,pageSize);
+        return bookErrataMapper.getOneBookErrInfo(id,pageStart,pageSize);
     }
 }
