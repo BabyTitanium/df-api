@@ -60,7 +60,10 @@ public class BookSeviceImpl implements BookService {
 
     @Override
     public void deleteBookErr(int userId, int id) {
-        bookErrataMapper.deleteByPrimaryKey(id);
+        BookErrataWithBLOBs bookErrataWithBLOBs=new BookErrataWithBLOBs();
+        bookErrataWithBLOBs.setId(id);
+        bookErrataWithBLOBs.setStatus(0);
+        bookErrataMapper.updateByPrimaryKeySelective(bookErrataWithBLOBs);
     }
 
     @Override
@@ -73,5 +76,26 @@ public class BookSeviceImpl implements BookService {
     public List<Map> getBookErrList(int id, int page, int pageSize) {
         int pageStart=PageUtil.getStart(page,pageSize);
         return bookErrataMapper.getOneBookErrInfo(id,pageStart,pageSize);
+    }
+    @Override
+    public List<Map> getAllBookErrList( int page, int pageSize) {
+        int pageStart=PageUtil.getStart(page,pageSize);
+        return bookErrataMapper.getAllBookErrList(pageStart,pageSize);
+    }
+
+    @Override
+    public void passBookErr(int id) {
+        BookErrataWithBLOBs bookErrataWithBLOBs=new BookErrataWithBLOBs();
+        bookErrataWithBLOBs.setId(id);
+        bookErrataWithBLOBs.setStatus(3);
+        bookErrataMapper.updateByPrimaryKeySelective(bookErrataWithBLOBs);
+    }
+
+    @Override
+    public void dispassBookErr(int id) {
+        BookErrataWithBLOBs bookErrataWithBLOBs=new BookErrataWithBLOBs();
+        bookErrataWithBLOBs.setId(id);
+        bookErrataWithBLOBs.setStatus(4);
+        bookErrataMapper.updateByPrimaryKeySelective(bookErrataWithBLOBs);
     }
 }

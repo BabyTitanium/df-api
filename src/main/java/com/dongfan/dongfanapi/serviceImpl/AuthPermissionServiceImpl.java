@@ -28,4 +28,14 @@ public class AuthPermissionServiceImpl implements AuthPermissionService {
     public void addPermission(AuthPermission authPermission) {
         authPermissionMapper.insertSelective(authPermission);
     }
+
+    @Override
+    public void deletePermission(int id) {
+        authPermissionMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void editPermission(AuthPermission authPermission) {
+        authPermissionMapper.updateByPrimaryKeySelective(authPermission);
+    }
 }

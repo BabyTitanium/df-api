@@ -43,5 +43,25 @@ public class AdminBookController {
         bookService.updateBook(book);
         return Response.success();
     }
-
+    @ApiOperation("管理员获取所有的挑错记录")
+    @SysPermission("BOOKERR_LIST")
+    @GetMapping("getAllBookErrList")
+    public ResponseData getAllBookErrList(@RequestParam(required = false,defaultValue = "-1")int page, @RequestParam(required = false,defaultValue = "-1")int pageSize){
+        bookService.getAllBookErrList(page,pageSize);
+        return Response.success();
+    }
+    @ApiOperation("管理员审核通过挑错记录")
+    @SysPermission("BOOKERR_PASS")
+    @PostMapping("bookErrPass")
+    public ResponseData bookErrPass(@RequestBody int id){
+        bookService.passBookErr(id);
+        return Response.success();
+    }
+    @ApiOperation("管理员审核通过挑错记录")
+    @SysPermission("BOOKERR_DISPASS")
+    @PostMapping("bookErrDispass")
+    public ResponseData bookErrDispass(@RequestBody int id){
+        bookService.dispassBookErr(id);
+        return Response.success();
+    }
 }

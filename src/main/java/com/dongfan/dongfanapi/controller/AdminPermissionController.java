@@ -36,4 +36,18 @@ public class AdminPermissionController {
         authPermissionService.addPermission(authPermission);
         return Response.success();
     }
+    @ApiOperation("删除系统权限")
+    @GetMapping("deletePermission")
+    @SysPermission("PERMISSION_DELETE")
+    public ResponseData deletePermission(@RequestParam int id){
+        authPermissionService.deletePermission(id);
+        return Response.success();
+    }
+    @ApiOperation("修改系统权限")
+    @PostMapping("editPermission")
+    @SysPermission("PERMISSION_EDIT")
+    public ResponseData editPermission(@RequestBody AuthPermission authPermission){
+        authPermissionService.editPermission(authPermission);
+        return Response.success();
+    }
 }

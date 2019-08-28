@@ -159,10 +159,13 @@
     </if>
   </select>
   <select id="getOneBookErrInfo" resultType="java.util.Map">
-select book_errata.* from book left join book_errata on book.id=book_errata.book_id and book.id=#{id}
-
+     select book_errata.*,book.author,book.cover,book.describe,book.title from book left join book_errata on book.id=book_errata.book_id
     <if test="pageStart!=-1 and pageSize!=-1">
       limit #{pageStart},#{pageSize}
     </if>
+  </select>
+
+  <select id="getAllBookErrList" resultType="java.util.Map">
+
   </select>
 </mapper>

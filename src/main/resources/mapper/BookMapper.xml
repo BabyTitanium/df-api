@@ -39,7 +39,7 @@
                 title,
             </if>
             <if test="describe != null">
-                describe,
+                book.describe,
             </if>
             <if test="cover != null">
                 cover,

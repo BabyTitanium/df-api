@@ -54,6 +54,7 @@ public class UserController {
     private String secret_app;
     @ApiOperation("用户网页登录")
     @GetMapping("webLogin")
+
     public String webLogin(@RequestParam(required = true) String code, HttpServletRequest request, HttpServletResponse response) {
         String loginUrl="https://api.weixin.qq.com/sns/oauth2/access_token";
         Map<String, String> loginParam = new HashMap<>();

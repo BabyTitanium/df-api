@@ -41,7 +41,7 @@ public class BookController {
         return Response.success();
     }
     @ApiOperation("提交错误")
-    @PostMapping("addNoSubBookErr")
+    @PostMapping("subBookErr")
     public ResponseData subBookErr(@RequestBody BookErrataWithBLOBs bookErrata){
         bookService.subBookErr(bookErrata);
         return Response.success();
@@ -58,4 +58,5 @@ public class BookController {
         List<Map> list= bookService.getUserBookErrInfo(userId,page,pageSize);
         return Response.success(list);
     }
+
 }

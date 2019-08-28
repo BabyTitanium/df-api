@@ -85,7 +85,7 @@ public class AdminNewsController {
 
     @ApiOperation("添加新闻")
     @GetMapping("addNews")
-    @SysPermission("NEWS_Add")
+    @SysPermission("NEWS_ADD")
     public ResponseData addNews(@Valid @RequestBody News news){
         newsService.addNews(news);
         return Response.success();

@@ -13,4 +13,6 @@ import java.util.List;
 public interface AuthPermissionService {
     List<AuthPermission> getAllPermissions(int page,int pageSize);
     void addPermission(AuthPermission authPermission);
+    void deletePermission(int id);
+    void editPermission(AuthPermission authPermission);
 }
