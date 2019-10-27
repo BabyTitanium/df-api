@@ -75,10 +75,28 @@
         select ap.* from auth_role_user aru ,auth_role_permission arp,auth_permission ap where aru.user_id=#{userId}
         and aru.role_id=arp.role_id and arp.permission_id=ap.id
     </select>
-    <select id="getAllPermissions" resultMap="BaseResultMap">
+    <select id="getAllPermissions" resultMap="BaseResultMap" parameterType="map">
         select * from auth_permission
-        <if test="pageStart!=-1 and pageSize!=-1">
+        where 1=1
+        <if test="name!=null">
+            and name like #{name}
+        </if>
+        <if test="code!=null">
+            and name like #{code}
+        </if>
+        <if test="pageStart!=null and pageSize!null">
             limit #{pageStart},#{pageSize}
         </if>
+    </select>
+    <select id="getAllPermissionsCount" resultType="int" parameterType="map">
+        select count(*) from(
+        select * from auth_permission
+        where 1=1
+        <if test="name!=null">
+            and name like #{name}
+        </if>
+        <if test="code!=null">
+            and name like #{code}
+        </if>)g
     </select>
 </mapper>

@@ -25,7 +25,7 @@ public interface BookService {
     List<Map> getUserBookErrInfo(int userId,int page,int pageSize);
     List<Map> getBookErrList(int id,int page,int pageSize);
 
-    List<Map> getAllBookErrList(int page,int pageSize);
+    List<Map> getAllBookErrList(Map condition);
 
     void passBookErr(int id);
     void dispassBookErr(int id);

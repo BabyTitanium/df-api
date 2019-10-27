@@ -154,18 +154,31 @@
   
   <select id="getUserBookErrInfo" resultType="java.util.Map">
     select book_errata.*,book.author,book.cover,book.describe,book.title from book,book_errata where book_errata.user_id=#{userId} and book_errata.book_id=book.id
-    <if test="pageStart!=-1 and pageSize!=-1">
+    <if test="pageStart!=null and pageSize!=null">
       limit #{pageStart},#{pageSize}
     </if>
   </select>
   <select id="getOneBookErrInfo" resultType="java.util.Map">
      select book_errata.*,book.author,book.cover,book.describe,book.title from book left join book_errata on book.id=book_errata.book_id
-    <if test="pageStart!=-1 and pageSize!=-1">
+    <if test="pageStart!=null and pageSize!=null">
       limit #{pageStart},#{pageSize}
     </if>
   </select>
 
-  <select id="getAllBookErrList" resultType="java.util.Map">
-
+  <select id="getAllBookErrList" resultType="java.util.Map" parameterType="map">
+    select book.title,book.describe,book.author,book.cover,book_errata.* from book_errata
+    , book where book_errata.book_id=book.id
+    <if test="title!=null">
+       and book.title LIKE #{title}
+    </if>
+    <if test="describe!=null">
+      and book.describe LIKE #{describe}
+    </if>
+    <if test="author!=null">
+      and book.author LIKE #{author}
+    </if>
+    <if test="pageStart!=null and pageSize!=null">
+      limit #{pageStart},#{pageSize}
+    </if>
   </select>
 </mapper>

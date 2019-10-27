@@ -3,6 +3,7 @@ package com.dongfan.dongfanapi.controller;
 import com.dongfan.dongfanapi.entity.User;
 import com.dongfan.dongfanapi.myAnnotation.SysPermission;
 import com.dongfan.dongfanapi.service.UserService;
+import com.dongfan.dongfanapi.untils.PageResult;
 import com.dongfan.dongfanapi.untils.PageUtil;
 import com.dongfan.dongfanapi.untils.Response;
 import com.dongfan.dongfanapi.untils.ResponseData;
@@ -25,6 +26,7 @@ import java.util.Map;
  */
 @Controller
 @RequestMapping("admin/user")
+@SysPermission("ADMIN_USER")
 public class AdminUserController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Autowired
@@ -32,9 +34,9 @@ public class AdminUserController {
 
     @ApiOperation("获取用户列表（可自定义条件，可分页）")
     @GetMapping("getUserList")
-    @SysPermission("USER_GETLIST")
-    public ResponseData getUserList(@RequestParam(required = false,defaultValue = "-1")int page,@RequestParam(required = false,defaultValue = "-1")int pageSize) {
-            List<User> userList = userService.getUserList(page,pageSize);
-            return Response.success(userList);
+
+    public ResponseData getUserList(@RequestParam(required = false,defaultValue = "") Map condition) {
+            PageResult pageResult = userService.getUserList(condition);
+            return Response.success(pageResult);
     }
 }

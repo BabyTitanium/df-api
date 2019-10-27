@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Param;
 
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface AuthPermissionMapper {
@@ -23,5 +24,6 @@ public interface AuthPermissionMapper {
 
     List<AuthPermission> selectUserAuthPermissions(int userId);
 
-    List<AuthPermission> getAllPermissions(@Param("pageStart")int pageStart,@Param("pageSize")int pageSize);
+    List<AuthPermission> getAllPermissions(Map map);
+    int getAllPermissionsCount(Map map);
 }

@@ -15,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: lll
@@ -51,8 +52,8 @@ public class AdminNewsController {
     @ApiOperation("获取新闻分类列表")
     @GetMapping("getNewsTypeList")
     @SysPermission("NEWSTYPE_LIST")
-    public ResponseData getNewsTypeList(@RequestParam(required = false,defaultValue = "-1")int page,@RequestParam(required = false,defaultValue = "-1")int pageSize){
-        List list=newsService.getNewsTypeList(page,pageSize);
+    public ResponseData getNewsTypeList(@RequestParam(required = false,defaultValue = "")Map condition){
+        List list=newsService.getNewsTypeList(condition);
         return Response.success(list);
     }
     @ApiOperation("获取新闻列表")

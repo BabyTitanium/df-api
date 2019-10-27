@@ -22,7 +22,9 @@ public interface TikuRecordMapper {
 
     int updateByPrimaryKey(TikuRecord record);
 
-    List<Map> getQuestionList(@Param("chapterId") int chapterId, @Param("userId") int userId,@Param("name") String name, @Param("dataname") String dataname,@Param("pageStart")int pageStart,@Param("pageSize")int pageSize);
-    List<Map> getChapterList( @Param("dataname") String dataname,@Param("pageStart") int pageStart,@Param("pageSize") int pageSize);
+    List<Map> getQuestionList(Map map);
+    int getQuestionListCount(Map map);
+    List<Map> getChapterList(Map map);
+    int getChapterListCount(Map map);
     Map getTikuQuestionById(@Param("dataname")String dataname,@Param("userId")int questionId);
 }

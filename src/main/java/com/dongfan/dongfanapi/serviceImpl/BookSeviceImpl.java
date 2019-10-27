@@ -6,6 +6,7 @@ import com.dongfan.dongfanapi.entity.BookErrataWithBLOBs;
 import com.dongfan.dongfanapi.mapper.BookErrataMapper;
 import com.dongfan.dongfanapi.mapper.BookMapper;
 import com.dongfan.dongfanapi.service.BookService;
+import com.dongfan.dongfanapi.untils.PageResult;
 import com.dongfan.dongfanapi.untils.PageUtil;
 import org.springframework.stereotype.Service;
 
@@ -78,9 +79,9 @@ public class BookSeviceImpl implements BookService {
         return bookErrataMapper.getOneBookErrInfo(id,pageStart,pageSize);
     }
     @Override
-    public List<Map> getAllBookErrList( int page, int pageSize) {
-        int pageStart=PageUtil.getStart(page,pageSize);
-        return bookErrataMapper.getAllBookErrList(pageStart,pageSize);
+    public List<Map> getAllBookErrList(Map condition) {
+        PageUtil.pageCondition(condition);
+        return bookErrataMapper.getAllBookErrList(condition);
     }
 
     @Override

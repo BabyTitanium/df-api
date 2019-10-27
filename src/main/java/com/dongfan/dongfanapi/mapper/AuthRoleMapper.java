@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface AuthRoleMapper {
@@ -24,7 +25,9 @@ public interface AuthRoleMapper {
 
     List<AuthRole> selectUserAuthRoles(int userId);//根据用户ID获取用户角色
 
-    List<AuthRole> getAllRoles(@Param("pageStart") int pageStart,@Param("pageSize") int pageSize);
+    List<AuthRole> getAllRoles(Map map);
+
+    int getAllRolesCount(Map map);
 
     List<AuthPermission> getRolePermissions(@Param("roleId")int roleId, @Param("pageStart") int pageStart, @Param("pageSize") int pageSize);
 }

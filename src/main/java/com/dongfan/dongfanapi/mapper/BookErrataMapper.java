@@ -28,5 +28,5 @@ public interface BookErrataMapper {
 
     List<Map> getOneBookErrInfo(@Param("id")int id,@Param("pageStart")int pageStart,@Param("pageSize")int pageSize);
 
-    List<Map> getAllBookErrList(@Param("pageStart")int pageStart,@Param("pageSize")int pageSize);
+    List<Map> getAllBookErrList( Map condition);
 }

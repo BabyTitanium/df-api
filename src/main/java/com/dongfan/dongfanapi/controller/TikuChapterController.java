@@ -1,6 +1,7 @@
 package com.dongfan.dongfanapi.controller;
 
 import com.dongfan.dongfanapi.service.ChapterService;
+import com.dongfan.dongfanapi.untils.PageResult;
 import com.dongfan.dongfanapi.untils.Response;
 import com.dongfan.dongfanapi.untils.ResponseData;
 import io.swagger.annotations.ApiOperation;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: lll
@@ -22,14 +24,9 @@ public class TikuChapterController {
     private ChapterService chapterService;
     @GetMapping("getChapterList")
     @ApiOperation("根据题库名称获取章节列表")
-    public ResponseData getChapterList(@RequestParam String name,@RequestParam(required = false,defaultValue = "-1")int page,@RequestParam(required = false,defaultValue = "-1")int pageSize){
-        List list =chapterService.getChapterList(name,page,pageSize);
-        return Response.success(list);
+    public ResponseData getChapterList(@RequestParam(required = true) String name,@RequestParam(required = false,defaultValue = "") Map condition){
+        PageResult pageResult =chapterService.getChapterList(name,condition);
+        return Response.success(pageResult);
     }
 
-    @PostMapping("addChapter")
-    @ApiOperation("添加章节")
-    public ResponseData addChapter(){
-        return Response.success();
-    }
 }

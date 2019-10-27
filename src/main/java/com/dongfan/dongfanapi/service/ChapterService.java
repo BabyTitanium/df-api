@@ -1,6 +1,10 @@
 package com.dongfan.dongfanapi.service;
 
+import com.dongfan.dongfanapi.params.TikuChapterInfo;
+import com.dongfan.dongfanapi.untils.PageResult;
+
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: lll
@@ -9,5 +13,7 @@ import java.util.List;
  */
 
 public interface ChapterService {
-    List getChapterList(String name,int page,int pageSize);
+    PageResult getChapterList(String name, Map map);
+    void addChapter(TikuChapterInfo tikuChapterInfo);
+    void deleteChapter(String name,List ids);
 }

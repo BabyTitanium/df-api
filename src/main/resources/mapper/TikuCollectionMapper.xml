@@ -93,11 +93,14 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="getTikuCollection"  resultType="java.util.Map">
+  <select id="getTikuCollection"  resultType="java.util.Map" parameterType="map">
     SELECT question.* from tiku_collection LEFT JOIN ${dataname} question on tiku_collection.question_id=question.id and tiku_collection.tiku_name=#{name} and tiku_collection.user_id=#{userId}
-    <if test="pageStart!=-1 and pageSize!=-1">
+    <if test="pageStart!=null and pageSize!=null">
       limit #{pageStart},#{pageSize}
     </if>
 
+  </select>
+  <select id="getTikuCollectionCount"  resultType="int" parameterType="map">
+   select count(*) from (SELECT question.* from tiku_collection LEFT JOIN ${dataname} question on tiku_collection.question_id=question.id and tiku_collection.tiku_name=#{name} and tiku_collection.user_id=#{userId}) g
   </select>
 </mapper>

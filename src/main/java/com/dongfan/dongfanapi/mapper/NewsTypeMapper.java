@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface NewsTypeMapper {
@@ -20,5 +21,5 @@ public interface NewsTypeMapper {
 
     int updateByPrimaryKey(NewsType record);
 
-    List<NewsType> getNewsTypeList(@Param("pageStart")int pageStart,@Param("pageSize")int pageSize);
+    List<NewsType> getNewsTypeList(Map map);
 }

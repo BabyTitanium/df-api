@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import com.dongfan.dongfanapi.myAnnotation.RequireTelephone;
 import com.dongfan.dongfanapi.params.UserLogin;
+import com.dongfan.dongfanapi.service.BookService;
 import com.dongfan.dongfanapi.service.UserService;
 import com.dongfan.dongfanapi.untils.*;
 import com.dongfan.dongfanapi.entity.User;
@@ -22,8 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @Author: lll
@@ -52,9 +52,10 @@ public class UserController {
     private String appId_app;
     @Value("${weixin.app.secret}")
     private String secret_app;
+    @Autowired
+    private BookService bookService;
     @ApiOperation("用户网页登录")
     @GetMapping("webLogin")
-
     public String webLogin(@RequestParam(required = true) String code, HttpServletRequest request, HttpServletResponse response) {
         String loginUrl="https://api.weixin.qq.com/sns/oauth2/access_token";
         Map<String, String> loginParam = new HashMap<>();
@@ -89,7 +90,7 @@ public class UserController {
                     } catch (Exception e) {
                         return "token生成失败";
                     }
-                    return "redirect:http://df-dashboard.itwang.wang:7002/#/?token="+jwt;
+                    return "redirect:http://dfadmin.itwang.wang/user/wechat-login-success?token="+jwt;
                 }else{
                     UserTokenInfo userTokenInfo=new UserTokenInfo();
                     userTokenInfo.setNickName(user.getNickName());
@@ -101,7 +102,7 @@ public class UserController {
                     } catch (Exception e) {
                         return "token生成失败";
                     }
-                    return "redirect:http://df-dashboard.itwang.wang:7002/#/?token="+jwt;
+                    return "redirect:http://dfadmin.itwang.wang/user/wechat-login-success?token="+jwt;
                 }
             }else{
                 return "验证失败";
@@ -219,5 +220,12 @@ public class UserController {
         User user=userService.getUserById(userId);
         return Response.success(user);
     }
+    @ApiOperation("测试登录")
+    @GetMapping("testLogin")
+    @ResponseBody
+    public ResponseData testLogin(@RequestParam(required = false,defaultValue = "")Map condition) {
 
+        List list=bookService.getAllBookErrList(condition);
+        return Response.success(list);
+    }
 }

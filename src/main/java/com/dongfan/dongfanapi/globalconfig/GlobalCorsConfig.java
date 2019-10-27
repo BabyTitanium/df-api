@@ -32,21 +32,25 @@ public class GlobalCorsConfig implements Filter {
         HttpServletRequest request = (HttpServletRequest) req;
         String method = request.getMethod();
 //        response.setHeader("Access-Control-Allow-Origin", "http://spcc-admin.houserqu.com");
-        response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
-
-        response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
-        response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,token");
-        response.setHeader("Access-Control-Allow-Credentials", "true");
-
-        response.addHeader("Access-Control-Expose-Headers", "Content-Type,token");
 
         System.out.println("*********************************过滤器被使用**************************");
 
         if (method.equalsIgnoreCase("options")) {
+            response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+            response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,token");
             response.setStatus(200);
             return;
         } else {
+            response.setHeader("Access-Control-Allow-Origin", request.getHeader("Origin"));
+
+            response.setHeader("Access-Control-Allow-Methods", "POST, GET, OPTIONS, DELETE");
+            response.setHeader("Access-Control-Max-Age", "3600");
+            response.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept,token");
+            response.setHeader("Access-Control-Allow-Credentials", "true");
+
+            response.addHeader("Access-Control-Expose-Headers", "Content-Type,token");
+
+
             String requri=request.getRequestURI();
             if(requri.contains("Login")||requri.contains("swagger")||requri.contains("webjars")||requri.contains("v2")||requri.contains("favicon")){
                 chain.doFilter(req,res);

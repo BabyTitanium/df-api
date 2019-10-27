@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: lll
@@ -43,13 +45,13 @@ public class AdminBookController {
         bookService.updateBook(book);
         return Response.success();
     }
-    @ApiOperation("管理员获取所有的挑错记录")
-    @SysPermission("BOOKERR_LIST")
-    @GetMapping("getAllBookErrList")
-    public ResponseData getAllBookErrList(@RequestParam(required = false,defaultValue = "-1")int page, @RequestParam(required = false,defaultValue = "-1")int pageSize){
-        bookService.getAllBookErrList(page,pageSize);
-        return Response.success();
-    }
+//    @ApiOperation("管理员获取所有的挑错记录")
+//    @SysPermission("BOOKERR_LIST")
+//    @GetMapping("getAllBookErrList")
+//    public ResponseData getAllBookErrList(@RequestParam(required = false,defaultValue = "-1")int page, @RequestParam(required = false,defaultValue = "-1")int pageSize){
+//        List<Map> list=bookService.getAllBookErrList(page,pageSize);
+//        return Response.success(list);
+//    }
     @ApiOperation("管理员审核通过挑错记录")
     @SysPermission("BOOKERR_PASS")
     @PostMapping("bookErrPass")

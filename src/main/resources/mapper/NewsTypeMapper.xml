@@ -57,9 +57,12 @@
         set title = #{title,jdbcType=VARCHAR}
         where id = #{id,jdbcType=INTEGER}
     </update>
-    <select id="getNewsTypeList" resultMap="BaseResultMap">
+    <select id="getNewsTypeList" resultMap="BaseResultMap" parameterType="map">
         select * from news_type
-        <if test="pageStart!=-1 and pageSize!=-1">
+        <if test="title !=null">
+            where title like #{title}
+        </if>
+        <if test="pageStart!=null and pageSize!=null">
             limit #{pageStart},#{pageSize}
         </if>
     </select>

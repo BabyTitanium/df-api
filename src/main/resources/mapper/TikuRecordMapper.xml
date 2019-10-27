@@ -127,19 +127,41 @@
       result = #{result,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-<select id="getQuestionList"  resultType="java.util.Map">
+<select id="getQuestionList"  resultType="java.util.Map" parameterType="map">
  SELECT tiku.*,g.id as record_id,g.create_at,g.answer as user_answer,g.result FROM
  ${dataname} tiku LEFT JOIN (select tiku_record.* from tiku_record where tiku_record.user_id=#{userId}  and tiku_record.tiku_name=#{name} ) g on tiku.id=g.question_id where tiku.chapter_id=#{chapterId}
-<if test="pageStart!=-1 and pageSize!=-1">
+<if test="pageStart!=null and pageSize!=null">
   limit #{pageStart},#{pageSize}
 </if>
 </select>
-  <select id="getChapterList"  resultType="java.util.Map">
- SELECT * from ${dataname}
- <if test="pageStart!=-1 and pageSize!=-1">
+  <select id="getQuestionListCount"  resultType="int" parameterType="map">
+   select count (*) from(SELECT tiku.*,g.id as record_id,g.create_at,g.answer as user_answer,g.result FROM
+    ${dataname} tiku LEFT JOIN (select tiku_record.* from tiku_record where tiku_record.user_id=#{userId}  and tiku_record.tiku_name=#{name} ) g on tiku.id=g.question_id where tiku.chapter_id=#{chapterId})g
+  </select>
+  <select id="getChapterList"  resultType="java.util.Map" parameterType="map">
+ SELECT * from ${dataname} where 1=1
+    <if test="title!=null">
+      and title like "%"#{title}"%"
+    </if>
+    <if test="chapter_parent_id!=null">
+      and chapter_parent_id = #{chapter_parent_id}
+    </if>
+
+ <if test="pageStart!=null and pageSize!=null">
    limit #{pageStart},#{pageSize}
  </if>
 </select>
+  <select id="getChapterListCount"  resultType="int" parameterType="map">
+    SELECT count(*) from (
+          SELECT * from ${dataname} where 1=1
+          <if test="title!=null">
+            and title like "%"#{title}"%"
+          </if>
+          <if test="chapter_parent_id!=null">
+            and chapter_parent_id = #{chapter_parent_id}
+          </if>
+    )g
+  </select>
   <select id="getTikuQuestionById" resultType="java.util.Map">
     select * from ${dataname} where id=#{questionId}
   </select>

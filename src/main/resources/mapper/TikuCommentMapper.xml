@@ -119,7 +119,7 @@
   <delete id="deleteByUserAndId">
     delete from tiku_comment where user_id=#{userId} and id=#{id}
   </delete>
-  <select id="getTikuCommentList" resultMap="BaseResultMap">
+  <select id="getTikuCommentList" resultMap="BaseResultMap" parameterType="map">
     select tiku_comment.* from tiku_comment where 1=1
     <if test="userId!=-1">
       and user_id=#{userId}
@@ -131,8 +131,22 @@
       and question_id=#{questionId}
     </if>
     order by create_at desc
-    <if test="pageStart!=-1 and pageSize!=-1">
+    <if test="pageStart!=null and pageSize!=null">
       limit #{pageStart},#{pageSize}
     </if>
+  </select>
+  <select id="getTikuCommentListCount" resultType="int" parameterType="map">
+    select count(*) from (
+    select tiku_comment.* from tiku_comment where 1=1
+    <if test="userId!=-1">
+      and user_id=#{userId}
+    </if>
+    <if test="name!=''">
+      and tiku_name=#{name}
+    </if>
+    <if test="questionId!=-1">
+      and question_id=#{questionId}
+    </if>
+    order by create_at desc)
   </select>
 </mapper>

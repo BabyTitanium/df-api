@@ -22,8 +22,8 @@ public interface UserMapper {
 
     int updateByPrimaryKey(User record);
 
-    List<User> getUserList(@Param("pageStart")int pageStart,@Param("pageSize")int pageSize);
-
+    List<User> getUserList(Map map);
+    int  getUserListCount(Map map);
     User selectUserByNickname(String nickname);
 
     User selectUserByOpenId(String openId);

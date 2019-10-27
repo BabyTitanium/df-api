@@ -213,14 +213,16 @@
   </update>
 
 
-  <select id="getUserList" resultType="com.dongfan.dongfanapi.entity.User">
+  <select id="getUserList" resultType="com.dongfan.dongfanapi.entity.User" parameterType="map">
     select * from user where 1=1
     <if test="pageStart!=null and pageSize!=null">
       limit #{pageStart},#{pageSize}
     </if>
     ;
   </select>
-
+  <select id="getUserListCount" resultType="int" parameterType="map">
+   select count(*) from (select * from user)g
+  </select>
   <select id="selectUserByNickname" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List"/>

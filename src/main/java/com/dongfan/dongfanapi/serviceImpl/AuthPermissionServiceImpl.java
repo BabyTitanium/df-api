@@ -3,11 +3,13 @@ package com.dongfan.dongfanapi.serviceImpl;
 import com.dongfan.dongfanapi.entity.AuthPermission;
 import com.dongfan.dongfanapi.mapper.AuthPermissionMapper;
 import com.dongfan.dongfanapi.service.AuthPermissionService;
+import com.dongfan.dongfanapi.untils.PageResult;
 import com.dongfan.dongfanapi.untils.PageUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: lll
@@ -19,9 +21,11 @@ public class AuthPermissionServiceImpl implements AuthPermissionService {
     @Resource
     private AuthPermissionMapper authPermissionMapper;
     @Override
-    public List<AuthPermission> getAllPermissions(int page,int pageSize) {
-        int pageStart=PageUtil.getStart(page,pageSize);
-        return authPermissionMapper.getAllPermissions(pageStart,pageSize);
+    public PageResult getAllPermissions(Map map) {
+        PageUtil.pageCondition(map);
+        List list=authPermissionMapper.getAllPermissions(map);
+        int count=authPermissionMapper.getAllPermissionsCount(map);
+        return PageUtil.getPageResult(list,count,map);
     }
 
     @Override

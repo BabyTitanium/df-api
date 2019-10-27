@@ -3,6 +3,8 @@ package com.dongfan.dongfanapi.service;
 import com.dongfan.dongfanapi.entity.TikuCollection;
 import com.dongfan.dongfanapi.entity.TikuComment;
 import com.dongfan.dongfanapi.entity.TikuRecord;
+import com.dongfan.dongfanapi.params.TikuQuestionInfo;
+import com.dongfan.dongfanapi.untils.PageResult;
 
 import java.util.List;
 import java.util.Map;
@@ -15,15 +17,18 @@ import java.util.Map;
 
 public interface QuestionService {
     void addQuestionRecord(TikuRecord tikuRecord);
-    List getQuestionListByChapter(int chapterId,int userId, String name,int page,int pageSize);
+    PageResult getQuestionListByChapter(int userId, String name,Map map);
     void addTikuCollection(TikuCollection tikuCollection);
     void deleteTikuCollection(int id);
-    List getTikuCollection(int userId,String name,int page,int pageSize);
+    PageResult getTikuCollection(String name, Map map);
     void addQuestionComment(TikuComment tikuComment);
     void deleteQuestionComment(int id);
     void userDeleteQuestionComment(int userId ,int id);
     Map getQueationById(String name, int id);
 
-    List<TikuComment> getTikuCommentList(int userId,String name,int questionId,int page,int pageSize);
+    PageResult getTikuCommentList(Map map);
+    PageResult getAllQuestionList(String name,Map map);
+    void deleteQuestion(String name,List ids);
+    void addQuestion(TikuQuestionInfo tikuInfo);
 //    List getQuestionRecordByTikuName(int chapterId, String name);
 }

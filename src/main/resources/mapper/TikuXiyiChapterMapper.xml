@@ -84,4 +84,11 @@
         sort = #{sort,jdbcType=INTEGER}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <delete id="deleteChapter" >
+        delete  from ${dataname}
+        where id in
+        <foreach collection="list"  item="item" open="(" separator="," close=")"  >
+            #{item}
+        </foreach>
+    </delete>
 </mapper>

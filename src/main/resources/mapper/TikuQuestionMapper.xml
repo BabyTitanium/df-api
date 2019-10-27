@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.dongfan.dongfanapi.mapper.TikuQuestionMapper">
+<select id="getAllQuestionList" parameterType="map" resultType="map">
+SELECT * FROM ${dataname} where 1=1
+<if test="title!=null">
+    and title like #{title}
+</if>
+<if test="chapter_id !=null">
+    and chapter_id=#{chapter_id}
+</if>
+<if test="year!=null">
+    and year=#{year}
+</if>
+<if test="question_type!=null">
+    and question_type=#{question_type}
+</if>
+<if test="type!=null">
+    and type=#{type}
+</if>
+<if test="pageStart!=null and pageSize!=null">
+    limit #{pageStart}, #{pageSize}
+</if>
+
+</select>
+    <select id="getAllQuestionListCount" parameterType="map" resultType="int">
+       select count(*) from( SELECT * FROM ${dataname} where 1=1
+        <if test="title!=null">
+            and title like #{title}
+        </if>
+        <if test="chapter_id !=null">
+            and chapter_id=#{chapter_id}
+        </if>
+        <if test="year!=null">
+            and year=#{year}
+        </if>
+        <if test="question_type!=null">
+            and question_type=#{question_type}
+        </if>
+        <if test="type!=null">
+            and type=#{type}
+        </if>
+        )g
+    </select>
+    <delete id="deleteQuestion">
+        delete from ${dataname}
+        where id in
+        <foreach collection="list"  item="item" open="(" separator="," close=")"  >
+            #{item}
+        </foreach>
+    </delete>
+</mapper>

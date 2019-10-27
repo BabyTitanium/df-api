@@ -6,11 +6,13 @@ import com.dongfan.dongfanapi.entity.AuthRolePermission;
 import com.dongfan.dongfanapi.mapper.AuthRoleMapper;
 import com.dongfan.dongfanapi.mapper.AuthRolePermissionMapper;
 import com.dongfan.dongfanapi.service.AuthRoleService;
+import com.dongfan.dongfanapi.untils.PageResult;
 import com.dongfan.dongfanapi.untils.PageUtil;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: lll
@@ -53,9 +55,11 @@ public class AuthRoleServiceImpl implements AuthRoleService {
     }
 
     @Override
-    public List<AuthRole> getAllRoles(int page,int pageSize) {
-        int pageStart=PageUtil.getStart(page,pageSize);
-        return authRoleMapper.getAllRoles(pageStart,pageSize);
+    public PageResult getAllRoles(Map map) {
+        PageUtil.pageCondition(map);
+        List list=authRoleMapper.getAllRoles(map);
+        int count=authRoleMapper.getAllRolesCount(map);
+        return PageUtil.getPageResult(list,count,map);
     }
 
     @Override

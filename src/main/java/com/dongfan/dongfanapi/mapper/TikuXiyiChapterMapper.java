@@ -2,6 +2,9 @@ package com.dongfan.dongfanapi.mapper;
 
 import com.dongfan.dongfanapi.entity.TikuXiyiChapter;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 @Mapper
 public interface TikuXiyiChapterMapper {
@@ -16,4 +19,6 @@ public interface TikuXiyiChapterMapper {
     int updateByPrimaryKeySelective(TikuXiyiChapter record);
 
     int updateByPrimaryKey(TikuXiyiChapter record);
+
+    void deleteChapter(@Param("dataname")String dataname,@Param("ids")List ids);
 }

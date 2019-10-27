@@ -1,8 +1,10 @@
 package com.dongfan.dongfanapi.service;
 
 import com.dongfan.dongfanapi.entity.AuthPermission;
+import com.dongfan.dongfanapi.untils.PageResult;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: lll
@@ -11,7 +13,7 @@ import java.util.List;
  */
 
 public interface AuthPermissionService {
-    List<AuthPermission> getAllPermissions(int page,int pageSize);
+    PageResult getAllPermissions(Map map);
     void addPermission(AuthPermission authPermission);
     void deletePermission(int id);
     void editPermission(AuthPermission authPermission);

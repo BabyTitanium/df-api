@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @Author: lll
@@ -38,9 +39,9 @@ public class NewsServiceImpl implements NewsService {
     }
 
     @Override
-    public List<NewsType> getNewsTypeList(int page, int pageSize) {
-        int pageStart=PageUtil.getStart(page,pageSize);
-        return newsTypeMapper.getNewsTypeList(pageStart,pageSize);
+    public List<NewsType> getNewsTypeList(Map condition) {
+        PageUtil.pageCondition(condition);
+        return newsTypeMapper.getNewsTypeList(condition);
     }
 
     @Override

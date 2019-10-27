@@ -5,6 +5,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface TikuCommentMapper {
@@ -20,7 +21,8 @@ public interface TikuCommentMapper {
 
     int updateByPrimaryKey(TikuComment record);
 
-    void deleteByUserAndId(@Param("userId")int userId,@Param("id") int id);
+    void deleteByUserAndId(@Param("userId") int userId, @Param("id") int id);
 
-    List<TikuComment> getTikuCommentList(@Param("userId")int userId,@Param("name") String name,@Param("questionId")int questionId,@Param("pageStart")int pageStart,@Param("pageSize")int pageSize);
+    List<TikuComment> getTikuCommentList(Map map);
+    int getTikuCommentListCount(Map map);
 }

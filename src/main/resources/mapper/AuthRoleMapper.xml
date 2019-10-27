@@ -75,17 +75,21 @@
         select auth_role.* from auth_role,auth_role_user where auth_role_user.user_id=#{userId,jdbcType=INTEGER}
         and auth_role_user.role_id=auth_role.id
     </select>
-    <select id="getAllRoles" resultMap="BaseResultMap">
+    <select id="getAllRoles" resultMap="BaseResultMap" parameterType="map">
         select * from auth_role
-        <if test="pageStart!=-1 and pageSize!=-1">
+        <if test="pageStart!=null and pageSize!=null">
             limit #{pageStart},#{pageSize}
         </if>
         ;
     </select>
+    <select id="getAllRolesCount" resultType="int" parameterType="map">
+      select count(*) from (       select * from auth_role)g
+
+    </select>
     <select id="getRolePermissions" resultType="com.dongfan.dongfanapi.entity.AuthPermission">
         select permission.* from auth_permission permission,auth_role_permission role
         where role.role_id=#{roleId} and permission.id=role.permission_id
-        <if test="pageStart!=-1 and pageSize!=-1">
+        <if test="pageStart!=null and pageSize!=null">
             limit #{pageStart},#{pageSize}
         </if>
     </select>

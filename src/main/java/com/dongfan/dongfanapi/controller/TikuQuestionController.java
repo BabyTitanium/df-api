@@ -4,6 +4,7 @@ import com.dongfan.dongfanapi.entity.TikuCollection;
 import com.dongfan.dongfanapi.entity.TikuComment;
 import com.dongfan.dongfanapi.entity.TikuRecord;
 import com.dongfan.dongfanapi.service.QuestionService;
+import com.dongfan.dongfanapi.untils.PageResult;
 import com.dongfan.dongfanapi.untils.Response;
 import com.dongfan.dongfanapi.untils.ResponseData;
 import io.swagger.annotations.ApiOperation;
@@ -30,18 +31,16 @@ public class TikuQuestionController {
     @PostMapping("submitQuestionRecord")
     @ApiOperation("提交用户答题记录")
     public ResponseData submitQuestionRecord(@RequestAttribute("userId") int userId,@RequestBody @Valid TikuRecord tikuRecord){
-//        String tikuName=tikuRecord.getTikuName();
-//        int questionId=tikuRecord.getQuestionId();
-//        Map result=questionService.getQueationById(tikuName,questionId);
+
         tikuRecord.setUserId(userId);
         questionService.addQuestionRecord(tikuRecord);
         return Response.success();
     }
     @GetMapping("getQuestionListByChapter")
     @ApiOperation("获取当前用户章节下的题目列表")
-    public ResponseData getQuestionListByChapter(@RequestParam(required = true) int chapterId,@RequestAttribute("userId") int userId,@RequestParam(required = true) String name,@RequestParam(required = false,defaultValue = "-1")int page,@RequestParam(required = false,defaultValue = "-1")int pageSize){
-        List list= questionService.getQuestionListByChapter(chapterId,userId,name,page,pageSize);
-        return Response.success(list);
+    public ResponseData getQuestionListByChapter(@RequestAttribute("userId") int userId,@RequestParam(required = true) String name,@RequestParam(required = false,defaultValue = "") Map condition){
+        PageResult pageResult= questionService.getQuestionListByChapter(userId,name,condition);
+        return Response.success(pageResult);
     }
 
     @PostMapping("addTikuCollection")
@@ -60,10 +59,10 @@ public class TikuQuestionController {
     //当前用户收藏列表
     @GetMapping("getTikuCollectionList")
     @ApiOperation("获取当前用户题目收藏列表")
-    public ResponseData getTikuCollectionRecord(@RequestAttribute("userId") int userId,@RequestParam("name")String name,@RequestParam(required = false,defaultValue = "-1")int page,@RequestParam(required = false,defaultValue = "-1")int pageSize){
-        List list=new ArrayList();
-        list=questionService.getTikuCollection(userId,name,page,pageSize);
-        return Response.success(list);
+    public ResponseData getTikuCollectionRecord(@RequestAttribute("userId") int userId,@RequestParam("name")String name,@RequestParam(required = false,defaultValue = "") Map condition){
+        condition.put("userId",userId);
+        PageResult pageResult=questionService.getTikuCollection(name,condition);
+        return Response.success(pageResult);
 
     }
     @PostMapping("submitQuestionComment")
@@ -79,11 +78,6 @@ public class TikuQuestionController {
         questionService.userDeleteQuestionComment(userId,id);
         return Response.success();
     }
-//    @PostMapping("addCommentLike")
-//    @ApiOperation("点赞评论")
-//    public ResponseData addCommentLike(){
-//
-//        return Response.success();
-//    }
+
 
 }
