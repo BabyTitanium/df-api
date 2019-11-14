@@ -83,6 +83,7 @@ public class JWTUtils {
         userTokenInfo.setNickName("刘蹦哒\uD83D\uDC8B");
         try {
             String str=createJWT(userTokenInfo,2592000000L);
+            System.out.println(str);
         } catch (Exception e) {
             e.printStackTrace();
         }
