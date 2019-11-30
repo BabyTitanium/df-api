@@ -87,7 +87,7 @@
     <delete id="deleteChapter" >
         delete  from ${dataname}
         where id in
-        <foreach collection="list"  item="item" open="(" separator="," close=")"  >
+        <foreach collection="ids"  item="item" open="(" separator="," close=")"  >
             #{item}
         </foreach>
     </delete>

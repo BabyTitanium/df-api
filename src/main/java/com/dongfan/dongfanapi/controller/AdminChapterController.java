@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -18,7 +19,7 @@ import java.util.List;
  * @Date: 2019/10/20 16:22
  * @Version 1.0
  */
-@Controller
+@RestController
 @RequestMapping("admin/chapter")
 @SysPermission("ADMIN_CHAPTER")
 public class AdminChapterController {
@@ -33,8 +34,9 @@ public class AdminChapterController {
     }
     @GetMapping("deleteChapter")
     @ApiOperation("删除章节")
-    public ResponseData deleteChapter(@RequestParam (required = true) String name,@RequestParam(required = true) List<Integer> ids){
-        chapterService.deleteChapter(name,ids);
+    public ResponseData deleteChapter(@RequestParam (required = true) String name,@RequestParam(required = true,defaultValue = "")String ids){
+        List list=Arrays.asList(ids.split(","));
+        chapterService.deleteChapter(name,list);
         return Response.success();
     }
 

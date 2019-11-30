@@ -3,8 +3,6 @@ package com.dongfan.dongfanapi.entity;
 public class TikuXiyiQuestion {
     private Integer id;
 
-
-
     private Integer chapterId;
 
     private Integer chapterParentId;

@@ -158,10 +158,10 @@
                 restore,
             </if>
             <if test="explain != null">
-                explain,
+                tiku_xiyizhiye_question.explain,
             </if>
             <if test="option != null">
-                option,
+                tiku_xiyizhiye_question.option,
             </if>
             <if test="knowledge != null">
                 knowledge,

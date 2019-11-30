@@ -21,5 +21,6 @@ public class TikuQuestionInfo {
     TikuKouqiangQuestionWithBLOBs tikuKouqiangQuestion;
     TikuZhiyexiyaoshiQuestionWithBLOBs tikuZhiyexiyaoshiQuestion;
     TikuZhiyezhongyaoshiQuestionWithBLOBs tikuZhiyezhongyaoshiQuestion;
-    TikuXiyizhiyezhuliQuestionWithBLOBs xiyizhiyezhuli;
+    TikuXiyizhiyezhuliQuestionWithBLOBs tikuXiyizhiyezhuliQuestion;
+    TikuZhongyizhiyeQuestionWithBLOBs tikuZhongyizhiyeQuestion;
 }

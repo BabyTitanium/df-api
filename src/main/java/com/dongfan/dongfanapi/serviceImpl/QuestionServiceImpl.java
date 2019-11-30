@@ -121,7 +121,7 @@ public class QuestionServiceImpl implements QuestionService {
     @Override
     public void deleteQuestion(String name, List ids) {
         String dataname="tiku_"+name+"_question";
-        tikuQuestionMapper.deleteQuestion(name,ids);
+        tikuQuestionMapper.deleteQuestion(dataname,ids);
     }
 
     @Override
@@ -134,11 +134,13 @@ public class QuestionServiceImpl implements QuestionService {
         }else if (name.equals("kouqiang")){
             tikuKouqiangQuestionMapper.insertSelective(tikuInfo.getTikuKouqiangQuestion());
         }else if (name.equals("xiyizhiyezhuli")){
-            tikuXiyizhiyeQuestionMapper.insertSelective(tikuInfo.getTikuXiyizhiyeQuestion());
+            tikuXiyizhiyezhuliQuestionMapper.insertSelective(tikuInfo.getTikuXiyizhiyezhuliQuestion());
         }else if (name.equals("zhiyexiyaoshi")){
             tikuZhiyexiyaoshiQuestionMapper.insertSelective(tikuInfo.getTikuZhiyexiyaoshiQuestion());
         }else if (name.equals("zhiyezhongyaoshi")){
             tikuZhiyezhongyaoshiQuestionMapper.insertSelective(tikuInfo.getTikuZhiyezhongyaoshiQuestion());
+        }else if (name.equals("zhongyizhiye")){
+            tikuZhongyizhiyeQuestionMapper.insertSelective(tikuInfo.getTikuZhongyizhiyeQuestion());
         }
     }
 }

@@ -148,10 +148,10 @@
                 restore,
             </if>
             <if test="explain != null">
-                explain,
+                tiku_kouqiang_question.explain,
             </if>
             <if test="option != null">
-                option,
+                tiku_kouqiang_question.option,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">

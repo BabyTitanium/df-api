@@ -156,10 +156,10 @@
                 recovery,
             </if>
             <if test="explain != null">
-                explain,
+                tiku_xiyi_question.explain,
             </if>
             <if test="option != null">
-                option,
+                tiku_xiyi_question.option,
             </if>
             <if test="restoren != null">
                 restoren,

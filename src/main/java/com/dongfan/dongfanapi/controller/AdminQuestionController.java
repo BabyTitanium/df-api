@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
@@ -51,15 +52,16 @@ public class AdminQuestionController {
 
     @GetMapping("deleteQuestion")
     @ApiOperation("删除题目")
-    public ResponseData deleteQuestion( @RequestParam(required = true) String name, @RequestParam(required = true,defaultValue = "") List<Integer> ids){
-        questionService.deleteQuestion(name,ids);
+    public ResponseData deleteQuestion( @RequestParam(required = true) String name, @RequestParam(required = true,defaultValue = "") String ids){
+        List list=Arrays.asList(ids.split(","));
+        questionService.deleteQuestion(name,list);
         return Response.success();
     }
 
     @PostMapping("addQuestion")
     @ApiOperation("添加题目")
-    public ResponseData addQuestion(@Valid @RequestBody TikuQuestionInfo tikuInfo){
-        questionService.addQuestion(tikuInfo);
+    public ResponseData addQuestion(@Valid @RequestBody TikuQuestionInfo tikuQuestionInfo){
+        questionService.addQuestion(tikuQuestionInfo);
         return Response.success();
     }
 }
