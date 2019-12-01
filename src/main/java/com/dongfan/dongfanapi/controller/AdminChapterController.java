@@ -39,5 +39,10 @@ public class AdminChapterController {
         chapterService.deleteChapter(name,list);
         return Response.success();
     }
-
+    @PostMapping("editChapter")
+    @ApiOperation("修改章节")
+    public ResponseData editChapter(@RequestBody @Valid TikuChapterInfo tikuChapterInfo){
+        chapterService.editChapter(tikuChapterInfo);
+        return Response.success();
+    }
 }

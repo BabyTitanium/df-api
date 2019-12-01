@@ -61,6 +61,22 @@ public class ChapterServiceImpl  implements ChapterService {
             tikuZhongyizhiyeChapterMapper.insertSelective(tikuChapterInfo.getTikuZhongyizhiyeChapter());
         }
     }
+
+    @Override
+    public void editChapter(TikuChapterInfo tikuChapterInfo) {
+        String name=tikuChapterInfo.getTiku();
+        if(name.equals("xiyi")){
+            tikuXiyiChapterMapper.updateByPrimaryKeySelective(tikuChapterInfo.getTikuXiyiChapter());
+        }else if(name.equals("xiyizhiye")){
+            tikuXiyizhiyeChapterMapper.updateByPrimaryKeySelective(tikuChapterInfo.getTikuXiyizhiyeChapter());
+        }else if (name.equals("kouqiang")){
+            tikuKouqiangChapterMapper.updateByPrimaryKeySelective(tikuChapterInfo.getTikuKouqiangChapter());
+        }else if (name.equals("xiyizhiyezhuli")){
+            tikuXiyizhiyezhuliChapterMapper.updateByPrimaryKeySelective(tikuChapterInfo.getTikuXizhiyezhuliChapter());
+        }else if (name.equals("zhongyizhiye")){
+            tikuZhongyizhiyeChapterMapper.updateByPrimaryKeySelective(tikuChapterInfo.getTikuZhongyizhiyeChapter());
+        }
+    }
     @Override
     public void deleteChapter(String name,List ids ) {
         String dataname="tiku_"+name+"_chapter";

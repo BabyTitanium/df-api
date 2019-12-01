@@ -143,4 +143,23 @@ public class QuestionServiceImpl implements QuestionService {
             tikuZhongyizhiyeQuestionMapper.insertSelective(tikuInfo.getTikuZhongyizhiyeQuestion());
         }
     }
+    @Override
+    public void editQuestion(TikuQuestionInfo tikuInfo) {
+        String name=tikuInfo.getTiku();
+        if(name.equals("xiyi")){
+            tikuXiyiQuestionMapper.updateByPrimaryKeySelective(tikuInfo.getTikuXiyiQuestion());
+        }else if(name.equals("xiyizhiye")){
+            tikuXiyizhiyeQuestionMapper.updateByPrimaryKeySelective(tikuInfo.getTikuXiyizhiyeQuestion());
+        }else if (name.equals("kouqiang")){
+            tikuKouqiangQuestionMapper.updateByPrimaryKeySelective(tikuInfo.getTikuKouqiangQuestion());
+        }else if (name.equals("xiyizhiyezhuli")){
+            tikuXiyizhiyezhuliQuestionMapper.updateByPrimaryKeySelective(tikuInfo.getTikuXiyizhiyezhuliQuestion());
+        }else if (name.equals("zhiyexiyaoshi")){
+            tikuZhiyexiyaoshiQuestionMapper.updateByPrimaryKeySelective(tikuInfo.getTikuZhiyexiyaoshiQuestion());
+        }else if (name.equals("zhiyezhongyaoshi")){
+            tikuZhiyezhongyaoshiQuestionMapper.updateByPrimaryKeySelective(tikuInfo.getTikuZhiyezhongyaoshiQuestion());
+        }else if (name.equals("zhongyizhiye")){
+            tikuZhongyizhiyeQuestionMapper.updateByPrimaryKeySelective(tikuInfo.getTikuZhongyizhiyeQuestion());
+        }
+    }
 }

@@ -15,5 +15,6 @@ import java.util.Map;
 public interface ChapterService {
     PageResult getChapterList(String name, Map map);
     void addChapter(TikuChapterInfo tikuChapterInfo);
+    void editChapter(TikuChapterInfo tikuChapterInfo);
     void deleteChapter(String name,List ids);
 }

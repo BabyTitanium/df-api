@@ -64,4 +64,11 @@ public class AdminQuestionController {
         questionService.addQuestion(tikuQuestionInfo);
         return Response.success();
     }
+
+    @PostMapping("editQuestion")
+    @ApiOperation("添加题目")
+    public ResponseData editQuestion(@Valid @RequestBody TikuQuestionInfo tikuQuestionInfo){
+        questionService.editQuestion(tikuQuestionInfo);
+        return Response.success();
+    }
 }

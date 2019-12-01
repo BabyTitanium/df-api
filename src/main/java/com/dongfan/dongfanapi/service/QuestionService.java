@@ -30,5 +30,6 @@ public interface QuestionService {
     PageResult getAllQuestionList(String name,Map map);
     void deleteQuestion(String name,List ids);
     void addQuestion(TikuQuestionInfo tikuInfo);
+    void editQuestion(TikuQuestionInfo tikuInfo);
 //    List getQuestionRecordByTikuName(int chapterId, String name);
 }
