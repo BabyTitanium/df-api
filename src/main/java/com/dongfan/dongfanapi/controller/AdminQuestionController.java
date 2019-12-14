@@ -28,20 +28,6 @@ public class AdminQuestionController {
     @Autowired
     QuestionService questionService;
 
-    @GetMapping("deleteQuestionComment")
-    @ApiOperation("管理员删除评论")
-    public ResponseData deleteQuestionComment(@RequestParam int id){
-        questionService.deleteQuestionComment(id);
-        return Response.success();
-    }
-
-    @GetMapping("getCommentList")
-    @ApiOperation("获取评论列表")
-    public ResponseData getCommentList(@RequestParam(required = false,defaultValue = "-1")int userId,@RequestParam(required = false,defaultValue = "") Map condition){
-        condition.put("userId",userId);
-        PageResult pageResult=questionService.getTikuCommentList(condition);
-        return Response.success(pageResult);
-    }
 
     @GetMapping("getQuestionList")
     @ApiOperation("获取题目列表")
@@ -70,5 +56,11 @@ public class AdminQuestionController {
     public ResponseData editQuestion(@Valid @RequestBody TikuQuestionInfo tikuQuestionInfo){
         questionService.editQuestion(tikuQuestionInfo);
         return Response.success();
+    }
+    @GetMapping("getQuestion")
+    @ApiOperation("获取题目")
+    public ResponseData getQuestion(@RequestParam(required = true) String name,@RequestParam(required = true) int id){
+        Map map=questionService.getQueationById(name,id);
+        return Response.success(map);
     }
 }

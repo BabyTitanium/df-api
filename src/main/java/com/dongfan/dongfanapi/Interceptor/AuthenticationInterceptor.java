@@ -105,6 +105,8 @@ public class AuthenticationInterceptor implements HandlerInterceptor {
                     }
                     if(!flag){
                       //  response.sendError(403,"无权限");
+                        ResponseData responseData=Response.noPermission();
+                        response.getWriter().write(JSON.toJSONString(responseData));
                         return false;
                     }
 

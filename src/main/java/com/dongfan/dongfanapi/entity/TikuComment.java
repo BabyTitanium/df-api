@@ -26,6 +26,7 @@ public class TikuComment {
 
     private Integer likes;
 
+    private  Integer status;
     public TikuComment(Integer id, String content, String tikuName, Integer questionId, Date createAt, Integer userId, Integer likes) {
         this.id = id;
         this.content = content;
@@ -94,5 +95,13 @@ public class TikuComment {
 
     public void setLikes(Integer likes) {
         this.likes = likes;
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

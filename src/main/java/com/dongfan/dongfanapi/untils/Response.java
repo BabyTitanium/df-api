@@ -65,6 +65,13 @@ public class Response<T> {
         responseData.setMessage("telephone is not bind");
         responseData.setData("");
         return responseData;
+    }
+    public static <T> ResponseData noPermission() {
+        ResponseData responseData = new ResponseData<T>();
+        responseData.setCode(403);
+        responseData.setMessage("no permission");
+        responseData.setData("");
+        return responseData;
 
     }
 }

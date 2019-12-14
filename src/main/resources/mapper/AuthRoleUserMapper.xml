@@ -21,6 +21,9 @@
         delete from auth_role_user
         where id = #{id,jdbcType=INTEGER}
     </delete>
+    <delete id="deleteUserRoles">
+        delete from auth_role_user where user_id=#{userId}
+    </delete>
     <insert id="insert" parameterType="com.dongfan.dongfanapi.entity.AuthRoleUser">
         insert into auth_role_user (id, role_id, user_id
         )
@@ -52,6 +55,14 @@
             </if>
         </trim>
     </insert>
+    <insert id="addUserRoles">
+        insert into auth_role_user(user_id,role_id)
+
+        values
+        <foreach collection="roleIds"  item="item"  separator=","  >
+            (#{userId},#{item})
+        </foreach>
+    </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.dongfan.dongfanapi.entity.AuthRoleUser">
         update auth_role_user
         <set>
@@ -70,4 +81,17 @@
         user_id = #{userId,jdbcType=INTEGER}
         where id = #{id,jdbcType=INTEGER}
     </update>
+    <select id="getAuthRoleUser" resultMap="BaseResultMap">
+        select * from auth_role_user where role_id=#{roleId} and user_id=#{userId}
+    </select>
+
+    <select id="getUserRoles" resultType="map">
+
+    SELECT auth_role.id as roleId,auth_role_user.id as userRoleId,
+    auth_role.`name`,auth_role_user.user_id,`user`.nick_name from auth_role
+    LEFT JOIN auth_role_user on auth_role.id=auth_role_user.role_id
+    and auth_role_user.user_id=#{userId} LEFT JOIN `user` on auth_role_user.user_id=`user`.id
+
+    order by  roleId
+    </select>
 </mapper>

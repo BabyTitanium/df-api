@@ -2,7 +2,10 @@ package com.dongfan.dongfanapi.service;
 
 import com.dongfan.dongfanapi.entity.AuthPermission;
 import com.dongfan.dongfanapi.entity.AuthRole;
+import com.dongfan.dongfanapi.entity.AuthRoleUser;
 import com.dongfan.dongfanapi.entity.User;
+import com.dongfan.dongfanapi.params.UserRole;
+import com.dongfan.dongfanapi.params.UserRoles;
 import com.dongfan.dongfanapi.untils.PageResult;
 
 import java.util.List;
@@ -26,4 +29,13 @@ public interface UserService {
     void adduser(User user);
 
     User getUserById(int userId);
+
+    void deleteUserRole(int id);
+
+    void addUserRole(AuthRoleUser authRoleUser);
+
+    List getUserRoles(int id);
+
+    void deleteUserRoles(int userId);
+    void addUserRoles(UserRoles userRoles);
 }

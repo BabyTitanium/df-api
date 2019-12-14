@@ -91,8 +91,13 @@ public class QuestionServiceImpl implements QuestionService {
         tikuCommentMapper.deleteByUserAndId(userId,id);
     }
     @Override
-    public void deleteQuestionComment(int id) {
-        tikuCommentMapper.deleteByPrimaryKey(id);
+    public void deleteQuestionComment(List ids) {
+       // tikuCommentMapper.deleteByPrimaryKey(id);
+//        TikuComment tikuComment=new TikuComment();
+//        tikuComment.setId(id);
+//        tikuComment.setStatus(-1);
+//        tikuCommentMapper.updateByPrimaryKeySelective(tikuComment);
+          tikuCommentMapper.deleteComment(ids);
     }
     @Override
     public Map getQueationById(String name, int id) {

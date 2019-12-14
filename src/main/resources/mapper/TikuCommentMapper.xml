@@ -10,6 +10,7 @@
       <arg column="create_at" javaType="java.util.Date" jdbcType="TIMESTAMP" />
       <arg column="user_id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="likes" javaType="java.lang.Integer" jdbcType="INTEGER" />
+      <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
   </resultMap>
   <sql id="Base_Column_List">
@@ -103,6 +104,9 @@
       <if test="likes != null">
         likes = #{likes,jdbcType=INTEGER},
       </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -119,18 +123,19 @@
   <delete id="deleteByUserAndId">
     delete from tiku_comment where user_id=#{userId} and id=#{id}
   </delete>
-  <select id="getTikuCommentList" resultMap="BaseResultMap" parameterType="map">
-    select tiku_comment.* from tiku_comment where 1=1
+  <select id="getTikuCommentList" resultType="map" parameterType="map">
+    select c.*,u.nick_name  from tiku_comment c left join user u on c.user_id=u.id  where 1=1
     <if test="userId!=-1">
-      and user_id=#{userId}
+      and c.user_id=#{userId}
     </if>
     <if test="name!=''">
-      and tiku_name=#{name}
+      and c.tiku_name=#{name}
     </if>
-    <if test="questionId!=-1">
-      and question_id=#{questionId}
+    <if test="questionId!=null and questionId!=-1">
+      and c.question_id=#{questionId}
     </if>
-    order by create_at desc
+    and c.status!=-1
+    order by c.create_at desc
     <if test="pageStart!=null and pageSize!=null">
       limit #{pageStart},#{pageSize}
     </if>
@@ -144,9 +149,20 @@
     <if test="name!=''">
       and tiku_name=#{name}
     </if>
-    <if test="questionId!=-1">
+    <if test="questionId!=null and questionId!=-1">
       and question_id=#{questionId}
     </if>
-    order by create_at desc)
+    and status!=-1
+    order by create_at desc)g
   </select>
+
+  <update id="deleteComment">
+   update tiku_comment
+
+    set status = -1
+    where id in
+    <foreach collection="ids"  item="item" open="(" separator="," close=")"  >
+      #{item}
+    </foreach>
+  </update>
 </mapper>

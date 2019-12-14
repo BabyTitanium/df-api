@@ -2,10 +2,14 @@ package com.dongfan.dongfanapi.serviceImpl;
 
 import com.dongfan.dongfanapi.entity.AuthPermission;
 import com.dongfan.dongfanapi.entity.AuthRole;
+import com.dongfan.dongfanapi.entity.AuthRoleUser;
 import com.dongfan.dongfanapi.entity.User;
 import com.dongfan.dongfanapi.mapper.AuthPermissionMapper;
 import com.dongfan.dongfanapi.mapper.AuthRoleMapper;
+import com.dongfan.dongfanapi.mapper.AuthRoleUserMapper;
 import com.dongfan.dongfanapi.mapper.UserMapper;
+import com.dongfan.dongfanapi.params.UserRole;
+import com.dongfan.dongfanapi.params.UserRoles;
 import com.dongfan.dongfanapi.service.UserService;
 import com.dongfan.dongfanapi.untils.PageResult;
 import com.dongfan.dongfanapi.untils.PageUtil;
@@ -15,6 +19,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -27,7 +32,8 @@ public class UserServiceImpl implements UserService {
     private AuthRoleMapper authRoleMapper;
     @Resource
     private AuthPermissionMapper authPermissionMapper;
-
+    @Resource
+    private AuthRoleUserMapper authRoleUserMapper;
     @Override
     public PageResult getUserList(Map map) {
         PageUtil.pageCondition(map);
@@ -70,6 +76,36 @@ public class UserServiceImpl implements UserService {
     @Override
     public User getUserById(int userId) {
         return userMapper.selectByPrimaryKey(userId);
+    }
+
+    @Override
+    public void deleteUserRole(int id) {
+        authRoleUserMapper.deleteByPrimaryKey(id);
+    }
+
+    @Override
+    public void addUserRole(AuthRoleUser authRoleUser) {
+        AuthRoleUser a=authRoleUserMapper.getAuthRoleUser(authRoleUser.getUserId(),authRoleUser.getRoleId());
+        if (a==null){
+            authRoleUserMapper.insert(authRoleUser);
+        }
+    }
+
+    @Override
+    public List getUserRoles(int id) {
+        List list=authRoleUserMapper.getUserRoles(id);
+        return list;
+    }
+
+    @Override
+    public void deleteUserRoles(int userId) {
+        authRoleUserMapper.deleteUserRoles(userId);
+    }
+
+    @Override
+    public void addUserRoles(UserRoles userRoles) {
+        List list=Arrays.asList(userRoles.getRoleIds().split(","));
+        authRoleUserMapper.addUserRoles(userRoles.getUserId(),list);
     }
 
 

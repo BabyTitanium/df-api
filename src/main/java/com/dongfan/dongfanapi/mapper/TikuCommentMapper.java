@@ -23,6 +23,8 @@ public interface TikuCommentMapper {
 
     void deleteByUserAndId(@Param("userId") int userId, @Param("id") int id);
 
-    List<TikuComment> getTikuCommentList(Map map);
+    List<Map> getTikuCommentList(Map map);
     int getTikuCommentListCount(Map map);
+
+    void deleteComment(@Param("ids")List ids);
 }

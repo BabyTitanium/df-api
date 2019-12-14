@@ -5,7 +5,7 @@
     <constructor>
       <idArg column="id" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="openid" javaType="java.lang.String" jdbcType="VARCHAR" />
-      <arg column="nick_name" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="nick_name"  javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="sex" javaType="java.lang.Integer" jdbcType="INTEGER" />
       <arg column="headimgurl" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="privilege" javaType="java.lang.String" jdbcType="VARCHAR" />
@@ -18,11 +18,32 @@
       <arg column="invate_code" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="real_name" javaType="java.lang.String" jdbcType="VARCHAR" />
       <arg column="type" javaType="java.lang.String" jdbcType="VARCHAR" />
+      <arg column="status" javaType="java.lang.Integer" jdbcType="INTEGER" />
     </constructor>
+  </resultMap>
+
+  <resultMap id="user" type="com.dongfan.dongfanapi.entity.User">
+    <id property="id" column="id"></id>
+    <result property="openid" column="openid"></result>
+    <result property="nickName" column="nick_name"></result>
+    <result column="sex" property="sex" />
+    <result column="headimgurl" property="headimgurl"/>
+    <result column="privilege" property="privilege" />
+    <result column="unionid" property="unionid"/>
+    <result column="phone" property="phone" />
+    <result column="province" property="province"/>
+    <result column="city" property="city"/>
+    <result column="country" property="country" />
+    <result column="language" property="language" />
+    <result column="invate_code" property="invateCode"/>
+    <result column="real_name" property="realName" />
+    <result column="type" property="type" />
+    <result column="created_at" property="createAt"></result>
+    <result column="status" property="status" />
   </resultMap>
   <sql id="Base_Column_List">
     id, openid, nick_name, sex, headimgurl, privilege, unionid, phone, province, city, 
-    country, language, invate_code, real_name, type
+    country, language, invate_code, real_name, type,status
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -190,6 +211,9 @@
       <if test="type != null">
         type = #{type,jdbcType=VARCHAR},
       </if>
+      <if test="status != null">
+        status = #{status,jdbcType=VARCHAR},
+      </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
   </update>
@@ -209,19 +233,52 @@
       invate_code = #{invateCode,jdbcType=VARCHAR},
       real_name = #{realName,jdbcType=VARCHAR},
       type = #{type,jdbcType=VARCHAR}
+      create_at = #{createAt,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
 
 
-  <select id="getUserList" resultType="com.dongfan.dongfanapi.entity.User" parameterType="map">
+  <select id="getUserList" resultMap="user" parameterType="map">
     select * from user where 1=1
+    <if test="id != null">
+      and id=#{id}
+    </if>
+    <if test="nick_name != null">
+      and nick_name like "%"#{nick_name}"%"
+    </if>
+    <if test="real_name != null">
+      and real_name like "%"#{real_name}"%"
+    </if>
+    <if test="phone != null">
+     and  phone = #{phone}
+    </if>
+    <if test="invate_code != null">
+      and invate_code = #{invate_code}
+    </if>
     <if test="pageStart!=null and pageSize!=null">
-      limit #{pageStart},#{pageSize}
+       limit #{pageStart},#{pageSize}
     </if>
     ;
   </select>
   <select id="getUserListCount" resultType="int" parameterType="map">
-   select count(*) from (select * from user)g
+   select count(*) from (
+    select * from user where 1=1
+    <if test="id !=null">
+      and id=#{id}
+    </if>
+    <if test="nick_name !=null">
+      and nick_name like "%"#{nick_name}"%"
+    </if>
+    <if test="real_name !=null">
+      and real_name like "%"#{real_name}"%"
+    </if>
+    <if test="phone !=null">
+      and  phone = #{phone}
+    </if>
+    <if test="invate_code !=null">
+      and invate_code = #{invate_code}
+    </if>
+   )g
   </select>
   <select id="selectUserByNickname" parameterType="java.lang.String" resultMap="BaseResultMap">
     select
@@ -241,4 +298,5 @@
     from user
     where unionid = #{unionId,jdbcType=VARCHAR}
   </select>
+
 </mapper>

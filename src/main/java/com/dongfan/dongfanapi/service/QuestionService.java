@@ -22,7 +22,7 @@ public interface QuestionService {
     void deleteTikuCollection(int id);
     PageResult getTikuCollection(String name, Map map);
     void addQuestionComment(TikuComment tikuComment);
-    void deleteQuestionComment(int id);
+    void deleteQuestionComment(List ids);
     void userDeleteQuestionComment(int userId ,int id);
     Map getQueationById(String name, int id);
 

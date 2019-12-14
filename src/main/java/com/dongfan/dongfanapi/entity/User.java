@@ -1,5 +1,10 @@
 package com.dongfan.dongfanapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import java.util.Date;
+
 public class User {
     private Integer id;
 
@@ -31,7 +36,20 @@ public class User {
 
     private String type;
 
-    public User(Integer id, String openid, String nickName, Integer sex, String headimgurl, String privilege, String unionid, String phone, String province, String city, String country, String language, String invateCode, String realName, String type) {
+    private Integer status;
+
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
+    private String createAt;
+
+    public String getCreateAt() {
+        return createAt;
+    }
+
+    public void setCreateAt(String createAt) {
+        this.createAt = createAt;
+    }
+
+    public User(Integer id, String openid, String nickName, Integer sex, String headimgurl, String privilege, String unionid, String phone, String province, String city, String country, String language, String invateCode, String realName, String type, Integer status) {
         this.id = id;
         this.openid = openid;
         this.nickName = nickName;
@@ -47,6 +65,7 @@ public class User {
         this.invateCode = invateCode;
         this.realName = realName;
         this.type = type;
+        this.status=status;
     }
 
     public User() {
@@ -171,5 +190,13 @@ public class User {
 
     public void setType(String type) {
         this.type = type == null ? null : type.trim();
+    }
+
+    public Integer getStatus() {
+        return status;
+    }
+
+    public void setStatus(Integer status) {
+        this.status = status;
     }
 }

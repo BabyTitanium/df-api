@@ -1,5 +1,6 @@
 package com.dongfan.dongfanapi.mapper;
 
+import com.dongfan.dongfanapi.entity.AuthRoleUser;
 import com.dongfan.dongfanapi.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -23,10 +24,13 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     List<User> getUserList(Map map);
-    int  getUserListCount(Map map);
+
+    int getUserListCount(Map map);
+
     User selectUserByNickname(String nickname);
 
     User selectUserByOpenId(String openId);
 
     User selectUserByUnionId(String unionId);
+
 }
